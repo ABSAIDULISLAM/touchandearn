@@ -3,10 +3,12 @@
 use App\Http\Controllers\admin\AdminDashController;
 use App\Http\Controllers\admin\SubAdminMaganeController;
 use App\Http\Controllers\backend\ProfileController as BackendProfileController;
+use App\Http\Controllers\GuestController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\member\MemberManageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\subadmin\ProfileController as SubadminProfileController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -36,11 +38,11 @@ Route::middleware('auth')->group(function () {
 require __DIR__.'/auth.php';
 
 
-Route::get('/dashboard', [AdminDashController::class, 'dashboard'])->name('dashboard')->middleware(['auth']);
+Route::get('/dashboard', [AdminDashController::class, 'dashboard'])->name('dashboard')->middleware(['auth', 'verified']);
 Route::get('/profile', [BackendProfileController::class, 'profile'])->name('profile')->middleware(['auth']);
 
 // admin routes
-Route::prefix('admin/')->middleware(['auth','admin','active'])->group(function (){
+Route::prefix('admin/')->middleware(['auth','admin'])->group(function (){
     Route::get('manage/sub-admin', [SubAdminMaganeController::class, 'managesubadmin'])->name('subadmin.withtype.manage');
     Route::get('sub-admin/register', [SubAdminMaganeController::class, 'createSubadmin'])->name('subadmin.create');
     Route::post('sub-admin/register/store', [SubAdminMaganeController::class, 'subadminStore'])->name('subadmin.store');
@@ -76,5 +78,6 @@ Route::prefix('admin/')->middleware(['auth','admin','active'])->group(function (
 
 // });
 
+// Guest register
 
 Route::get('/dashboard/test', [AdminDashController::class, 'dashboardTest']);

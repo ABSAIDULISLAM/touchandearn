@@ -12,6 +12,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
+use App\Enums\Status;
+use App\Models\Network;
+use Illuminate\Support\Str;
 
 class RegisteredUserController extends Controller
 {
@@ -28,24 +31,66 @@ class RegisteredUserController extends Controller
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function store(Request $request): RedirectResponse
+    public function store(Request $request)
     {
         $request->validate([
+            'referral_code' => ['nullable', 'max:15'],
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
+            'number' => ['required','max:15', 'min:11', 'unique:'.User::class],
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:255'], // , 'unique:'.User::class
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
+        $user = new User();
 
-        event(new Registered($user));
+        $referral_code = Str::random(10);
 
-        Auth::login($user);
+        if(isset($request->referral_code)){
 
-        return redirect(RouteServiceProvider::HOME);
+            $referrer = User::where('referral_code', $request->referral_code)->first();
+
+            if($referrer->count() > 0){
+
+                $user->name = $request->name;
+                $user->email = $request->email;
+                $user->number = $request->number;
+                $user->role_as = Status::Member->value;
+                $user->referral_code = $referral_code;
+                $user->password = Hash::make($request->password);
+                $user->save();
+
+                $network = new Network();
+                $network->referrer_id = $user->id;
+                $network->referral_code = $request->referral_code;
+                $network->save();
+
+                event(new Registered($user));
+
+                Auth::login($user);
+
+                return redirect(RouteServiceProvider::HOME);
+
+            }else{
+
+                return redirect()->back()->with('error', 'Your Refer Code is Invalid !! Please Try Again with Valid refer Code');
+            }
+
+        }else{
+
+            $user->name = $request->name;
+            $user->email = $request->email;
+            $user->number = $request->number;
+            $user->role_as = Status::Member->value;
+            $user->referral_code = $referral_code;
+            $user->password = Hash::make($request->password);
+            $user->save();
+
+            event(new Registered($user));
+
+            Auth::login($user);
+
+            return redirect(RouteServiceProvider::HOME);
+        }
+
     }
 }

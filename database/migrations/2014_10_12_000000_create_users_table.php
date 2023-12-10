@@ -21,12 +21,15 @@ return new class extends Migration
             $table->text('image')->nullable();
             $table->string('role_as')->default('member');
             $table->string('password');
-            $table->string('ballance');
+            $table->string('ballance')->nullable();
+            $table->string('referral_code')->nullable();
+            $table->unsignedBigInteger('referrer_id')->nullable();
             $table->enum('status',[Status::Active->value,Status::Deactivate->value])->default(Status::Deactivate->value);
             $table->timestamp('last_seen')->nullable();
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();
+            $table->foreign('referrer_id')->references('id')->on('users')->onDelete('set null');
         });
     }
 
