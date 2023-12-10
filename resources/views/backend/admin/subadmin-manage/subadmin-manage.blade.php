@@ -13,9 +13,11 @@ subadmin withtype
             <h4 class="m-0">Sub admin With type</h4>
         </div>
         <div class="col-sm-6">
+
             <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
-                <li class="breadcrumb-item"><a href="#">Station</a></li>
+                {{-- <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
+                <li class="breadcrumb-item"><a href="#">Station</a></li> --}}
+                <a href="" class="btn btn-outline-primary">Create Teacher</a>
             </ol>
         </div>
     </div>

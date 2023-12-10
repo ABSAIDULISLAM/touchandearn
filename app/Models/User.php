@@ -3,13 +3,17 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Support\Str;
 
-class User extends Authenticatable
+
+class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
 
@@ -26,6 +30,8 @@ class User extends Authenticatable
         'role_as',
         'password',
         'ballance',
+        'referral_code',
+        'referrer_id',
         'status',
         'last_seen',
     ];
@@ -39,7 +45,21 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
+    public function referrals()
+    {
+        return $this->hasMany(User::class, 'referrer_id');
+    }
 
+    public function generateReferralCode()
+    {
+        $this->referral_code = Str::random(10);
+        $this->save();
+    }
+
+    public function isReferredBy(User $referrer)
+    {
+        return $this->referrer_id === $referrer->id;
+    }
 
     public function subadmin()
     {
