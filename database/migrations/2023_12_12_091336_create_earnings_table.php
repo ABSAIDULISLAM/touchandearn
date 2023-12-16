@@ -11,11 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('networks', function (Blueprint $table) {
+        Schema::create('earnings', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id')->nullable();
-            $table->string('referral_code')->nullable();
-            $table->integer('parent_id')->nullable();
+            $table->unsignedBigInteger('user_id')->nullable();
+            $table->decimal('amount')->default('0.00');
             $table->timestamps();
         });
     }
@@ -25,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('networks');
+        Schema::dropIfExists('earnings');
     }
 };

@@ -36,14 +36,19 @@ class RegisteredUserController extends Controller
         $request->validate([
             'referral_code' => ['nullable', 'max:15'],
             'name' => ['required', 'string', 'max:255'],
+            'country' => ['required'],
+            'language' => ['required'],
             'number' => ['required','max:15', 'min:11', 'unique:'.User::class],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255'], // , 'unique:'.User::class
+            'whats_app' => ['required','max:15', 'min:11', 'unique:'.User::class],
+            'gender' => ['required'],
+            'image'   => ['nullable'],//,'mimes:png,jpg,webp,jpeg'],
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class], // ,
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
         $user = new User();
 
-        $referral_code = Str::random(10);
+        $referral_code = Str::random(8);
 
         if(isset($request->referral_code)){
 
@@ -52,16 +57,26 @@ class RegisteredUserController extends Controller
             if($referrer->count() > 0){
 
                 $user->name = $request->name;
-                $user->email = $request->email;
+                $user->country = $request->country;
+                $user->language = $request->language;
                 $user->number = $request->number;
+                $user->whats_app = $request->whats_app;
+                $user->gender = $request->gender;
+                $user->email = $request->email;
                 $user->role_as = Status::Member->value;
                 $user->referral_code = $referral_code;
                 $user->password = Hash::make($request->password);
+                if(request()->hasFile('image')){
+                    $image = upload_image(request('image'), 'uploads/members/', 400, 400);
+                    $user->image = $image;
+                }
                 $user->save();
 
+
                 $network = new Network();
-                $network->referrer_id = $user->id;
+                $network->user_id = $user->id;
                 $network->referral_code = $request->referral_code;
+                $network->parent_id = $referrer->id;
                 $network->save();
 
                 event(new Registered($user));
@@ -71,18 +86,25 @@ class RegisteredUserController extends Controller
                 return redirect(RouteServiceProvider::HOME);
 
             }else{
-
                 return redirect()->back()->with('error', 'Your Refer Code is Invalid !! Please Try Again with Valid refer Code');
             }
 
         }else{
 
             $user->name = $request->name;
-            $user->email = $request->email;
+            $user->country = $request->country;
+            $user->language = $request->language;
             $user->number = $request->number;
+            $user->whats_app = $request->whats_app;
+            $user->gender = $request->gender;
+            $user->email = $request->email;
             $user->role_as = Status::Member->value;
             $user->referral_code = $referral_code;
             $user->password = Hash::make($request->password);
+            if(request()->hasFile('image')){
+                $image = upload_image(request('image'), 'uploads/members/', 400, 400);
+                $user->image = $image;
+            }
             $user->save();
 
             event(new Registered($user));

@@ -54,11 +54,7 @@ class SubadminCreate
             $message->subject('Welcome Mail from Touch and Earn');
         });
 
-
-
-
         return true;
-
 
     }
 }

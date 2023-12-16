@@ -26,6 +26,7 @@ return new class extends Migration
             $table->unsignedBigInteger('referrer_id')->nullable();
             $table->enum('status',[Status::Active->value,Status::Deactivate->value])->default(Status::Deactivate->value);
             $table->timestamp('last_seen')->nullable();
+            $table->timestamp('management_type')->nullable()->default('controller');
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();

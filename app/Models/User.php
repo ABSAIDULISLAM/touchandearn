@@ -34,6 +34,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'referrer_id',
         'status',
         'last_seen',
+        'management_type',
     ];
 
     /**
@@ -67,7 +68,7 @@ class User extends Authenticatable implements MustVerifyEmail
         // return $this->hasMany(Subadmin::class);
     }
 
-
+    
     /**
      * The attributes that should be cast.
      *

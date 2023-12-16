@@ -71,5 +71,6 @@ class Kernel extends HttpKernel
         'seniorAccountant' => \App\Http\Middleware\SenionAccountant::class,
         'supportTeamLeader' => \App\Http\Middleware\SupportTeamLeader::class,
         'controller' => \App\Http\Middleware\Controller::class,
+        'counselor' => \App\Http\Middleware\CounselorMiddleware::class,
     ];
 }
