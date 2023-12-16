@@ -20,80 +20,173 @@
             </ol>
         </div>
     </div>
-    
+
 @endsection
 
 
 @section('homesection')
     <div class="row">
 
-        <div class="col-lg-3 col-6">
-            <div class="small-box bg-info">
-                <div class="inner">
-                    <h3>150</h3>
 
-                    <p>মোট লাইসেন্স</p>
+        <div class="container">
+            <div class="marquer py-2" style="background-color: #2196F3;">
+                <div class="card-header px-3 py-2">
+                    <marquee behavior="smoth" direction="left" class="d-flex"> <b class="text-white" style="font-size: 19px;">Welcome to Touch and earn Empire</b></marquee>
                 </div>
-                <div class="icon">
-                    <i class="ion ion-bag"></i>
-                </div>
-                <a href="#" class="small-box-footer">More info<i class="fas fa-arrow-circle-right"></i></a>
             </div>
         </div>
 
-        <div class="col-lg-3 col-6">
-            <div class="small-box bg-success">
-                <div class="inner">
-                    <h3>56</h3>
+        <div class="container my-5" style="background-color: #ffffff">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card my-2 shodow-white"
+                        style=" box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; background-color:#fff;">
+                        <div class="card-body p-5">
+                            <div class="profile text-center">
+                                <span style="font-size: 19px" class="mb-4"><b class="mb-2">02:04:34 PM</b></span><br>
+                                <img src="{{ asset('backend/assets/dist/img/avatar3.png') }}" alt="profile-image"
+                                    height="120px" width="130px" class="rounded-circle m-auto">
 
-                    <p>বানিজ্যিক</p>
+                                {{-- <div class="button">
+                                    <button class="btn mt-3 px-5" style="background-color: #FFA000; color:#fff;">GOLDEN PREMIUM
+                                        MEMBER</button>
+                                </div>
+
+                                <span style="font-size: 11px; font-weight:500;">Expiry: 16th Jan 24 - 12:28 AM</span> --}}
+
+                                <div class="user-info mt-4">
+                                    <p style="font-weight: 500; font-size: 22px">{{auth()->user()->name}}
+                                    <p>
+                                        <span style="font-weight: 100; font-size: 12px"> Joined : 29th Nov 2023</span><br>
+                                        {{-- <p> </p> --}}
+                                        <span>Sponsored by :</span><br>
+                                        <b>Md rakib Mahmud (000429405)</b>
+                                </div>
+
+                                <div class="card p-2" style=" box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px">
+                                    <div class="col-md-12 d-block mt-3">
+                                        <button class="btn btn-primary w-100">EARNINGS</button>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6 col-sm-6 col-6 mt-2">
+                                            <div class="today">
+                                                <p style="background-color: #FFA000; color:#fff; font-size:15px" class="p-3">
+                                                    TK. 12</p>
+                                                <p style="background-color: #377DFF; color:#fff; font-size:15px" class="p-3">
+                                                    total</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-sm-6 col-6 mt-2">
+                                            <div class="today">
+                                                <p style="background-color: #FFA000; color:#fff; font-size:15px" class="p-3">
+                                                    TK. 12</p>
+                                                <p style="background-color: #377DFF; color:#fff; font-size:15px" class="p-3">
+                                                    Today</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <style>
+                                    hr {
+                                        padding: 0px;
+                                        margin: 0px;
+                                    }
+
+                                    .navbars a {
+                                        font-size: 18px;
+                                        padding-top: 5px;
+
+                                    }
+
+                                    .navbars a .active {
+                                        background-color: #FF6A00;
+                                        color: #fff;
+                                    }
+
+                                    .navbars a p {
+                                        padding: 5px 20px;
+                                        font-size: 18px;
+                                        border-radius: 5px;
+                                        color: #333;
+                                        transition: 0.1s;
+                                    }
+
+                                    .navbars a p:hover {
+                                        color: #FF5C00;
+                                    }
+                                </style>
+
+
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="icon">
-                    <i class="ion ion-stats-bars"></i>
+
+                <div class="col-md-8">
+
+                    <div class="card my-2 shodow-white"
+                        style=" box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; background-color:rgb(255, 255, 255)">
+                        <div class="card-body  p-5">
+                            <div class="joing text-center">
+                                <img src="{{ asset('backend/assets/dist/img/avatar3.png') }}" alt="profile-image"
+                                    height="120px" width="150px" class="rounded-circle m-auto">
+                                <p class="text-center mt-2"  style="font-size: 16px;">আমাদের অফিসিয়াল Telegram গ্রুপ এ নিচের বাটনে ক্লিক করে জয়েন করুন</p>
+                                <div class="button text-center">
+                                    <a href="" class="btn mt-3 text-center px-5"
+                                        style="background-color: #FF5C00; color:#fff;">GOLDEN PREMIUM MEMBER</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card my-2 shodow-white mt-2"
+                        style=" box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; background-color:#E0EDE4">
+                        <div class="card-body  p-5">
+                            <div class="joing">
+                                <h4 class="text-success text-center">আপনার রেফার লিংক:</h4>
+                                <p class="text-center mt-2 text-danger" style="font-size: 16px;">asfgq34r52x Zsadf</p>
+                                <div class="button text-center">
+                                    <a href="" class="btn mt-3 text-center px-3"
+                                        style="background-color: #FF5C00; color:#fff;">Share</a>
+
+                                    <a href="" class="btn mt-3 text-center px-3"
+                                        style="background-color: #FF5C00; color:#fff;">Copy</a>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card my-2 shodow-white mt-2"
+                        style=" box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; background-color:#E0EDE4">
+                        <div class="card-body  p-5">
+                            <div class="joing">
+                                <h4 class="text-primary text-center">আপনার একাউন্ট নম্বর ও রেফার আই.ডি:</h4>
+                                <p class="text-center mt-2 text-danger" style="font-size: 16px;">asfgq34r52x Zsadf</p>
+                                <div class="button text-center">
+
+                                    <a href="" class="btn mt-3 text-center px-3"
+                                        style="background-color: #FF5C00; color:#fff;">Copy</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 col-6">
+
+                        </div>
+                    </div>
+
                 </div>
-                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
         </div>
-        <div class="col-lg-3 col-6">
-            <div class="small-box bg-warning">
-                <div class="inner">
-                    <h3>67</h3>
 
-                    <p>কৃষি</p>
-                </div>
-                <div class="icon">
-                    <i class="ion ion-person-add"></i>
-                </div>
-                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
-        </div>
-        <div class="col-lg-3 col-6">
-            <div class="small-box bg-secondary">
-                <div class="inner">
-                    <h3>67</h3>
 
-                    <p>মৎস</p>
-                </div>
-                <div class="icon">
-                    <i class="ion ion-pie-graph"></i>
-                </div>
-                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
-        </div>
 
-        <div class="col-lg-3 col-6">
-            <div class="small-box bg-danger">
-                <div class="inner">
-                    <h3>56</h3>
 
-                    <p>ক্ষতিপূরন</p>
-                </div>
-                <div class="icon">
-                    <i class="ion ion-pie-graph"></i>
-                </div>
-                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
-        </div>
+
+
 
 
     </div>

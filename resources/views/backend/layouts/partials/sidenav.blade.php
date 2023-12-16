@@ -56,9 +56,15 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{{ route('member.manage') }}" class="nav-link">
+                            <a href="{{ route('activemember.admin') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Member</p>
+                                <p>Active Member</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('inactivemember.admin') }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Inactive Member</p>
                             </a>
                         </li>
 
@@ -281,11 +287,19 @@
                         </p>
                     </a>
                 </li>
+                <li class="nav-item menu-open">
+                    <a href="{{route('controller.members')}}" class="nav-link ">
+                        <i class="nav-icon fas fa-home"></i>
+                        <p>
+                            Inactive Members
+                        </p>
+                    </a>
+                </li>
                 <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-id-card"></i>
                         <p>
-                            Licence
+                            manage Member
                             <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
@@ -300,6 +314,50 @@
                             <a href="" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Licence Check </p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+
+                <!-- sub Counselor area  -->
+                @elseif(auth()->user()->role_as == 'counselor')
+                <span style="color: #c8c9c9; font-size:12px;" class="pl-2 mb-2">Counselor </span>
+                <li class="nav-item menu-open">
+                    <a href="" class="nav-link @yield('active')">
+                        <i class="nav-icon fas fa-home"></i>
+                        <p>
+                            Dashboard
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item menu-open">
+                    <a href="{{route('counselor.members')}}" class="nav-link ">
+                        <i class="nav-icon fas fa-home"></i>
+                        <p>
+                            Inactive Members
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-id-card"></i>
+                        <p>
+                            manage Member
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Member </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Member </p>
                             </a>
                         </li>
                     </ul>
@@ -341,7 +399,7 @@
                     </ul>
                 </li>
 
-                
+
                 <!-- Member area  -->
                 @elseif(auth()->user()->role_as == 'member')
                 <span style="color: #c8c9c9; font-size:12px;" class="pl-2 mb-2">Member</span>
@@ -352,30 +410,38 @@
                             Dashboard
                         </p>
                     </a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-id-card"></i>
+                    <a href="" class="nav-link">
+                        <i class="nav-icon fas fa-home"></i>
                         <p>
-                            Licence
-                            <i class="right fas fa-angle-left"></i>
+                            My Wallet
                         </p>
                     </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Licence Add</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Licence Check </p>
-                            </a>
-                        </li>
-                    </ul>
+                    <a href="" class="nav-link">
+                        <i class="nav-icon fas fa-home"></i>
+                        <p>
+                            Withdraw
+                        </p>
+                    </a>
+                    <a href="" class="nav-link">
+                        <i class="nav-icon fas fa-home"></i>
+                        <p>
+                            Transfer Balance
+                        </p>
+                    </a>
+                    <a href="" class="nav-link">
+                        <i class="nav-icon fas fa-home"></i>
+                        <p>
+                            Sponsor List
+                        </p>
+                    </a>
+                    <a href="" class="nav-link">
+                        <i class="nav-icon fas fa-home"></i>
+                        <p>
+                            Logout
+                        </p>
+                    </a>
                 </li>
+
 
                 @endif
 

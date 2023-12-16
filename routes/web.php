@@ -3,9 +3,11 @@
 use App\Http\Controllers\admin\AdminDashController;
 use App\Http\Controllers\admin\SubAdminMaganeController;
 use App\Http\Controllers\backend\ProfileController as BackendProfileController;
+use App\Http\Controllers\counselor\CounselorController;
 use App\Http\Controllers\GuestController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\member\MemberManageController;
+use App\Http\Controllers\ManageMemberByController;
+use App\Http\Controllers\admin\MemberMaganeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\subadmin\ProfileController as SubadminProfileController;
 use Illuminate\Support\Facades\Auth;
@@ -28,7 +30,6 @@ Route::controller(HomeController::class)->group(function(){
 });
 
 
-
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -43,10 +44,12 @@ Route::get('/profile', [BackendProfileController::class, 'profile'])->name('prof
 
 // admin routes
 Route::prefix('admin/')->middleware(['auth','admin'])->group(function (){
+    
     Route::get('manage/sub-admin', [SubAdminMaganeController::class, 'managesubadmin'])->name('subadmin.withtype.manage');
     Route::get('sub-admin/register', [SubAdminMaganeController::class, 'createSubadmin'])->name('subadmin.create');
     Route::post('sub-admin/register/store', [SubAdminMaganeController::class, 'subadminStore'])->name('subadmin.store');
-    Route::get('manage/member', [MemberManageController::class, 'memberManage'])->name('member.manage');
+    Route::get('member/active', [MemberMaganeController::class, 'activemember'])->name('activemember.admin');
+    Route::get('member/inactive', [MemberMaganeController::class, 'inactivemember'])->name('inactivemember.admin');
 
 });
 
@@ -73,11 +76,20 @@ Route::prefix('admin/')->middleware(['auth','admin'])->group(function (){
 
 
 // Controller routes
-// Route::prefix('controller/')->middleware(['auth','controller','active'])->group(function (){
+Route::prefix('controller/')->middleware(['auth','controller','active'])->group(function (){
+
+    Route::get('controller/inactive-members', [ManageMemberByController::class, 'inactiveMembers'])->name('controller.members');
+    Route::post('controller/members-transfer', [ManageMemberByController::class, 'transferMember'])->name('member.transfer');
+
+});
 
 
-// });
+// Controller routes
+Route::prefix('counsellor/')->middleware(['auth','counselor','active'])->group(function (){
+
+    Route::get('counsellor/inactive-members', [CounselorController::class, 'inactiveMembers'])->name('counselor.members');
+
+});
 
 // Guest register
-
 Route::get('/dashboard/test', [AdminDashController::class, 'dashboardTest']);
