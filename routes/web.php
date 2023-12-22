@@ -44,7 +44,7 @@ Route::get('/profile', [BackendProfileController::class, 'profile'])->name('prof
 
 // admin routes
 Route::prefix('admin/')->middleware(['auth','admin'])->group(function (){
-    
+
     Route::get('manage/sub-admin', [SubAdminMaganeController::class, 'managesubadmin'])->name('subadmin.withtype.manage');
     Route::get('sub-admin/register', [SubAdminMaganeController::class, 'createSubadmin'])->name('subadmin.create');
     Route::post('sub-admin/register/store', [SubAdminMaganeController::class, 'subadminStore'])->name('subadmin.store');
@@ -84,12 +84,25 @@ Route::prefix('controller/')->middleware(['auth','controller','active'])->group(
 });
 
 
-// Controller routes
+// counsellor routes
 Route::prefix('counsellor/')->middleware(['auth','counselor','active'])->group(function (){
 
-    Route::get('counsellor/inactive-members', [CounselorController::class, 'inactiveMembers'])->name('counselor.members');
+    Route::get('counsellor/my-leads', [CounselorController::class, 'myleads'])->name('counselor.leads');
+    Route::get('counsellor/message-done', [CounselorController::class, 'messageDone'])->name('counselor.message-done');
+    Route::get('/send-whatsapp/{number}/{applicant_id}', [CounselorController::class, 'sendWhatsAppMessage'])->name('send-whatsapp');
+    Route::get('/counsellor/working-zone', [CounselorController::class, 'workingZone'])->name('counselor.working-zone');
+    Route::get('/counsellor/wrong-whatsapp/{stid}', [CounselorController::class, 'wrongWhatsappupdate'])->name('counselor.wrong-whatsapp');
+    Route::get('/counsellor/wrong-wp-list', [CounselorController::class, 'wrongWhatsappList'])->name('counselor.wrong_wp_list');
+});
+
+
+
+// Students routes
+Route::prefix('student/')->middleware(['auth','','active'])->group(function (){
+
 
 });
+
 
 // Guest register
 Route::get('/dashboard/test', [AdminDashController::class, 'dashboardTest']);

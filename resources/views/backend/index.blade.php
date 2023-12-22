@@ -31,7 +31,7 @@
         <div class="container">
             <div class="marquer py-2" style="background-color: #2196F3;">
                 <div class="card-header px-3 py-2">
-                    <marquee behavior="smoth" direction="left" class="d-flex"> <b class="text-white" style="font-size: 19px;">Welcome to Touch and earn Empire</b></marquee>
+                    <marquee behavior="smoth" onmouseover="stop()" onmouseout="start()" direction="left" class="d-flex"> <b class="text-white" style="font-size: 19px;">Welcome to Touch and earn Empire</b></marquee>
                 </div>
             </div>
         </div>
@@ -116,7 +116,6 @@
                                     }
                                 </style>
 
-
                             </div>
                         </div>
                     </div>
@@ -181,12 +180,6 @@
                 </div>
             </div>
         </div>
-
-
-
-
-
-
 
 
     </div>

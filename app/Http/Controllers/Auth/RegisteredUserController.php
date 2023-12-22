@@ -34,7 +34,7 @@ class RegisteredUserController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'referral_code' => ['nullable', 'max:15'],
+            'referral_code' => ['nullable', 'unique:users,referral_code'],
             'name' => ['required', 'string', 'max:255'],
             'country' => ['required'],
             'language' => ['required'],
@@ -65,13 +65,13 @@ class RegisteredUserController extends Controller
                 $user->email = $request->email;
                 $user->role_as = Status::Member->value;
                 $user->referral_code = $referral_code;
+                $user->student_id = $referral_code;
                 $user->password = Hash::make($request->password);
                 if(request()->hasFile('image')){
                     $image = upload_image(request('image'), 'uploads/members/', 400, 400);
                     $user->image = $image;
                 }
                 $user->save();
-
 
                 $network = new Network();
                 $network->user_id = $user->id;
@@ -100,6 +100,7 @@ class RegisteredUserController extends Controller
             $user->email = $request->email;
             $user->role_as = Status::Member->value;
             $user->referral_code = $referral_code;
+            $user->student_id = $referral_code;
             $user->password = Hash::make($request->password);
             if(request()->hasFile('image')){
                 $image = upload_image(request('image'), 'uploads/members/', 400, 400);
@@ -115,4 +116,17 @@ class RegisteredUserController extends Controller
         }
 
     }
+
+    // protected function registered(Request $request, $user)
+    // {
+    //     // Check if Gmail is verified
+    //     if ($user->hasVerifiedEmail()) {
+    //         // Update activation points to 100
+    //         $user->update(['activation_points' => 100]);
+    //     }
+
+    //     return redirect($this->redirectPath());
+    // }
+
+
 }

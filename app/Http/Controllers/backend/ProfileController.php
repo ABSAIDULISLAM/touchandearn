@@ -14,10 +14,12 @@ class ProfileController extends Controller
     {
         $id = auth()->user()->id;
 
-        $userdata = User::where('id', $id)->with('subadmin.subadmintype')->first();
+        $userdata = User::where('id', $id)->with(['subadmin'])->first();
         // return $userdata;
+        $user =  User::where('id', auth()->user()->id)->first();
+        $referRoute = route('register', ['ref' => $user->referral_code]);
 
-        return view('backend.profile', compact('userdata'));
+        return view('backend.profile', compact(['userdata', 'referRoute']));
 
     }
 }

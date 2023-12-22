@@ -33,12 +33,10 @@ class SubAdminMaganeController extends Controller
 
     public function subadminStore(SubadminCreateRequest $request)
     {
-
         $validatedData = $request->all();
         SubadminCreate::subadminSave($validatedData);
 
         return redirect()->back()->with('success', 'Sub Admin Created Successfully !');
-
 
     }
 

@@ -20,25 +20,28 @@ class ManageMemberByController extends Controller
 
     public function transferMember(Request $request)
     {
+        $request->validate([
+            'languages' => 'required',
+            'management_type' => 'required',
+        ]);
 
         $userIds = $request->languages;
-        // dd($userIds);
         $affectedRows = 0;
 
-        if($request->languages > 0){
-            foreach ($userIds as $userId) {
+        foreach ($userIds as $userId) {
+            $result = DB::table('users')->where('id', $userId)->where('status', 'deactivate')->update(['management_type' => $request->management_type]);
 
-                $result = DB::table('users')->where('id', $userId)->update(['management_type' => $request->management_type]);
-
-                if ($result) {
-                    $affectedRows++;
-                    return redirect()->back()->with('success', 'Member Treansfered Successflly');
-                }else{
-                    return redirect()->back()->with('error', ' Opps !! Something Went Wrong');
-                }
+            if ($result) {
+                $affectedRows++;
+            } else {
+                return redirect()->back()->with('error', 'Only One Members Transferred Successfully');
             }
-        }else{
-            return redirect()->back()->with('error', ' Opps !! Something Went Wrong');
+        }
+
+        if ($affectedRows > 0) {
+            return redirect()->back()->with('success', 'Members Transferred Successfully');
+        } else {
+            return redirect()->back()->with('error', 'Oops!! Something Went Wrong');
         }
 
     }

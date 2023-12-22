@@ -30,8 +30,12 @@ class User extends Authenticatable implements MustVerifyEmail
         'role_as',
         'password',
         'ballance',
+        'activation_points',
         'referral_code',
         'referrer_id',
+        'student_id',
+        'message',
+        'myleads_response',
         'status',
         'last_seen',
         'management_type',
@@ -51,11 +55,11 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(User::class, 'referrer_id');
     }
 
-    public function generateReferralCode()
-    {
-        $this->referral_code = Str::random(10);
-        $this->save();
-    }
+    // public function generateReferralCode()
+    // {
+    //     $this->referral_code = Str::random(10);
+    //     $this->save();
+    // }
 
     public function isReferredBy(User $referrer)
     {
@@ -68,7 +72,32 @@ class User extends Authenticatable implements MustVerifyEmail
         // return $this->hasMany(Subadmin::class);
     }
 
-    
+
+
+
+
+    public function networks()
+    {
+        return $this->hasMany(Network::class, 'user_id', 'id');
+    }
+
+    public function referredUsers()
+    {
+        return $this->hasManyThrough(User::class, Network::class, 'parent_id', 'id', 'id', 'user_id');
+    }
+
+
+    public function earnings()
+    {
+        return $this->hasMany(Earning::class);
+    }
+
+
+
+
+
+
+
     /**
      * The attributes that should be cast.
      *
@@ -78,4 +107,5 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
 }

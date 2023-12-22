@@ -295,72 +295,50 @@
                         </p>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-id-card"></i>
-                        <p>
-                            manage Member
-                            <i class="right fas fa-angle-left"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Licence Add</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Licence Check </p>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
 
 
                 <!-- sub Counselor area  -->
                 @elseif(auth()->user()->role_as == 'counselor')
                 <span style="color: #c8c9c9; font-size:12px;" class="pl-2 mb-2">Counselor </span>
                 <li class="nav-item menu-open">
-                    <a href="" class="nav-link @yield('active')">
+                    <a href="" class="nav-link @yield('')">
                         <i class="nav-icon fas fa-home"></i>
                         <p>
-                            Dashboard
+                            Profile
                         </p>
                     </a>
                 </li>
                 <li class="nav-item menu-open">
-                    <a href="{{route('counselor.members')}}" class="nav-link ">
-                        <i class="nav-icon fas fa-home"></i>
+                    <a href="{{route('counselor.leads')}}" class="nav-link ">
+                        <i class="nav-icon fas fa-globe"></i>
                         <p>
-                            Inactive Members
+                            My Leads
                         </p>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-id-card"></i>
+                <li class="nav-item menu-open">
+                    <a href="{{route('counselor.message-done')}}" class="nav-link ">
+                        <i class="nav-icon fas fa-globe"></i>
                         <p>
-                            manage Member
-                            <i class="right fas fa-angle-left"></i>
+                            Message Done
                         </p>
                     </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Member </p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Member </p>
-                            </a>
-                        </li>
-                    </ul>
+                </li>
+                <li class="nav-item menu-open">
+                    <a href="{{route('counselor.working-zone')}}" class="nav-link ">
+                        <i class="nav-icon fas fa-globe"></i>
+                        <p>
+                            Working zone
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item menu-open">
+                    <a href="{{route('counselor.wrong_wp_list')}}" class="nav-link ">
+                        <i class="nav-icon fas fa-globe"></i>
+                        <p>
+                            Wrong WP
+                        </p>
+                    </a>
                 </li>
 
 
@@ -404,13 +382,8 @@
                 @elseif(auth()->user()->role_as == 'member')
                 <span style="color: #c8c9c9; font-size:12px;" class="pl-2 mb-2">Member</span>
                 <li class="nav-item menu-open">
-                    <a href="" class="nav-link @yield('active')">
-                        <i class="nav-icon fas fa-home"></i>
-                        <p>
-                            Dashboard
-                        </p>
-                    </a>
-                    <a href="" class="nav-link">
+
+                    <a href="{{route('dashboard')}}" class="nav-link">
                         <i class="nav-icon fas fa-home"></i>
                         <p>
                             My Wallet
@@ -425,19 +398,13 @@
                     <a href="" class="nav-link">
                         <i class="nav-icon fas fa-home"></i>
                         <p>
-                            Transfer Balance
-                        </p>
-                    </a>
-                    <a href="" class="nav-link">
-                        <i class="nav-icon fas fa-home"></i>
-                        <p>
                             Sponsor List
                         </p>
                     </a>
-                    <a href="" class="nav-link">
+                    <a href="{{route('profile')}}" class="nav-link">
                         <i class="nav-icon fas fa-home"></i>
                         <p>
-                            Logout
+                            Profile
                         </p>
                     </a>
                 </li>

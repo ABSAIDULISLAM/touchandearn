@@ -37,6 +37,17 @@
         <div class="col-md-12 order-2 order-md-1">
             <div class="card card-outline card-primary">
                 <div class="card-body">
+                    @if ($errors->any())
+                    <div class="">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                            @php
+                            toastr()->error($error);
+                            @endphp
+                            @endforeach
+                        </ul>
+                    </div>
+                    @endif
                     <div class="table-responsive">
 
                         <form action="{{route('member.transfer')}}" method="post">
@@ -45,14 +56,14 @@
                                 <div class="col-md-8 m-auto">
                                     <div class="form-group row">
                                         <div class="col-md-9">
-                                            <select name="management_type" id="" class="form-control">
+                                            <select name="management_type" id="" class="form-control" required>
                                                 <option disabled selected>Select Management Type</option>
                                                 <option value="counsellor">Counsellor</option>
-                                                <option value="team_leader">Team Leader</option>
+                                                {{-- <option value="team_leader">Team Leader</option> --}}
                                             </select>
                                         </div>
 
-                                        <div class="col-md-2">
+                                        <div class="col-md-2 mt-1">
                                             <button type="submit" class="btn btn-primary">Transfer</button>
                                         </div>
                                     </div>
@@ -67,14 +78,13 @@
                                         <th scope="col" class="col-md-1">
                                             <div class="form-check">
                                                 <input class="form-check-input" type="checkbox" id="selectAll">
-                                                <label class="form-check-label" for="selectAll">Select All Language</label>
+                                                <label class="form-check-label" for="selectAll">Select All (Language)</label>
                                             </div>
                                         </th>
                                         <th scope="col" class="col-md-2">Name</th>
                                         <th scope="col" class="col-md-2">email</th>
-                                        <th scope="col" class="col-md-2">number</th>
-                                        <th scope="col" class="col-md-2">whats_app</th>
                                         <th scope="col" class="col-md-1">country</th>
+                                        <th scope="col" class="col-md-1">Gender</th>
                                         <th scope="col" class="col-md-1">email_verified_at</th>
                                         <th scope="col" class="col-md-1">created_at</th>
                                         <th scope="col" class="col-md-2">Action</th>
@@ -93,9 +103,8 @@
                                             </td>
                                             <td>{{ $user->name }}</td>
                                             <td>{{ $user->email }}</td>
-                                            <td>{{ $user->number }}</td>
-                                            <td>{{ $user->whats_app }}</td>
                                             <td>{{ $user->country }}</td>
+                                            <td>{{ $user->gender }}</td>
                                             <td>{{ $user->email_verified_at == null ? 'Unverified' : 'verified' }}</td>
                                             <td>{{ $user->created_at }}</td>
                                             <td>

@@ -5,7 +5,7 @@
 @endsection
 
 @section('title')
-    Dashboard
+    Profile
 @endsection
 
 @section('toproute')
@@ -584,7 +584,7 @@
 
                     <h3 class="profile-username text-center">{{ $userdata->name }}</h3>
 
-                    <p class="text-muted text-center">{{ $userdata->subadmin->subadmintype->subadmin_type }}</p>
+                    {{-- <p class="text-muted text-center">{{ $userdata->subadmin->subadmintype->subadmin_type }}</p> --}}
 
                     <ul class="list-group list-group-unbordered mb-3">
 
@@ -750,38 +750,82 @@
 
                     <h3 class="profile-username text-center">{{ $userdata->name }}</h3>
 
-                    <p class="text-muted text-center">{{ $userdata->subadmin->subadmintype->subadmin_type }}</p>
+                    <p class="text-muted text-center">{{ $userdata->role_as == 'member'? 'Student': '' }}</p>
 
                     <ul class="list-group list-group-unbordered mb-3">
 
                         <li class="list-group-item">
-                            <b>Points</b> <a class="float-right">13,287</a>
+                            <b>Activation Points:</b> <a class="float-right">{{ $userdata->activation_points}}</a>
                         </li>
                         <li class="list-group-item">
-                            <b class="text-success">Ballance</b> <a class="float-right">{{ $userdata->ballance}}</a>
+                            <b class="text-success">Wallet Points:</b> <a class="float-right">{{ $userdata->ballance}}</a>
                         </li>
+                        <li class="list-group-item">
+                            <b class="text-primary">Freeze Wallet points:</b> <a class="float-right">{{ $userdata->ballance}}</a>
+                        </li>
+
                     </ul>
 
                     <div class="d-flex">
-                        <a href="#" class="btn btn-primary btn-sm mr-2"><b>Share Points</b></a>
+                        <a href="#" class="btn btn-primary btn-sm mr-2" ><b>Share Points</b></a>
                         <a href="#" class="btn btn-success btn-sm"><b> Withdrow</b></a>
                     </div>
 
+                    @if (auth()->user()->status == 'active')
                     <ul class="list-group list-group-unbordered mb-3">
                         <hr>
                         <li class="list-group-item">
-                            <a class="">xsak4353xcoirtyo</a>
+                            <input type="text" class="form-control" id="referenceLink" readonly value="{{$referRoute}}">
                         </li>
                     </ul>
-
+                    @else
+                        <p class="text-danger h6 my-3">your member ID is not active !</p>
+                    @endif
+                    
                     <div class="d-flex">
-                        <a href="#" class="btn btn-primary btn-sm btn-block"><b>Copy Refer Link</b></a>
+                        <button class="btn btn-primary btn-sm mr-2" onclick="copyToClipboard()"><b>Copy Link</b></button>
+                        <button class="btn btn-success btn-sm" onclick="shareLink()"><b> Share Link</b></button>
                     </div>
 
                 </div>
                 <!-- /.card-body -->
             </div>
         </div>
+        <script>
+            function copyToClipboard() {
+                // Get the input element
+                var inputElement = document.getElementById('referenceLink');
+
+                // Select the text in the input element
+                inputElement.select();
+                inputElement.setSelectionRange(0, 99999); // For mobile devices
+
+                // Copy the selected text to the clipboard
+                document.execCommand('copy');
+
+                // Deselect the text
+                inputElement.setSelectionRange(0, 0);
+                alert('Link copied to clipboard!');
+            }
+        </script>
+        <script>
+            function shareLink() {
+                // Check if the Web Share API is supported
+                if (navigator.share) {
+                    // Use the Web Share API to share the link
+                    navigator.share({
+                        title: 'Share Link',
+                        text: 'Check out this link:',
+                        url: '{{ $referRoute }}'
+                    })
+                    .then(() => console.log('Link shared successfully!'))
+                    .catch((error) => console.error('Error sharing link:', error));
+                } else {
+                    // Fallback for browsers that do not support the Web Share API
+                    alert('Web Share API is not supported on this browser.');
+                }
+            }
+        </script>
         <!-- /.col -->
         <div class="col-md-9">
             <div class="card card-primary card-outline">
@@ -798,52 +842,44 @@
                             <div class="table-responsive">
                                 <table class="table table-bordered table-striped table-hover">
                                     <tr>
-                                        <th>Email</th>
+                                        <th>ID</th>
+                                        <td>{{ $userdata->student_id }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Name</th>
+                                        <td>{{ $userdata->name }}</td>
+                                    </tr>
+                                    {{-- <tr>
+                                        <th>Account Type</th>
+                                        <td>{{ $userdata->role_as }}</td>
+                                    </tr> --}}
+                                    <tr>
+                                        <th>Phone Number:</th>
+                                        <td><a href="tel:{{ $userdata->number }}">{{ $userdata->number }}</a></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Whstsapp Number:</th>
+                                        <td><a href="tel:{{$userdata->whats_app}}">{{ $userdata->whats_app }}</a></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Gmail:</th>
                                         <td>{{ $userdata->email }}</td>
                                     </tr>
                                     <tr>
-                                        <th>number</th>
-                                        <td>{{ $userdata->number }}</td>
+                                        <th>Country:</th>
+                                        <td>{{ $userdata->country }}</td>
                                     </tr>
                                     <tr>
-                                        <th>member_id</th>
-                                        <td>{{ $userdata->subadmin->whats_app }}</td>
+                                        <th>Language:</th>
+                                        <td>{{ $userdata->language }}</td>
                                     </tr>
                                     <tr>
-                                        <th>role_as</th>
-                                        <td>{{ $userdata->role_as }}</td>
+                                        <th>Gender:</th>
+                                        <td>{{ $userdata->gender }}</td>
                                     </tr>
                                     <tr>
-                                        <th>status</th>
-                                        <td>{{ $userdata->status }}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>last_seen</th>
-                                        <td>{{ $userdata->last_seen }}</td>
-                                    </tr>
-
-                                    @if ($userdata->subadmin->member_id == null)
-                                    <tr>
-                                        <th>Member Type</th>
-                                        <td>n/a</td>
-                                    </tr>
-                                    @else
-                                    <tr>
-                                        <th>Member Type</th>
-                                        <td>{{ $userdata->subadmin->member_id }}</td>
-                                    </tr>
-                                    @endif
-                                    <tr>
-                                        <th>gender</th>
-                                        <td>{{ $userdata->subadmin->gender }}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>country_id</th>
-                                        <td>{{ $userdata->subadmin->country_id }}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>language</th>
-                                        <td>{{ $userdata->subadmin->language }}</td>
+                                        <th>My Team Leader (ID)</th>
+                                        <td>lagbe</td>
                                     </tr>
                                     <tr>
                                         <th>created_at</th>
@@ -866,6 +902,12 @@
                                     <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
                                     <div class="col-sm-10">
                                         <input type="email" name="email" value="{{$userdata->email}}" class="form-control" id="inputEmail" placeholder="Email">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="inputEmail" class="col-sm-2 col-form-label">What's App</label>
+                                    <div class="col-sm-10">
+                                        <input type="number" name="whats_app" value="{{$userdata->whats_app}}" class="form-control" id="inputEmail" placeholder="Whats App">
                                     </div>
                                 </div>
                                 <div class="form-group row">

@@ -22,8 +22,12 @@ return new class extends Migration
             $table->string('role_as')->default('member');
             $table->string('password');
             $table->string('ballance')->nullable();
+            $table->string('activation_points')->nullable();
             $table->string('referral_code')->nullable();
             $table->unsignedBigInteger('referrer_id')->nullable();
+            $table->unsignedBigInteger('student_id')->nullable();
+            $table->string('message')->nullable();
+            $table->string('myleads_response')->nullable();
             $table->enum('status',[Status::Active->value,Status::Deactivate->value])->default(Status::Deactivate->value);
             $table->timestamp('last_seen')->nullable();
             $table->timestamp('management_type')->nullable()->default('controller');
