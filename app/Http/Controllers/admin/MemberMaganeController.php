@@ -8,8 +8,6 @@ use Illuminate\Http\Request;
 
 class MemberMaganeController extends Controller
 {
-    
-    
 
     public function inactivemember()
     {

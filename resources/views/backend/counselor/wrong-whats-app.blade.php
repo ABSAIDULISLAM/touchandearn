@@ -90,7 +90,7 @@
                                         <td>{{ $user->language }}</td>
                                         <td>
                                             @if ($user->message == 'done')
-                                                <a href="{{route('counselor.wrong-whatsapp', ['stid' => $user->student_id])}}" class="btn btn-danger btn-sm px-3">Wrong WP</a>
+                                                <a href="{{route('counselor.right-wp-update', ['stid' => $user->student_id])}}" class="btn btn-success btn-sm px-3" onclick="return confirm('are you sure to listed this user in right wp message list ?')">Right WP</a>
                                             @else
                                                 <p class="" style="font-size: 11px;">Please click WhatsApp before update response</p>
                                             @endif

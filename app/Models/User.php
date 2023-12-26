@@ -35,6 +35,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'referrer_id',
         'student_id',
         'message',
+        'wp_message',
         'myleads_response',
         'status',
         'last_seen',
@@ -83,7 +84,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function referredUsers()
     {
-        return $this->hasManyThrough(User::class, Network::class, 'parent_id', 'id', 'id', 'user_id');
+        return $this->hasManyThrough(User::class, Network::class, 'parent_id', 'id', 'user_id', 'id');
     }
 
 

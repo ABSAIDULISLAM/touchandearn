@@ -72,7 +72,7 @@
                             </thead>
                             <tbody>
                                 @foreach ($users as $user)
-                                    <tr>
+                                    <tr class="open-modal" data-user-id="{{ $user->id }}">
                                         <td>{{ $loop->index + 1 }}</td>
                                         <td>{{ $user->student_id }}</td>
                                         <td>{{ date('d M Y H:i', strtotime($user->created_at)) }}</td>
@@ -84,13 +84,17 @@
                                         <td>{{ $user->country }}</td>
                                         <td>Noting</td>
                                         <td>
-                                            <select name="response" id="" class="form-control">
-                                                <option selected disabled>Select Response</option>
-                                                <option value="" id="">Re Schedule</option>
-                                                <option value="">Not Replied</option>
-                                                <option value="">Didn't Fill Up The Form</option>
-                                                <option value="">Meeting Not Join</option>
-                                            </select>
+                                            <form action="{{ route('counselor.responseupdate-msdone') }}" method="post" class="msdForm">
+                                                @csrf
+                                                <input type="hidden" name="student_id" value="{{ $user->student_id }}">
+                                                <select name="msd_response" class="msdResponse form-control">
+                                                    <option selected disabled>Select Response</option>
+                                                    <option value="show_modal">Re Scedule</option>
+                                                    <option value="not_replied">Not Replied</option>
+                                                    <option value="dont_fillup">Didn't Fill Up The Form</option>
+                                                    <option value="meeting_not_join">Meeting Not Join</option>
+                                                </select>
+                                            </form>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -138,7 +142,38 @@
                 });
             });
         </script>
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+        <script>
+            var $j = jQuery.noConflict();
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+        <script>
+            $(document).ready(function () {
+                $('.msdResponse').change(function () {
+                    var selectedOption = $(this).val();
+                    var parentForm = $(this).closest('form');
+
+                    if (selectedOption === 'not_replied' || selectedOption === 'dont_fillup' || selectedOption === 'meeting_not_join') {
+                        var confirmation = confirm("Are you sure you want to save this response?");
+                        if (confirmation) {
+                            parentForm.submit();
+                        } else {
+                            $(this).val(null);
+                        }
+                    } else if (selectedOption === 'show_modal') {
+                        var userId = parentForm.find('input[name="student_id"]').val();
+
+                        // Adjust the URL based on your route structure
+                        var redirectUrl = '/counselor/re-schedule/' + userId;
+
+                        window.location.href = redirectUrl;
+                    }
+                });
+            });
+        </script>
 
     @endpush
-    {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script> --}}
 @endsection

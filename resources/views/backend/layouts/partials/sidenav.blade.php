@@ -340,6 +340,14 @@
                         </p>
                     </a>
                 </li>
+                <li class="nav-item menu-open">
+                    <a href="" class="nav-link ">
+                        <i class="nav-icon fas fa-globe"></i>
+                        <p>
+                            Time Zone
+                        </p>
+                    </a>
+                </li>
 
 
                 <!-- sub admin area  -->
@@ -395,7 +403,7 @@
                             Withdraw
                         </p>
                     </a>
-                    <a href="" class="nav-link">
+                    <a href="{{route('student.sponsor-list')}}" class="nav-link">
                         <i class="nav-icon fas fa-home"></i>
                         <p>
                             Sponsor List

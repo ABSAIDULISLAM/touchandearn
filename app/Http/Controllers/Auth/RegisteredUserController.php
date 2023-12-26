@@ -21,9 +21,11 @@ class RegisteredUserController extends Controller
     /**
      * Display the registration view.
      */
-    public function create(): View
+    public function create(Request $request)
     {
-        return view('auth.register');
+        $referralCode = $request->query('referral_code');
+
+        return view('auth.register', compact('referralCode'));
     }
 
     /**
@@ -48,7 +50,7 @@ class RegisteredUserController extends Controller
 
         $user = new User();
 
-        $referral_code = Str::random(8);
+        $referral_code = Rand(100000,10000000);
 
         if(isset($request->referral_code)){
 

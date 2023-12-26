@@ -31,7 +31,7 @@
                             <div class="col-md-12 my-3">
                                 <label for="" class="mb-2">Referral Code</label>
                                 <input type="text" class="form-control @error('referral_code') is-invalid border border-danger @enderror" name="referral_code"
-                                value="{{ old('referral_code') }}" >
+                                value="{{ isset($referralCode) ? $referralCode : old('referral_code') }}" >
                             </div>
                             <div class="col-md-12 my-3">
                                 <label for="" class="mb-2">Full Name</label>

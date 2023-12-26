@@ -49,8 +49,9 @@
                                     <th scope="col" class="col-md-2">NAME</th>
                                     <th scope="col" class="col-md-1">WHATSAPP</th>
                                     <th scope="col" class="col-md-1">Call</th>
-                                    <th scope="col" class="col-md-1">LANGUAGE</th>
+                                    <th scope="col" class="col-md-1">WP-Meaage</th>
                                     <th scope="col" class="col-md-2">RESPONSE</th>
+                                    <th scope="col" class="col-md-1">LANGUAGE</th>
                                     <th scope="col" class="col-md-2">COUNTRY</th>
                                     <th scope="col" class="col-md-2">GENDER</th>
                                     <th scope="col" class="col-md-2">MESSAGE</th>
@@ -68,16 +69,24 @@
                                         <td>
                                             <a id="whatsappButton" href="{{ route('send-whatsapp', ['number' => $user->whats_app, 'applicant_id' => $user->student_id]) }}" class="btn btn-primary btn-sm">WhatsApp</a></td>
                                         <td>
-                                            <a href="tel:{{$user->number}}" class="btn btn-success btn-sm px-3">Call</a>
+                                            <a href="tel:{{$user->number}}" class="btn btn-secondary btn-sm px-3">Call</a>
                                         </td>
-                                        <td>{{ $user->language }}</td>
                                         <td>
                                             @if ($user->message == 'done')
-                                                <a href="{{route('counselor.wrong-whatsapp', ['stid' => $user->student_id])}}" class="btn btn-danger btn-sm px-3">Wrong WP</a>
+                                                <a href="{{route('counselor.wp-ms-done', ['id' => $user->student_id])}}" onclick="return confirm('are you sure to done this wp message !')" class="btn btn-success btn-sm px-3">done</a>
+                                            @else
+                                                <p class="" style="font-size: 11px;">Please click WhatsApp before update WP-Message</p>
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @if ($user->message == 'done')
+                                                <a href="{{route('counselor.wrong-whatsapp', ['stid' => $user->student_id])}}" class="btn btn-danger btn-sm px-3" onclick="return confirm('are you sure want to Wrong Wp listed this user !')">Wrong WP</a>
                                             @else
                                                 <p class="" style="font-size: 11px;">Please click WhatsApp before update response</p>
                                             @endif
                                         </td>
+                                        <td>{{ $user->language }}</td>
+
                                         <td>{{ $user->country }}</td>
                                         <td>{{ $user->gender }}</td>
                                         <td>Noting</td>

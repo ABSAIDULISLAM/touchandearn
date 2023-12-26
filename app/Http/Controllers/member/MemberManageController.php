@@ -3,11 +3,21 @@
 namespace App\Http\Controllers\member;
 
 use App\Http\Controllers\Controller;
+use App\Models\Network;
 use App\Models\User;
 use Illuminate\Http\Request;
 
 class MemberManageController extends Controller
 {
+
+    public function sponsorList()
+    {
+        $networkDatas = Network::with('usertwo')->where('parent_id', auth()->user()->id)->get();
+        // return $networkDatas;
+        return view('backend.member.sponsor-list', compact('networkDatas'));
+    }
+
+
     // public function activemember()
     // {
 
@@ -25,4 +35,6 @@ class MemberManageController extends Controller
 
     //     return view('backend.admin.member-manage.inactive-member', compact('users'));
     // }
+
+
 }

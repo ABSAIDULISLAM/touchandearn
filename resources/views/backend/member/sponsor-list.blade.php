@@ -4,13 +4,13 @@
     active
 @endsection
 @section('title')
-    Working zone
+    Sponsor list
 @endsection
 
 @section('toproute')
     <div class="row mb-2" style="box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; padding: 8px; background-color:#fff">
         <div class="col-sm-6">
-            <h4 class="m-0">Working Zone</h4>
+            <h4 class="m-0">Sponsor list</h4>
         </div>
         <div class="col-sm-6">
 
@@ -38,58 +38,25 @@
             <div class="card card-outline card-primary">
                 <div class="card-body">
 
-                    <div class="card">
-                        <div class="col-md-8 m-auto">
-                            <form action="" method="post">
-                                <div class="form-group row">
-                                    <div class="col-md-9">
-                                        <input type="text" class="form-control" name="search" placeholder="Search here by Student ID or NAME">
-                                    </div>
-
-                                    <div class="col-md-2 mt-1">
-                                        <button type="submit" class="btn btn-primary">Transfer</button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-
-
                     <div class="table-responsive">
                         <table id="example1" class="table table-bordered table-striped">
                             <thead>
-                                <tr>
-                                    <th scope="col" class="col-md-1">#</th>
-                                    <th scope="col" class="col-md-2">STUDENT ID</th>
-                                    <th scope="col" class="col-md-2">JOINING DATE</th>
-                                    <th scope="col" class="col-md-2">NAME</th>
-                                    <th scope="col" class="col-md-1">WHATSAPP</th>
-                                    <th scope="col" class="col-md-2">GENDER</th>
-                                    <th scope="col" class="col-md-2">COUNTRY</th>
-                                    <th scope="col" class="col-md-2">COUNSELLING</th>
-                                    <th scope="col" class="col-md-2">RESPONSE</th>
-                                    <th scope="col" class="col-md-2">CL RESP</th>
-                                    <th scope="col" class="col-md-2">MESSAGE</th>
-                                </tr>
+                                <th scope="col" class="col-md-1">#</th>
+                                <th scope="col" class="col-md-2">Name</th>
+                                <th scope="col" class="col-md-2">Status</th>
+                                <th scope="col" class="col-md-2">Joing date</th>
+                                <th scope="col" class="col-md-1">Last seen</th>
                             </thead>
                             <tbody>
-                                @foreach ($users as $user)
+                                @foreach ($networkDatas as $user)
                                     <tr>
                                         <td>{{ $loop->index + 1 }}</td>
-                                        <td>{{ $user->student_id }}</td>
-                                        <td>{{ date('d M Y H:i', strtotime($user->created_at)) }}</td>
-                                        <td>{{ $user->name }}</td>
-                                        <td><a target="blank" href="{{ route('send-whatsapp', ['number' => $user->whats_app, 'applicant_id' => $user->student_id]) }}" class="btn btn-primary btn-sm">
-                                            WhatsApp
-                                        </a></td>
-                                        <td>{{ $user->gender }}</td>
-                                        <td>{{ $user->country }}</td>
-                                        <td><a target="blank" href="" class="btn btn-success btn-sm">
-                                            Pending For Approval
-                                        </a></td>
-                                        <td>{{ $user->msd_response }}</td>
-                                        <td>interested</td>
-                                        <td>Noting</td>
+                                        <td>{{ $user->usertwo->name }}</td>
+                                        <td>{{ $user->usertwo->status }}</td>
+                                        <td>{{ $user->usertwo->created_at }}</td>
+                                        <td>{{ $user->usertwo->last_seen }}</td>
+
+
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -136,7 +103,6 @@
                 });
             });
         </script>
-
     @endpush
     {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script> --}}
 @endsection

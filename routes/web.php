@@ -8,6 +8,7 @@ use App\Http\Controllers\GuestController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ManageMemberByController;
 use App\Http\Controllers\admin\MemberMaganeController;
+use App\Http\Controllers\member\MemberManageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\subadmin\ProfileController as SubadminProfileController;
 use Illuminate\Support\Facades\Auth;
@@ -78,28 +79,37 @@ Route::prefix('admin/')->middleware(['auth','admin'])->group(function (){
 // Controller routes
 Route::prefix('controller/')->middleware(['auth','controller','active'])->group(function (){
 
-    Route::get('controller/inactive-members', [ManageMemberByController::class, 'inactiveMembers'])->name('controller.members');
-    Route::post('controller/members-transfer', [ManageMemberByController::class, 'transferMember'])->name('member.transfer');
+    Route::get('/inactive-members', [ManageMemberByController::class, 'inactiveMembers'])->name('controller.members');
+    Route::post('/members-transfer', [ManageMemberByController::class, 'transferMember'])->name('member.transfer');
 
 });
 
 
 // counsellor routes
-Route::prefix('counsellor/')->middleware(['auth','counselor','active'])->group(function (){
+Route::prefix('counselor/')->middleware(['auth','counselor','active'])->group(function (){
 
-    Route::get('counsellor/my-leads', [CounselorController::class, 'myleads'])->name('counselor.leads');
-    Route::get('counsellor/message-done', [CounselorController::class, 'messageDone'])->name('counselor.message-done');
+    Route::get('/my-leads', [CounselorController::class, 'myleads'])->name('counselor.leads');
+    Route::get('message-done', [CounselorController::class, 'messageDone'])->name('counselor.message-done');
     Route::get('/send-whatsapp/{number}/{applicant_id}', [CounselorController::class, 'sendWhatsAppMessage'])->name('send-whatsapp');
-    Route::get('/counsellor/working-zone', [CounselorController::class, 'workingZone'])->name('counselor.working-zone');
-    Route::get('/counsellor/wrong-whatsapp/{stid}', [CounselorController::class, 'wrongWhatsappupdate'])->name('counselor.wrong-whatsapp');
-    Route::get('/counsellor/wrong-wp-list', [CounselorController::class, 'wrongWhatsappList'])->name('counselor.wrong_wp_list');
+    Route::get('working-zone', [CounselorController::class, 'workingZone'])->name('counselor.working-zone');
+    Route::get('/wrong-whatsapp/{stid}', [CounselorController::class, 'wrongWhatsappupdate'])->name('counselor.wrong-whatsapp');
+    Route::get('/wp-message-done/{id}', [CounselorController::class, 'wpmessageDone'])->name('counselor.wp-ms-done');
+    Route::get('/wrong-wp-list', [CounselorController::class, 'wrongWhatsappList'])->name('counselor.wrong_wp_list');
+    Route::get('/right-wp/{stid}', [CounselorController::class, 'RightWPUpdate'])->name('counselor.right-wp-update');
+    Route::post('/message-done/response', [CounselorController::class, 'responseUpdate'])->name('counselor.responseupdate-msdone');
+    Route::post('/getUserData/{id}', [CounselorController::class, 'getUserData'])->name('get.user.data');
+    Route::get('/re-schedule/{userId}', [CounselorController::class, 'reschedule']);
+    Route::post('/schedule-save', [CounselorController::class, 'scheduleSave'])->name('schedule-save');
+    Route::get('/reschedule-details/{studentId}', [CounselorController::class, 'showRescheduleDetails'])->name('counselor.reschedule-details');
+
 });
 
 
 
 // Students routes
-Route::prefix('student/')->middleware(['auth','','active'])->group(function (){
+Route::prefix('student/')->middleware(['auth','active'])->group(function (){
 
+    Route::get('sponsor-list', [MemberManageController::class, 'sponsorList'])->name('student.sponsor-list');
 
 });
 

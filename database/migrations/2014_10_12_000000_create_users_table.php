@@ -27,6 +27,7 @@ return new class extends Migration
             $table->unsignedBigInteger('referrer_id')->nullable();
             $table->unsignedBigInteger('student_id')->nullable();
             $table->string('message')->nullable();
+            $table->string('wp_message')->nullable();
             $table->string('myleads_response')->nullable();
             $table->enum('status',[Status::Active->value,Status::Deactivate->value])->default(Status::Deactivate->value);
             $table->timestamp('last_seen')->nullable();

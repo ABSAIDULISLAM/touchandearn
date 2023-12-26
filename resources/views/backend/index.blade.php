@@ -25,9 +25,8 @@
 
 
 @section('homesection')
+
     <div class="row">
-
-
         <div class="container">
             <div class="marquer py-2" style="background-color: #2196F3;">
                 <div class="card-header px-3 py-2">
@@ -54,13 +53,19 @@
 
                                 <span style="font-size: 11px; font-weight:500;">Expiry: 16th Jan 24 - 12:28 AM</span> --}}
 
-                                <div class="user-info mt-4">
-                                    <p style="font-weight: 500; font-size: 22px">{{auth()->user()->name}}
+                                <div class="user-info mt-2">
+                                    <p style="font-weight: 500; font-size: 22px">{{ $user->name }}
                                     <p>
-                                        <span style="font-weight: 100; font-size: 12px"> Joined : 29th Nov 2023</span><br>
-                                        {{-- <p> </p> --}}
+                                        <span style="font-weight: 100; font-size: 12px"> Joined :
+                                            {{ $user->created_at }}</span><br>
+                                        {{-- @if ($name == ' ' && $code == ' ')
+                                            <p>Nothing To Show</p>
+                                        @else
                                         <span>Sponsored by :</span><br>
-                                        <b>Md rakib Mahmud (000429405)</b>
+                                        <b>{{ $name }} ({{ $code }})</b>
+                                        @endif --}}
+
+
                                 </div>
 
                                 <div class="card p-2" style=" box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px">
@@ -143,7 +148,7 @@
                         <div class="card-body  p-5">
                             <div class="joing">
                                 <h4 class="text-success text-center">আপনার রেফার লিংক:</h4>
-                                <p class="text-center mt-2 text-danger" style="font-size: 16px;">asfgq34r52x Zsadf</p>
+                                <p class="text-center mt-2 text-danger" style="font-size: 16px;">{{$referRoute}}</p>
                                 <div class="button text-center">
                                     <a href="" class="btn mt-3 text-center px-3"
                                         style="background-color: #FF5C00; color:#fff;">Share</a>
@@ -161,7 +166,7 @@
                         <div class="card-body  p-5">
                             <div class="joing">
                                 <h4 class="text-primary text-center">আপনার একাউন্ট নম্বর ও রেফার আই.ডি:</h4>
-                                <p class="text-center mt-2 text-danger" style="font-size: 16px;">asfgq34r52x Zsadf</p>
+                                <p class="text-center mt-2 text-danger" style="font-size: 16px;">{{$user->referral_code}}</p>
                                 <div class="button text-center">
 
                                     <a href="" class="btn mt-3 text-center px-3"
