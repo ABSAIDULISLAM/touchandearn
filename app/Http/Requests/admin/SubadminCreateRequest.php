@@ -29,10 +29,11 @@ class SubadminCreateRequest extends FormRequest
             'whats_app'   => ['required'],
             'member_id'   => ['nullable'],
             'gender'   => ['nullable'],
+            'email_verified_at'   => ['nullable'],
             'subadmintype_id'   => ['required','integer'],
-            'managment_id'   => ['required','integer'],
+            // 'managment_id'   => ['nullable','integer'],
             'image'   => ['nullable','mimes:png,jpg,webp,jpeg'],
-            'country_id'   => ['nullable'],
+            'country'   => ['nullable'],
             'language'   => ['nullable'],
             'password' => ['required','min:8','confirmed'],
         ];

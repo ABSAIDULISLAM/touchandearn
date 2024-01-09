@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
 use App\Enums\Status;
+use App\Events\UserRegistered;
+use App\Models\Earning;
 use App\Models\Network;
 use Illuminate\Support\Str;
 
@@ -36,7 +38,7 @@ class RegisteredUserController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'referral_code' => ['nullable', 'unique:users,referral_code'],
+            'referral_code' => ['nullable'],//, 'unique:users,referral_code'
             'name' => ['required', 'string', 'max:255'],
             'country' => ['required'],
             'language' => ['required'],
@@ -51,6 +53,13 @@ class RegisteredUserController extends Controller
         $user = new User();
 
         $referral_code = Rand(100000,10000000);
+
+        $userId = User::orderBy('id', 'desc')->first();
+        $studentId = 100001;
+
+        if ($userId) {
+            $studentId = $userId->student_id + 1;
+        }
 
         if(isset($request->referral_code)){
 
@@ -67,7 +76,9 @@ class RegisteredUserController extends Controller
                 $user->email = $request->email;
                 $user->role_as = Status::Member->value;
                 $user->referral_code = $referral_code;
-                $user->student_id = $referral_code;
+                $user->referrer_id = $referrer->id;
+                $user->student_id = $studentId;
+                $user->management_type = 'controller';
                 $user->password = Hash::make($request->password);
                 if(request()->hasFile('image')){
                     $image = upload_image(request('image'), 'uploads/members/', 400, 400);
@@ -84,6 +95,18 @@ class RegisteredUserController extends Controller
                 event(new Registered($user));
 
                 Auth::login($user);
+
+                //
+
+                // $userdata = [];
+                // $userdata['name'] = $data['name'];
+                // $userdata['email'] = $data['email'];
+                // $userdata['password'] = $data['password'];
+
+                // Mail::send('backend.admin.emails.welcome', $userdata, function($message) use ($data){
+                //     $message->to($data['email']);
+                //     $message->subject('Welcome Mail from Touch and Earn');
+                // });
 
                 return redirect(RouteServiceProvider::HOME);
 
@@ -102,7 +125,8 @@ class RegisteredUserController extends Controller
             $user->email = $request->email;
             $user->role_as = Status::Member->value;
             $user->referral_code = $referral_code;
-            $user->student_id = $referral_code;
+            $user->student_id = $studentId;
+            $user->management_type = 'controller';
             $user->password = Hash::make($request->password);
             if(request()->hasFile('image')){
                 $image = upload_image(request('image'), 'uploads/members/', 400, 400);
@@ -119,15 +143,33 @@ class RegisteredUserController extends Controller
 
     }
 
-    // protected function registered(Request $request, $user)
-    // {
-    //     // Check if Gmail is verified
-    //     if ($user->hasVerifiedEmail()) {
-    //         // Update activation points to 100
-    //         $user->update(['activation_points' => 100]);
-    //     }
 
-    //     return redirect($this->redirectPath());
+
+    // public function verifyGmail(Request $request)
+    // {
+
+    //     if (!$request->user()->gmail_verified_points_received) {
+    //         $request->user()->update(['gmail_verified_points_received' => true]);
+
+    //         // Award 100 points
+    //         $request->user()->earnings()->create([
+    //             'user_id' => $request->user()->id,
+    //             'amount' => 100,
+    //         ]);
+
+
+    //         if ($request->user()->referrer_id) {
+    //             // Award 50 points for being referred
+    //             $referrer = User::find($request->user()->referrer_id);
+    //             if ($referrer) {
+    //                 $referrer->earnings()->create([
+    //                     'user_id' => $referrer->id,
+    //                     'amount' => 50,
+    //                 ]);
+    //             }
+    //         }
+
+    //     }
     // }
 
 

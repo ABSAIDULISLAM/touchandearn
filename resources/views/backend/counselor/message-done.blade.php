@@ -15,9 +15,7 @@
         <div class="col-sm-6">
 
             <ol class="breadcrumb float-sm-right">
-                {{-- <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
-                <li class="breadcrumb-item"><a href="#">Station</a></li> --}}
-                <a href="" class="btn btn-outline-primary">Create</a>
+                {{-- <a href="" class="btn btn-outline-primary">Create</a> --}}
             </ol>
         </div>
     </div>
@@ -41,10 +39,12 @@
 
                     <div class="card">
                         <div class="col-md-8 m-auto">
-                            <form action="" method="post">
+                            <form action="{{ route('counselor.student.search') }}" method="post">
+                                @csrf
                                 <div class="form-group row">
                                     <div class="col-md-9">
-                                        <input type="text" class="form-control" name="search" placeholder="Search here by Student ID or NAME">
+                                        <input type="text" class="form-control" name="search"
+                                            placeholder="Search here by Student ID or NAME">
                                     </div>
 
                                     <div class="col-md-2 mt-1">
@@ -54,6 +54,36 @@
                             </form>
                         </div>
                     </div>
+
+
+                    @if (isset($searchResult))
+                        <table id="example1" class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th scope="col" class="col-md-2">name</th>
+                                    <th scope="col" class="col-md-2">ID</th>
+                                    <th scope="col" class="col-md-2">WhatsApp</th>
+                                    <th scope="col" class="col-md-2">Call</th>
+                                    <th scope="col" class="col-md-2">Counselor</th>
+                                    <th scope="col" class="col-md-2">Team Leader</th>
+                                    <th scope="col" class="col-md-2">status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>{{ $searchResult->name }}</td>
+                                    <td>{{ $searchResult->student_id }}</td>
+                                    <td>{{ $searchResult->whats_app }}</td>
+                                    <td>{{ $searchResult->number }}</td>
+                                    <td>{{ $searchResult->counselor_id }}</td>
+                                    <td>{{ $searchResult->teamleader_id }}</td>
+                                    <td>{{ $searchResult->status }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    @endif
+
+
 
                     <div class="table-responsive">
                         <table id="example1" class="table table-bordered table-striped">
@@ -78,15 +108,16 @@
                                         <td>{{ date('d M Y H:i', strtotime($user->created_at)) }}</td>
                                         <td>{{ $user->name }}</td>
                                         <td><a target="blank" class="btn btn-primary btn-sm">
-                                            WhatsApp
-                                        </a></td>
+                                                WhatsApp
+                                            </a></td>
                                         <td>{{ $user->gender }}</td>
                                         <td>{{ $user->country }}</td>
                                         <td>Noting</td>
                                         <td>
-                                            <form action="{{ route('counselor.responseupdate-msdone') }}" method="post" class="msdForm">
+                                            <form action="{{ route('counselor.responseupdate-msdone') }}" method="post"
+                                                class="msdForm">
                                                 @csrf
-                                                <input type="hidden" name="student_id" value="{{ $user->student_id }}">
+                                                <input type="hidden" name="student_id" value="{{ $user->id }}">
                                                 <select name="msd_response" class="msdResponse form-control">
                                                     <option selected disabled>Select Response</option>
                                                     <option value="show_modal">Re Scedule</option>
@@ -151,12 +182,13 @@
         <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
         <script>
-            $(document).ready(function () {
-                $('.msdResponse').change(function () {
+            $(document).ready(function() {
+                $('.msdResponse').change(function() {
                     var selectedOption = $(this).val();
                     var parentForm = $(this).closest('form');
 
-                    if (selectedOption === 'not_replied' || selectedOption === 'dont_fillup' || selectedOption === 'meeting_not_join') {
+                    if (selectedOption === 'not_replied' || selectedOption === 'dont_fillup' ||
+                        selectedOption === 'meeting_not_join') {
                         var confirmation = confirm("Are you sure you want to save this response?");
                         if (confirmation) {
                             parentForm.submit();
@@ -174,6 +206,5 @@
                 });
             });
         </script>
-
     @endpush
 @endsection

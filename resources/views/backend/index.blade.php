@@ -42,9 +42,19 @@
                         style=" box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; background-color:#fff;">
                         <div class="card-body p-5">
                             <div class="profile text-center">
-                                <span style="font-size: 19px" class="mb-4"><b class="mb-2">02:04:34 PM</b></span><br>
-                                <img src="{{ asset('backend/assets/dist/img/avatar3.png') }}" alt="profile-image"
-                                    height="120px" width="130px" class="rounded-circle m-auto">
+                                {{-- <span style="font-size: 19px" class="mb-4">
+                                    <b class="mb-2">02:04:34 PM</b>
+                                </span> --}}
+                                <br>
+
+                                @if (empty($user->image))
+                                    <img src="{{ asset('backend/assets/dist/img/avatar3.png') }}" alt="profile-image"
+                                         height="120px" width="130px" class="rounded-circle m-auto">
+                                @else
+                                    <img src="{{ asset($user->image) }}" alt="profile-image"
+                                         height="120px" width="130px" class="rounded-circle m-auto">
+                                @endif
+
 
                                 {{-- <div class="button">
                                     <button class="btn mt-3 px-5" style="background-color: #FFA000; color:#fff;">GOLDEN PREMIUM
@@ -65,7 +75,6 @@
                                         <b>{{ $name }} ({{ $code }})</b>
                                         @endif --}}
 
-
                                 </div>
 
                                 <div class="card p-2" style=" box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px">
@@ -76,17 +85,29 @@
                                         <div class="col-md-6 col-sm-6 col-6 mt-2">
                                             <div class="today">
                                                 <p style="background-color: #FFA000; color:#fff; font-size:15px" class="p-3">
-                                                    TK. 12</p>
+                                                    @if ($todayEarnings== null)
+                                                    TK. 0.00
+                                                    @else
+                                                    TK. {{$todayEarnings}}
+                                                    @endif
+                                                </p>
                                                 <p style="background-color: #377DFF; color:#fff; font-size:15px" class="p-3">
-                                                    total</p>
+                                                    Today
+                                                </p>
                                             </div>
                                         </div>
                                         <div class="col-md-6 col-sm-6 col-6 mt-2">
                                             <div class="today">
                                                 <p style="background-color: #FFA000; color:#fff; font-size:15px" class="p-3">
-                                                    TK. 12</p>
+                                                    @if ($totalEarnings== null)
+                                                    TK. 0.00
+                                                    @else
+                                                    TK. {{$user->ballance}}
+                                                    @endif
+                                                </p>
                                                 <p style="background-color: #377DFF; color:#fff; font-size:15px" class="p-3">
-                                                    Today</p>
+                                                    Total
+                                                </p>
                                             </div>
                                         </div>
                                     </div>
@@ -132,9 +153,13 @@
                         style=" box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; background-color:rgb(255, 255, 255)">
                         <div class="card-body  p-5">
                             <div class="joing text-center">
+                                @if (auth()->user()->status == 'deactivate')
+                                <h3 class="text-danger text-center my-3">Your Account is Inactive now.</h3>
+                                @endif
                                 <img src="{{ asset('backend/assets/dist/img/avatar3.png') }}" alt="profile-image"
                                     height="120px" width="150px" class="rounded-circle m-auto">
-                                <p class="text-center mt-2"  style="font-size: 16px;">আমাদের অফিসিয়াল Telegram গ্রুপ এ নিচের বাটনে ক্লিক করে জয়েন করুন</p>
+
+                                    <p class="text-center mt-2"  style="font-size: 16px;">আমাদের অফিসিয়াল Telegram গ্রুপ এ নিচের বাটনে ক্লিক করে জয়েন করুন</p>
                                 <div class="button text-center">
                                     <a href="" class="btn mt-3 text-center px-5"
                                         style="background-color: #FF5C00; color:#fff;">GOLDEN PREMIUM MEMBER</a>
@@ -160,7 +185,6 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="card my-2 shodow-white mt-2"
                         style=" box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; background-color:#E0EDE4">
                         <div class="card-body  p-5">
@@ -175,6 +199,7 @@
                             </div>
                         </div>
                     </div>
+                    
 
                     <div class="row">
                         <div class="col-md-6 col-6">

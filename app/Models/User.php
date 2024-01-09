@@ -11,6 +11,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Support\Str;
+use Illuminate\Database\Eloquent\Model;
 
 
 class User extends Authenticatable implements MustVerifyEmail
@@ -31,13 +32,17 @@ class User extends Authenticatable implements MustVerifyEmail
         'password',
         'ballance',
         'activation_points',
+        'freeze_points',
+        'withdraw',
         'referral_code',
         'referrer_id',
         'student_id',
         'message',
         'wp_message',
         'myleads_response',
+        'subadmintype_id',
         'status',
+        'points_distributed',
         'last_seen',
         'management_type',
     ];
@@ -56,26 +61,6 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(User::class, 'referrer_id');
     }
 
-    // public function generateReferralCode()
-    // {
-    //     $this->referral_code = Str::random(10);
-    //     $this->save();
-    // }
-
-    public function isReferredBy(User $referrer)
-    {
-        return $this->referrer_id === $referrer->id;
-    }
-
-    public function subadmin()
-    {
-        return $this->hasOne(Subadmin::class);
-        // return $this->hasMany(Subadmin::class);
-    }
-
-
-
-
 
     public function networks()
     {
@@ -87,16 +72,11 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasManyThrough(User::class, Network::class, 'parent_id', 'id', 'user_id', 'id');
     }
 
-
+    // earnings ber korar jonno
     public function earnings()
     {
         return $this->hasMany(Earning::class);
     }
-
-
-
-
-
 
 
     /**
@@ -108,5 +88,58 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+
+
+
+
+
+    // for referrar infos too
+    public function referrer()
+    {
+        return $this->belongsTo(User::class, 'referrer_id');
+    }
+
+
+    public function distributePoints()
+    {
+        if ($this->status == 'active' && !$this->points_distributed) {
+            // Points distribution logic based on roles
+            switch ($this->role_as) {
+                case 'member':
+                    $this->distributeMemberPoints();
+                    break;
+                // Add other cases for different roles
+            }
+            $this->update(['points_distributed' => true]);
+        }
+    }
+
+    protected function distributeMemberPoints()
+    {
+        // Points distribution logic for member role
+        $referrer = $this->referrer;
+
+        if ($referrer) {
+            Earning::create([
+                'user_id' => $referrer->id,
+                'amount' => 500, // Referrer gets 500 points
+            ]);
+
+            Earning::create([
+                'user_id' => $referrer->counselor_id,
+                'amount' => 250, // Referrer gets 250 points
+            ]);
+            Earning::create([
+                'user_id' => $referrer->teamleader_id,
+                'amount' => 150, // Referrer gets 150 points
+            ]);
+
+        }
+
+    }
+
+
+
 
 }

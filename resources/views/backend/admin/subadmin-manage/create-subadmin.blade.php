@@ -54,92 +54,110 @@
                                 <input type="text" id="name"
                                     class="form-control @error('name') is-invalid @enderror" name="name"
                                     value="{{ old('name') }}" placeholder="Enter Sub-admin name">
+                                    @if ($errors->has('name'))
+                                        <span class="error text-danger ms-5">{{ $errors->first('name') }}</span>
+                                    @endif
                             </div>
                             <div class="col-md-6 my-2">
                                 <label for="">Email</label>
                                 <input type="email" class="form-control @error('email') is-invalid @enderror"
                                     value="{{ old('email') }}" name="email" placeholder="Enter Email">
+                                    @if ($errors->has('email'))
+                                        <span class="error text-danger ms-5">{{ $errors->first('email') }}</span>
+                                    @endif
                             </div>
                             <div class="col-md-4 my-2">
                                 <label for="">Phone No.</label>
                                 <input type="number" class="form-control @error('number') is-invalid @enderror"
                                     value="{{ old('number') }}" name="number" placeholder="Enter Phone Number">
+                                    @if ($errors->has('number'))
+                                        <span class="error text-danger ms-5">{{ $errors->first('number') }}</span>
+                                    @endif
                             </div>
                             <div class="col-md-4 my-2">
                                 <label for="">what's App No.</label>
                                 <input type="number" class="form-control @error('whats_app') is-invalid @enderror"
                                     name="whats_app" value="{{ old('whats_app') }}" placeholder="Enter What's Aapp  Number">
+                                    @if ($errors->has('whats_app'))
+                                        <span class="error text-danger ms-5">{{ $errors->first('whats_app') }}</span>
+                                    @endif
                             </div>
                             <div class="col-md-4 my-2">
                                 <label for="">Image</label>
                                 <input type="file" class="form-control" name="image">
+                                @if ($errors->has('image'))
+                                    <span class="error text-danger ms-5">{{ $errors->first('image') }}</span>
+                                @endif
                             </div>
 
-                            <div class="col-md-3 my-3">
+                            <div class="col-md-4 my-3">
                                 <label for="">Gender</label>
                                 <select name="gender" class="form-control" id="">
+                                    <option selected disabled>Select Gender</option>
                                     <option value="male">Male</option>
                                     <option value="famale">Famale</option>
                                 </select>
+                                @if ($errors->has('gender'))
+                                    <span class="error text-danger ms-5">{{ $errors->first('gender') }}</span>
+                                @endif
                             </div>
-                            <div class="col-md-3 my-3">
+                            <div class="col-md-4 my-3">
                                 <label for="">Sub admin Type</label>
                                 <select name="subadmintype_id" class="form-control" id="">
+                                        <option selected disabled>Select Sub admin Type</option>
                                     @foreach ($subadminTypes as $subadminType)
                                         <option value="{{ $subadminType->id }}">{{ $subadminType->subadmin_type }}</option>
                                     @endforeach
 
                                 </select>
+                                @if ($errors->has('subadmintype_id'))
+                                    <span class="error text-danger ms-5">{{ $errors->first('subadmintype_id') }}</span>
+                                @endif
                             </div>
-                            <div class="col-md-3 my-3">
-                                <label for="">Management Type</label>
-                                <select name="managment_id" class="form-control" id="">
-                                    @foreach ($managements as $management)
-                                        <option value="{{ $management->id }}">{{ $management->role_name }}</option>
-                                    @endforeach
-
-                                </select>
-                            </div>
-                            @php
-
-                            @endphp
-                            <div class="col-md-3 my-3">
-                                <label for="">Member Id</label>
-                                <input type="text" id="member_id"
-                                    class="form-control @error('member_id') is-invalid @enderror" name="member_id"
-                                    value="{{ old('member_id') }}" placeholder="Enter Member Id">
-                            </div>
-                            <div class="col-md-3 my-2">
+                            <div class="col-md-4 my-2">
                                 <label for="">Coutry</label>
-                                <select name="country_id" class="form-control" id="">
+                                <select name="country" class="form-control" id="">
+                                    <option selected disabled>Select Country</option>
                                     <option value="Bangladesh">Bangladesh</option>
                                     <option value="India">India</option>
                                 </select>
+                                @if ($errors->has('country'))
+                                    <span class="error text-danger ms-5">{{ $errors->first('country') }}</span>
+                                @endif
                             </div>
-                            <div class="col-md-3 my-2">
+                            <div class="col-md-4 my-2">
                                 <label for="">Language</label>
                                 <select name="language" class="form-control" id="">
+                                    <option selected disabled>Select Language</option>
                                     <option value="Bangla">Bangla</option>
                                     <option value="English">English</option>
                                     <option value="Hindi">Hindi</option>
                                 </select>
+                                @if ($errors->has('language'))
+                                    <span class="error text-danger ms-5">{{ $errors->first('language') }}</span>
+                                @endif
                             </div>
-                            <div class="col-md-3 my-2">
+                            <div class="col-md-4 my-2">
                                 <label for="">New Password</label>
                                 <input type="password" class="form-control @error('password') is-invalid @enderror"
                                     name="password" placeholder="Enter Password">
+                                    @if ($errors->has('password'))
+                                        <span class="error text-danger ms-5">{{ $errors->first('password') }}</span>
+                                    @endif
                             </div>
-                            <div class="col-md-3 my-2">
+                            <div class="col-md-4 my-2">
                                 <label for="">Confirm Password</label>
                                 <input type="password"
                                     class="form-control @error('password_confirmation') is-invalid @enderror"
                                     name="password_confirmation" placeholder="Enter same as Password">
+                                    @if ($errors->has('password_confirmation'))
+                                        <span class="error text-danger ms-5">{{ $errors->first('password_confirmation') }}</span>
+                                    @endif
                             </div>
 
                             <div class="ml-auto mt-4 me-1">
                                 <button type="submit" class="d-block btn btn-primary px-5">Save</button>
                             </div>
-
                         </div>
                     </form>
                 </div>

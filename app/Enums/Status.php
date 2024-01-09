@@ -18,4 +18,6 @@ enum Status :string
     case Success = 'success';
     case Deactivate = "deactivate";
     case Completed = "completed";
+    case Paid = "paid";
+    case Unpaid = "unpaid";
 }

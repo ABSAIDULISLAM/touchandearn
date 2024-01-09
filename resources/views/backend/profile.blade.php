@@ -23,13 +23,22 @@
 
 @section('homesection')
     <div class="row">
+
         @if(auth()->user()->role_as == 'admin')
+
         <div class="col-md-3">
             <div class="card card-primary card-outline">
                 <div class="card-body box-profile">
                     <div class="text-center">
-                        <img class="profile-user-img img-fluid img-circle" src="{{ asset('frontend/assets/img/logo.png') }}"
-                            alt="User profile picture">
+
+                        @if (empty($userdata->image) || $userdata->image == NULL)
+                                    <img src="{{ asset('backend/assets/dist/img/avatar3.png') }}" alt="profile-image"
+                                         height="120px" width="130px" class="rounded-circle m-auto">
+                                @else
+                                    <img src="{{ asset($userdata->image) }}" alt="profile-image"
+                                         height="120px" width="130px" class="rounded-circle m-auto">
+                                @endif
+
                     </div>
 
                     <h3 class="profile-username text-center">{{ $userdata->name }}</h3>
@@ -61,10 +70,8 @@
                     </div>
 
                 </div>
-                <!-- /.card-body -->
             </div>
         </div>
-        <!-- /.col -->
         <div class="col-md-9">
             <div class="card card-primary card-outline">
                 <div class="card-header p-2">
@@ -72,7 +79,7 @@
                         <li class="nav-item"><a class="nav-link active" href="#overView" data-toggle="tab">OverView</a></li>
                         <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">Update</a></li>
                     </ul>
-                </div><!-- /.card-header -->
+                </div>
                 <div class="card-body">
                     <div class="tab-content">
                         <div class="active tab-pane" id="overView">
@@ -151,17 +158,15 @@
                                 </div>
                             </form>
                         </div>
-                        <!-- /.tab-pane -->
                     </div>
-                    <!-- /.tab-content -->
-                </div><!-- /.card-body -->
+                </div>
             </div>
-            <!-- /.card -->
         </div>
 
-        {{-- for senior Accountant  --}}
-        @elseif(auth()->user()->role_as == 'senior_accountant')
-        <div class="col-md-3">
+
+        @else
+
+        {{-- <div class="col-md-3">
             <div class="card card-primary card-outline">
                 <div class="card-body box-profile">
                     <div class="text-center">
@@ -198,10 +203,8 @@
                     </div>
 
                 </div>
-                <!-- /.card-body -->
             </div>
         </div>
-        <!-- /.col -->
         <div class="col-md-9">
             <div class="card card-primary card-outline">
                 <div class="card-header p-2">
@@ -209,7 +212,7 @@
                         <li class="nav-item"><a class="nav-link active" href="#overView" data-toggle="tab">OverView</a></li>
                         <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">Update</a></li>
                     </ul>
-                </div><!-- /.card-header -->
+                </div>
                 <div class="card-body">
                     <div class="tab-content">
                         <div class="active tab-pane" id="overView">
@@ -288,16 +291,12 @@
                                 </div>
                             </form>
                         </div>
-                        <!-- /.tab-pane -->
                     </div>
-                    <!-- /.tab-content -->
-                </div><!-- /.card-body -->
+                </div>
             </div>
-            <!-- /.card -->
         </div>
 
 
-        {{-- for support_team_leader  --}}
         @elseif(auth()->user()->role_as == 'support_team_leader')
         <div class="col-md-3">
             <div class="card card-primary card-outline">
@@ -336,10 +335,8 @@
                     </div>
 
                 </div>
-                <!-- /.card-body -->
             </div>
         </div>
-        <!-- /.col -->
         <div class="col-md-9">
             <div class="card card-primary card-outline">
                 <div class="card-header p-2">
@@ -347,7 +344,7 @@
                         <li class="nav-item"><a class="nav-link active" href="#overView" data-toggle="tab">OverView</a></li>
                         <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">Update</a></li>
                     </ul>
-                </div><!-- /.card-header -->
+                </div>
                 <div class="card-body">
                     <div class="tab-content">
                         <div class="active tab-pane" id="overView">
@@ -426,16 +423,12 @@
                                 </div>
                             </form>
                         </div>
-                        <!-- /.tab-pane -->
                     </div>
-                    <!-- /.tab-content -->
-                </div><!-- /.card-body -->
+                </div>
             </div>
-            <!-- /.card -->
         </div>
 
 
-        {{-- for Controller  --}}
         @elseif(auth()->user()->role_as == 'controller')
         <div class="col-md-3">
             <div class="card card-primary card-outline">
@@ -474,10 +467,8 @@
                     </div>
 
                 </div>
-                <!-- /.card-body -->
             </div>
         </div>
-        <!-- /.col -->
         <div class="col-md-9">
             <div class="card card-primary card-outline">
                 <div class="card-header p-2">
@@ -485,7 +476,7 @@
                         <li class="nav-item"><a class="nav-link active" href="#overView" data-toggle="tab">OverView</a></li>
                         <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">Update</a></li>
                     </ul>
-                </div><!-- /.card-header -->
+                </div>
                 <div class="card-body">
                     <div class="tab-content">
                         <div class="active tab-pane" id="overView">
@@ -564,15 +555,11 @@
                                 </div>
                             </form>
                         </div>
-                        <!-- /.tab-pane -->
                     </div>
-                    <!-- /.tab-content -->
-                </div><!-- /.card-body -->
+                </div>
             </div>
-            <!-- /.card -->
         </div>
 
-        {{-- for Sub-admin  --}}
         @elseif(auth()->user()->role_as == 'sub_admin')
         <div class="col-md-3">
             <div class="card card-primary card-outline">
@@ -584,7 +571,6 @@
 
                     <h3 class="profile-username text-center">{{ $userdata->name }}</h3>
 
-                    {{-- <p class="text-muted text-center">{{ $userdata->subadmin->subadmintype->subadmin_type }}</p> --}}
 
                     <ul class="list-group list-group-unbordered mb-3">
 
@@ -613,10 +599,8 @@
                     </div>
 
                 </div>
-                <!-- /.card-body -->
             </div>
         </div>
-        <!-- /.col -->
         <div class="col-md-9">
             <div class="card card-primary card-outline">
                 <div class="card-header p-2">
@@ -624,7 +608,7 @@
                         <li class="nav-item"><a class="nav-link active" href="#overView" data-toggle="tab">OverView</a></li>
                         <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">Update</a></li>
                     </ul>
-                </div><!-- /.card-header -->
+                </div>
                 <div class="card-body">
                     <div class="tab-content">
                         <div class="active tab-pane" id="overView">
@@ -682,7 +666,7 @@
                                     <tr>
                                         <th>created_at</th>
                                         <td>{{ $userdata->created_at->isoFormat('Do MMM YYYY') }}</td>
-                                        {{-- <td>{{ $userdata->created_at }}</td> --}}
+
                                     </tr>
                                 </table>
                             </div>
@@ -731,21 +715,24 @@
                                 </div>
                             </form>
                         </div>
-                        <!-- /.tab-pane -->
                     </div>
-                    <!-- /.tab-content -->
-                </div><!-- /.card-body -->
+                </div>
             </div>
-            <!-- /.card -->
-        </div>
+        </div> --}}
 
-        @elseif(auth()->user()->role_as == 'member')
+        {{-- @elseif(auth()->user()->role_as == 'member') --}}
         <div class="col-md-3">
             <div class="card card-primary card-outline">
                 <div class="card-body box-profile">
+
                     <div class="text-center">
+                        @if(empty($userdata->image))
                         <img class="profile-user-img img-fluid img-circle" src="{{ asset($userdata->image) }}"
                             alt="User profile picture">
+                        @else
+                        <img class="profile-user-img img-fluid img-circle" src="{{ asset($userdata->image) }}"
+                        alt="User profile picture">
+                        @endif
                     </div>
 
                     <h3 class="profile-username text-center">{{ $userdata->name }}</h3>
@@ -761,17 +748,22 @@
                             <b class="text-success">Wallet Points:</b> <a class="float-right">{{ $userdata->ballance}}</a>
                         </li>
                         <li class="list-group-item">
-                            <b class="text-primary">Freeze Wallet points:</b> <a class="float-right">{{ $userdata->ballance}}</a>
+                            <b class="text-primary">Freeze Wallet points:</b> <a class="float-right">{{ $userdata->freeze_points}}</a>
                         </li>
-
                     </ul>
 
                     <div class="d-flex">
-                        <a href="#" class="btn btn-primary btn-sm mr-2" ><b>Share Points</b></a>
-                        <a href="#" class="btn btn-success btn-sm"><b> Withdrow</b></a>
+                        <a href="{{route('withdraw-request')}}" class="btn btn-success btn-sm"><b> Withdrow</b></a>
+                        @if ($userdata->activation_points >= 500)
+                            <a href="#" class="btn btn-primary btn-sm ml-2" ><b>Active Now</b></a>
+                        @else
+                            <button class="btn btn-danger btn-sm ml-2" disabled><b>Active</b></button>
+                        @endif
+
                     </div>
 
                     @if (auth()->user()->status == 'active')
+
                     <ul class="list-group list-group-unbordered mb-3">
                         <hr>
                         <li class="list-group-item">
@@ -781,14 +773,13 @@
                     @else
                         <p class="text-danger h6 my-3">your member ID is not active !</p>
                     @endif
-                    
+
                     <div class="d-flex">
                         <button class="btn btn-primary btn-sm mr-2" onclick="copyToClipboard()"><b>Copy Link</b></button>
                         <button class="btn btn-success btn-sm" onclick="shareLink()"><b> Share Link</b></button>
                     </div>
 
                 </div>
-                <!-- /.card-body -->
             </div>
         </div>
         <script>
@@ -826,7 +817,6 @@
                 }
             }
         </script>
-        <!-- /.col -->
         <div class="col-md-9">
             <div class="card card-primary card-outline">
                 <div class="card-header p-2">
@@ -834,7 +824,7 @@
                         <li class="nav-item"><a class="nav-link active" href="#overView" data-toggle="tab">OverView</a></li>
                         <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">Update</a></li>
                     </ul>
-                </div><!-- /.card-header -->
+                </div>
                 <div class="card-body">
                     <div class="tab-content">
                         <div class="active tab-pane" id="overView">
@@ -891,45 +881,66 @@
                         </div>
 
                         <div class="tab-pane" id="settings">
-                            <form class="form-horizontal">
+
+                            @if ($errors->any())
+                            <div class="">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                    @php
+                                    toastr()->error($error);
+                                    @endphp
+                                    @endforeach
+                                </ul>
+                            </div>
+                            @endif
+                            <form action="{{route('profile.update')}}" method="POST" enctype="multipart/form-data">
+                                @csrf
                                 <div class="form-group row">
                                     <label for="inputName" class="col-sm-2 col-form-label">Name</label>
                                     <div class="col-sm-10">
-                                        <input type="text" name="name" value="{{$userdata->name}}" class="form-control" id="inputName" placeholder="Name">
+                                        <input type="text" name="name" value="{{$userdata->name}}" class="form-control @error('name') is-invalid border border-danger @enderror" id="inputName" placeholder="Name">
                                     </div>
+                                    @if ($errors->has('name'))
+                                        <span class="error text-danger ">{{ $errors->first('name') }}</span>
+                                    @endif
                                 </div>
                                 <div class="form-group row">
-                                    <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
+                                    <label for="inputName" class="col-sm-2 col-form-label">What's App</label>
                                     <div class="col-sm-10">
-                                        <input type="email" name="email" value="{{$userdata->email}}" class="form-control" id="inputEmail" placeholder="Email">
+                                        <input type="number" name="whats_app" value="{{$userdata->whats_app}}" class="form-control @error('whats_app') is-invalid border border-danger @enderror" id="inputName" placeholder="What's App number">
                                     </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label for="inputEmail" class="col-sm-2 col-form-label">What's App</label>
-                                    <div class="col-sm-10">
-                                        <input type="number" name="whats_app" value="{{$userdata->whats_app}}" class="form-control" id="inputEmail" placeholder="Whats App">
-                                    </div>
+                                    @if ($errors->has('whats_app'))
+                                        <span class="error text-danger ">{{ $errors->first('whats_app') }}</span>
+                                    @endif
                                 </div>
                                 <div class="form-group row">
                                     <label for="inputExperience" class="col-sm-2 col-form-label">Old Password</label>
                                     <div class="col-sm-10">
-                                        <input type="password" name="old_password" class="form-control" id="inputEmail" placeholder="old Password">
+                                        <input type="password" name="old_password" class="form-control @error('old_password') is-invalid border border-danger @enderror" id="inputEmail" placeholder="old Password">
                                     </div>
+                                    @if ($errors->has('old_password'))
+                                        <span class="error text-danger ">{{ $errors->first('old_password') }}</span>
+                                    @endif
                                 </div>
                                 <div class="form-group row">
                                     <label for="inputExperience" class="col-sm-2 col-form-label">New Password</label>
                                     <div class="col-sm-10">
-                                        <input type="password" name="password" class="form-control" id="inputEmail" placeholder="New Password">
+                                        <input type="password" name="password" class="form-control @error('password') is-invalid border border-danger @enderror" id="inputEmail" placeholder="New Password">
                                     </div>
+                                    @if ($errors->has('password'))
+                                        <span class="error text-danger ">{{ $errors->first('password') }}</span>
+                                    @endif
                                 </div>
 
                                 <div class="form-group row">
                                     <label for="inputExperience" class="col-sm-2 col-form-label">Image</label>
                                     <div class="col-sm-10">
-                                        <input type="file" name="password" class="form-control" id="inputEmail" placeholder=" Password">
-                                        <img src="{{ asset($userdata->image) }}" class="my-2" alt="" height="80px" width="80px">
+                                        <input type="file" name="image" class="form-control @error('image') is-invalid border border-danger @enderror" id="inputEmail">
+                                        <img src="{{asset($userdata->image)}}"  alt="profile-image" height="80px" width="80px">
                                     </div>
-
+                                    @if ($errors->has('image'))
+                                        <span class="error text-danger ">{{ $errors->first('image') }}</span>
+                                    @endif
                                 </div>
 
                                 <div class="form-group row my-3 ml-auto" >
@@ -938,13 +949,11 @@
                                     </div>
                                 </div>
                             </form>
+
                         </div>
-                        <!-- /.tab-pane -->
                     </div>
-                    <!-- /.tab-content -->
-                </div><!-- /.card-body -->
+                </div>
             </div>
-            <!-- /.card -->
         </div>
         @endif
 

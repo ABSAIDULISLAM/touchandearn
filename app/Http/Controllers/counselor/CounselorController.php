@@ -16,7 +16,7 @@ class CounselorController extends Controller
 
     public function myleads()
     {
-        $users = User::where('status', 'deactivate')->Where('role_as', 'member')->Where('management_type', 'counsellor')->where('myleads_response', null)->where('wp_message', null)->get();
+        $users = User::where('status', 'deactivate')->Where('role_as', 'member')->Where('management_type', 'counselor')->where('myleads_response', null)->where('wp_message', null)->where('counselor_id', auth()->user()->id)->get();
 
         return view('backend.counselor.inactive-members', compact('users'));
     }
@@ -54,10 +54,56 @@ class CounselorController extends Controller
 
     public function messageDone()
     {
-        $users = User::where('status', 'deactivate')->Where('role_as', 'member')->Where('management_type', 'counsellor')->where('wp_message', 'done')->Orwhere('myleads_response', 'right_wp')->get();
+        $users = User::where('status', 'deactivate')->Where('role_as', 'member')->Where('management_type', 'counselor')->where('wp_message', 'done')->where('msd_response', NULL)->Orwhere('myleads_response', 'right_wp')->where('counselor_id', auth()->user()->id)->get();
 
         return view('backend.counselor.message-done', compact('users'));
     }
+
+
+    public function msdonestudentSearch(Request $request)
+    {
+        $searchQuery = $request->input('search');
+
+        $searchResult = User::where('role_as', 'member')
+                                ->where('student_id', $searchQuery)
+                                ->orWhere('whats_app', $searchQuery)
+                                ->first();
+        if(!$searchResult){
+            return redirect()->back()->with('error', 'Your Student ID or WhatsApp Not Match With Existing Record');
+        }
+
+        return view('backend.counselor.messageDone-search', compact('searchResult'));
+    }
+
+    // public function messageDone(Request $request)
+    // {
+    //     if ($request->isMethod('post')) {
+    //         // Handle the form submission and redirect back with the search result.
+    //         $searchQuery = $request->input('search');
+    //         $searchResult = User::where('role_as', 'member')
+    //             ->where('student_id', $searchQuery)
+    //             ->orWhere('whats_app', $searchQuery)
+    //             ->first();
+
+    //         if (!$searchResult) {
+    //             return redirect()->back()->with('error', 'Your Student ID or WhatsApp Not Match With Existing Record');
+    //         }
+
+    //         return view('backend.counselor.message-done', compact('searchResult'));
+    //     }
+
+    //     // If it's a GET request, fetch the list of users.
+    //     $users = User::where('status', 'deactivate')
+    //         ->where('role_as', 'member')
+    //         ->where('management_type', 'counselor')
+    //         ->where('wp_message', 'done')
+    //         ->where('msd_response', NULL)
+    //         ->orWhere('myleads_response', 'right_wp')
+    //         ->where('counselor_id', auth()->user()->id)
+    //         ->get();
+
+    //     return view('backend.counselor.message-done', compact('users'));
+    // }
 
 
     public function responseUpdate(Request $request)
@@ -74,26 +120,39 @@ class CounselorController extends Controller
 
     public function reschedule($userId)
     {
-        $userData = User::where('student_id', $userId)->first();
+        $userData = User::where('id', $userId)->first();
 
         return view('backend.counselor.re-scedule', compact('userData'));
     }
 
+
     public function scheduleSave(Request $request)
     {
-       $save = Reschedule::create($request->all());
-        if($save){
-            return redirect()->route('counselor.message-done')->with('success', 'Shedule inserted Successfuly');
-       }else{
-            return redirect()->back()->with('error', 'Something Wrong');
-       }
+        $request->validate([
+            'student_id' => ['exists:users,student_id'],
+            'schedule_date' => ['required'],
+            'schedule_time' => ['required'],
+        ]);
 
+        // Retrieve the student ID from the request
+        $studentId = $request->input('student_id');
+
+        // Create or update the Reschedule record
+        Reschedule::updateOrCreate(
+            ['student_id' => $studentId],
+            [
+                'schedule_date' => $request->input('schedule_date'),
+                'schedule_time' => $request->input('schedule_time'),
+            ]
+        );
+
+        return redirect()->route('counselor.message-done')->with('success', 'Schedule inserted successfuly');
     }
 
 
     public function workingZone()
     {
-        $users = User::where('status', 'deactivate')->Where('role_as', 'member')->Where('management_type', 'counsellor')->where('wp_message', 'done')->Orwhere('myleads_response', 'right_wp')->get();
+        $users = User::where('status', 'deactivate')->Where('role_as', 'member')->Where('management_type', 'counselor')->where('wp_message', 'done')->Orwhere('myleads_response', 'right_wp')->where('counselor_id', auth()->user()->id)->get();
 
         return view('backend.counselor.working-zone', compact('users'));
     }
@@ -114,7 +173,7 @@ class CounselorController extends Controller
 
     public function wrongWhatsappList()
     {
-        $users = User::where('status', 'deactivate')->Where('role_as', 'member')->Where('management_type', 'counsellor')->where('message', 'done')->where('myleads_response', 'wrong_wp')->get();
+        $users = User::where('status', 'deactivate')->Where('role_as', 'member')->Where('management_type', 'counselor')->where('message', 'done')->where('myleads_response', 'wrong_wp')->where('counselor_id', auth()->user()->id)->get();
 
         return view('backend.counselor.wrong-whats-app', compact('users'));
     }
@@ -129,6 +188,29 @@ class CounselorController extends Controller
         }
     }
 
+
+
+
+    public function CounselorStudentSearch()
+    {
+        return view('backend.controller.search-member');
+    }
+
+    public function studentSearch(Request $request)
+    {
+        $searchQuery = $request->input('id_or_wp');
+
+        $searchResult = User::where('role_as', 'member')
+                                ->where('student_id', $searchQuery)
+                                ->orWhere('whats_app', $searchQuery)
+                                ->first();
+        if(!$searchResult){
+            return redirect()->back()->with('error', 'Your Student ID or WhatsApp Not Match With Existing Record');
+        }
+
+
+        return view('backend.controller.search-member', compact('searchResult'));
+    }
 
 
 

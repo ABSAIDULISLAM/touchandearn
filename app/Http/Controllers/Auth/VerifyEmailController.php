@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Earning;
+use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Verified;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
@@ -16,11 +18,34 @@ class VerifyEmailController extends Controller
     public function __invoke(EmailVerificationRequest $request): RedirectResponse
     {
         if ($request->user()->hasVerifiedEmail()) {
+
             return redirect()->intended(RouteServiceProvider::HOME.'?verified=1');
         }
 
         if ($request->user()->markEmailAsVerified()) {
+
+            if (!$request->user()->gmail_verified_points_received) {
+                $request->user()->update(['gmail_verified_points_received' => true]);
+
+                // Award 100 points
+                $request->user()->earnings()->create([
+                    'user_id' => $request->user()->id,
+                    'amount' => 100,
+                ]);
+
+                if ($request->user()->referrer_id) {
+                    $referrer = User::find($request->user()->referrer_id);
+                    if ($referrer) {
+                        $referrer->earnings()->create([
+                            'user_id' => $referrer->id,
+                            'amount' => 50,
+                        ]);
+                    }
+                }
+            }
+
             event(new Verified($request->user()));
+
         }
 
         return redirect()->intended(RouteServiceProvider::HOME.'?verified=1');

@@ -47,7 +47,7 @@
                                     </div>
 
                                     <div class="col-md-2 mt-1">
-                                        <button type="submit" class="btn btn-primary">Transfer</button>
+                                        <button type="submit" class="btn btn-primary">Search</button>
                                     </div>
                                 </div>
                             </form>
@@ -87,7 +87,7 @@
                                         <td><a target="blank" href="" class="btn btn-success btn-sm">
                                             Pending For Approval
                                         </a></td>
-                                        <td>{{ $user->msd_response }}</td>
+                                        <td>{{ $user->msd_response==null ? 'null' : $user->msd_response }}</td>
                                         <td>interested</td>
                                         <td>Noting</td>
                                     </tr>

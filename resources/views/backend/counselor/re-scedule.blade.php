@@ -68,15 +68,19 @@
                                         <input type="text" readonly value="{{$userData->country}}"  class="form-control">
                                     </div>
 
-
-
+                                    @php
+                                        $now = date('Y-m-d');
+                                    @endphp
                                     <div class="col-md-12 mt-4">
                                         <label for="">Select Date of Schedule :</label>
-                                        <input type="date" name="schedule_date" id="schedule_date" class="form-control">
+                                        <input type="date" name="schedule_date" id="schedule_date" value="{{ $now }}" class="form-control">
                                     </div>
+                                    @php
+                                        $time = date('H:i');
+                                    @endphp
                                     <div class="col-md-12 my-3">
                                         <label for="">Select Time of Schedule :</label>
-                                        <input type="time" name="schedule_time" id="schedule_time" class="form-control">
+                                        <input type="time" name="schedule_time" id="schedule_time" value="{{$time}}" class="form-control">
                                     </div>
 
                                     <div class="col-md-12 mt-4">

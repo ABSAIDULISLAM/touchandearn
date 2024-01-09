@@ -4,20 +4,18 @@
 active
 @endsection
 @section('title')
-subadmin withtype
+subadmin
 @endsection
 
 @section('toproute')
     <div class="row mb-2" style="box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; padding: 8px; background-color:#fff">
         <div class="col-sm-6">
-            <h4 class="m-0">Sub admin With type</h4>
+            <h4 class="m-0">Controller & Senior Accountant</h4>
         </div>
         <div class="col-sm-6">
 
             <ol class="breadcrumb float-sm-right">
-                {{-- <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
-                <li class="breadcrumb-item"><a href="#">Station</a></li> --}}
-                <a href="" class="btn btn-outline-primary">Create Teacher</a>
+                <a href="{{route('subadmin.create')}}" class="btn btn-outline-primary">Create Sub admin</a>
             </ol>
         </div>
     </div>
@@ -41,11 +39,10 @@ subadmin withtype
                             <thead>
                                 <tr>
                                     <th scope="col" class="col-md-1">#</th>
-                                    {{-- <th scope="col" class="col-md-2">managent Type</th> --}}
-                                    <th scope="col" class="col-md-2">Type</th>
+                                    <th scope="col" class="col-md-2">Role</th>
+                                    <th scope="col" class="col-md-2">Id</th>
                                     <th scope="col" class="col-md-2">Name</th>
                                     <th scope="col" class="col-md-2">Number</th>
-                                    <th scope="col" class="col-md-1">Verification</th>
                                     <th scope="col" class="col-md-1">Status</th>
                                     <th scope="col" class="col-md-2">Action</th>
                                 </tr>
@@ -54,16 +51,17 @@ subadmin withtype
                                 @foreach ($subadmins as $subadmin)
                                 <tr>
                                     <td>{{$loop->index+1}}</td>
-                                    <td>{{$subadmin->subadmintype->subadmin_type}}</td>
-                                    {{-- <td>{{$subadmin->management_type->role_name}}</td> --}}
-                                    <td>{{$subadmin->user->name}}</td>
-                                    <td>{{$subadmin->user->number}}</td>
-                                    <td>{{$subadmin->user->email_verified_at==null ? 'Unverified': 'Verified'}}</td>
-                                    <td>{{$subadmin->user->status}}</td>
+                                    <td>{{$subadmin->role_as}}</td>
+                                    <td>{{$subadmin->student_id}}</td>
+                                    <td>{{$subadmin->name}}</td>
+                                    <td>{{$subadmin->number}}</td>
+                                    @if ($subadmin->status=='active')
+                                    <td class="text-success">{{$subadmin->status}}</td>
+                                    @else
+                                    <td class="text-danger">{{$subadmin->status}}</td>
+                                    @endif
                                     <td>
-                                        <a href="" class="btn-sm btn-success">Edit</a>
                                         <a href="" class="btn-sm btn-primary">Edit</a>
-                                        <a href="" onclick="confirm('are you sure to delete this item')" class="btn-sm btn-danger">Delete</a>
                                     </td>
                                 </tr>
                                 @endforeach

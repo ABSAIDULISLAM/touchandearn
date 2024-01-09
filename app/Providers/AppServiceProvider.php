@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Events\ProjectLoaded;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -19,6 +20,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+
+        // for load with artisan commands for project faster
+        event(new ProjectLoaded());
     }
 }

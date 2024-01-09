@@ -56,10 +56,11 @@
                                 <div class="col-md-8 m-auto">
                                     <div class="form-group row">
                                         <div class="col-md-9">
-                                            <select name="management_type" id="" class="form-control" required>
+                                            <select name="counselor_id" id="" class="form-control" required>
                                                 <option disabled selected>Select Management Type</option>
-                                                <option value="counsellor">Counsellor</option>
-                                                {{-- <option value="team_leader">Team Leader</option> --}}
+                                                @foreach ($counselors as $counselor)
+                                                <option value="{{$counselor->user->id}}">{{$counselor->user->name}}</option>
+                                                @endforeach
                                             </select>
                                         </div>
 
@@ -82,6 +83,7 @@
                                             </div>
                                         </th>
                                         <th scope="col" class="col-md-2">Name</th>
+                                        <th scope="col" class="col-md-2">std id</th>
                                         <th scope="col" class="col-md-2">email</th>
                                         <th scope="col" class="col-md-1">country</th>
                                         <th scope="col" class="col-md-1">Gender</th>
@@ -93,7 +95,6 @@
                                 <tbody>
                                     @foreach ($users as $user)
                                         <tr>
-
                                             <td>{{ $loop->index+1 }}</td>
                                             <td>
                                                 <div class="form-check">
@@ -102,6 +103,7 @@
                                                 </div>
                                             </td>
                                             <td>{{ $user->name }}</td>
+                                            <td>{{ $user->student_id }}</td>
                                             <td>{{ $user->email }}</td>
                                             <td>{{ $user->country }}</td>
                                             <td>{{ $user->gender }}</td>
@@ -109,9 +111,7 @@
                                             <td>{{ $user->created_at }}</td>
                                             <td>
                                                 <a href="" class="btn-sm btn-success">Edit</a>
-                                                <a href="" class="btn-sm btn-primary">Edit</a>
-                                                <a href="" onclick="confirm('are you sure to delete this item')"
-                                                    class="btn-sm btn-danger">Delete</a>
+                                                <a href="" class="btn-sm btn-primary">View</a>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -122,8 +122,6 @@
                 </div>
             </div>
         </div>
-
-
 
 
     {{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-OgVRXrjzMl/8M+5/yr8ymtSUpH2i0PJK3e/BktSAIT4D7iJKd5R2h/EMuL7eQE8pX" crossorigin="anonymous"></script> --}}
