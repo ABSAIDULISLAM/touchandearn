@@ -2,8 +2,6 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
-
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -27,6 +25,12 @@ class User extends Authenticatable implements MustVerifyEmail
         'name',
         'email',
         'number',
+        'whats_app',
+        'gender',
+        'language',
+        'country',
+        'email_verified_at',
+        'gmail_verified_points_received',
         'image',
         'role_as',
         'password',
@@ -37,14 +41,20 @@ class User extends Authenticatable implements MustVerifyEmail
         'referral_code',
         'referrer_id',
         'student_id',
+        'subadmintype_id',
+        'managment_id',
         'message',
         'wp_message',
         'myleads_response',
-        'subadmintype_id',
+        'msd_response',
         'status',
         'points_distributed',
         'last_seen',
         'management_type',
+        'counselor_id',
+        'teamleader_id',
+        'teamlead_status',
+        'tl_wp_done',
     ];
 
     /**
@@ -78,6 +88,20 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(Earning::class);
     }
 
+    // for counselor with user
+    public function counselor()
+    {
+        return $this->belongsTo(User::class, 'counselor_id');
+    }
+    // for team leader with user
+    public function teamleader()
+    {
+        return $this->belongsTo(User::class, 'teamleader_id');
+    }
+    public function referrar()
+    {
+        return $this->belongsTo(User::class, 'referrer_id');
+    }
 
     /**
      * The attributes that should be cast.
@@ -88,8 +112,6 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
-
-
 
 
 
@@ -117,25 +139,19 @@ class User extends Authenticatable implements MustVerifyEmail
 
     protected function distributeMemberPoints()
     {
-        // Points distribution logic for member role
         $referrer = $this->referrer;
 
         if ($referrer) {
             Earning::create([
                 'user_id' => $referrer->id,
-                'amount' => 500, // Referrer gets 500 points
-            ]);
-
-            Earning::create([
-                'user_id' => $referrer->counselor_id,
-                'amount' => 250, // Referrer gets 250 points
+                'amount' => 1250, // Referrer gets 1250 points
             ]);
             Earning::create([
                 'user_id' => $referrer->teamleader_id,
-                'amount' => 150, // Referrer gets 150 points
+                'amount' => 300, // Referrer gets 300 points
             ]);
-
         }
+
 
     }
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\member;
 
 use App\Http\Controllers\Controller;
+use App\Models\Earning;
 use App\Models\Network;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -18,23 +19,36 @@ class MemberManageController extends Controller
     }
 
 
-    // public function activemember()
-    // {
+    public function sponsorEdit($id, $name)
+    {
+        $user = User::find($id);
+        return view('backend.member.sponsor-edit', compact('user'));
+    }
 
-    //     $users = User::where('status', 'active')->where('role_as', 'member')->get();
-    //      return $users;
+    public function sponsorupdate(Request $request)
+    {
+        $request->validate([
+            'number' => ['required', 'max:13', 'min:11'],
+            'whats_app' => ['required', 'max:13', 'min:11'],
+        ]);
 
-    //     return view('backend.admin.member-manage.active-member');
-    // }
+        User::where('id', $request->id)->update([
+            'number' => $request->number,
+            'whats_app' => $request->whats_app,
+        ]);
 
-    // public function inactivemember()
-    // {
+        return redirect()->route('student.sponsor-list')->with('success', 'Student Info Updated Succesfuly');
+    }
 
-    //     $users = User::where('status', 'deactivate')->where('role_as', 'member')->get();
+    public function StudnentIncomeHistory()
+    {
+        $earnings = Earning::with('user')->where('user_id', auth()->user()->id)->get();
+        // return $earnings;
+
+        return view('backend.member.income-history', compact('earnings'));
+    }
 
 
-    //     return view('backend.admin.member-manage.inactive-member', compact('users'));
-    // }
 
 
 }

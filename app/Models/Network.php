@@ -9,11 +9,7 @@ class Network extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'user_id',
-        'amount',
-        // other columns...
-    ];
+    protected $fillable = ['user_id', 'referral_code', 'parent_id'];
 
 
     public function user()

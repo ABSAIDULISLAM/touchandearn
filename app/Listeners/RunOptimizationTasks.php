@@ -13,10 +13,10 @@ class RunOptimizationTasks implements ShouldQueue
     public function handle($event)
     {
         // Run your desired commands upon project load
-        Artisan::call('optimize');
-        Artisan::call('view:clear');
-        Artisan::call('route:clear');
-        Artisan::call('cache:clear');
-        Artisan::call('config:clear');
+        // Artisan::call('optimize');
+        // Artisan::call('view:clear');
+        // Artisan::call('route:clear');
+        // Artisan::call('cache:clear');
+        // Artisan::call('config:clear');
     }
 }

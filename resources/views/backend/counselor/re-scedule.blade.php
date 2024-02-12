@@ -8,19 +8,11 @@
 @endsection
 
 @section('toproute')
-    <div class="row mb-2" style="box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; padding: 8px; background-color:#fff">
-        <div class="col-sm-6">
-            <h4 class="m-0">Re-Scedule</h4>
-        </div>
-        <div class="col-sm-6">
-
-            <ol class="breadcrumb float-sm-right">
-                {{-- <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
-                <li class="breadcrumb-item"><a href="#">Station</a></li> --}}
-                <a href="" class="btn btn-outline-primary">Create</a>
-            </ol>
-        </div>
+<div class="row mb-4" style="box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; padding: 8px; background-color:#fff">
+    <div class="col-md-12 d-flex justify-content-between">
+        <h4 class="m-0">Reshedule </h4>
     </div>
+</div>
 @endsection
 
 @push('css')
@@ -118,17 +110,6 @@
                     $('#schedule_date').attr('min', formattedCurrentDate);
                     $('#schedule_date').attr('max', formattedNextThreeDays);
                 }
-
-                // Function to set the available time options
-                // function setAvailableTimes() {
-                //     var currentTime = new Date();
-                //     var hours = currentTime.getHours();
-                //     var minutes = currentTime.getMinutes();
-
-                //     // Set the minimum time to the current time
-                //     $('#schedule_time').attr('min', ('0' + hours).slice(-2) + ':' + ('0' + minutes).slice(-2));
-                // }
-
                 // Call the functions on page load
                 setAvailableDates();
                 // setAvailableTimes();

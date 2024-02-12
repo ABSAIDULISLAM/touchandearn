@@ -42,42 +42,46 @@
                             <thead>
                                 <tr>
                                     <th scope="col" class="col-md-1">#</th>
-                                    <th scope="col" class="col-md-1">Name</th>
-                                    <th scope="col" class="col-md-1">ID</th>
-                                    <th scope="col" class="col-md-2">Payment Number</th>
-                                    <th scope="col" class="col-md-1">payment method</th>
-                                    <th scope="col" class="col-md-1" style="font-size: 13px">Withdawal Request amount</th>
-                                    <th scope="col" class="col-md-1">Paid amount</th>
-                                    <th scope="col" class="col-md-1">Status</th>
-                                    <th scope="col" class="col-md-1">created_at</th>
-                                    <th scope="col" class="col-md-3">Action</th>
+                                    <th scope="col" class="col-md-2">Name</th>
+                                    <th scope="col" class="col-md-2">std id</th>
+                                    <th scope="col" class="col-md-2">Phone</th>
+                                    <th scope="col" class="col-md-2">Whats app</th>
+                                    <th scope="col" class="col-md-2">Country</th>
+                                    <th scope="col" class="col-md-2">Role</th>
+                                    <th scope="col" class="col-md-2">Gender</th>
+                                    <th scope="col" class="col-md-2">Withdrawal Point</th>
+                                    <th scope="col" class="col-md-2">Withdrawal coast</th>
+                                    <th scope="col" class="col-md-2">payment method</th>
+                                    <th scope="col" class="col-md-2">payment number</th>
+                                    <th scope="col" class="col-md-1">Request date</th>
+                                    <th scope="col" class="col-md-1">status</th>
+                                    <th scope="col" class="col-md-2">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($subadmins as $subadmin)
                                     <tr>
                                         <td>{{ $loop->index + 1 }}</td>
-                                        <td>{{ $subadmin->user->name }}</td>
-                                        <td>{{ $subadmin->user->student_id }}</td>
-                                        <td>{{ $subadmin->payment_number }}</td>
-                                        <td>{{ $subadmin->payment_method }}</td>
-                                        <td>{{ $subadmin->withdrawal_amount }}</td>
-                                        <td>{{ $subadmin->paid_amount }}</td>
-                                        @if($subadmin->status=='unpaid')
-                                            <td class="badge badge-danger">{{ $subadmin->status }}</td>
-                                        @else
-                                            <td class="badge badge-success">{{ $subadmin->status }}</td>
-                                        @endif
-                                        <td>{{ $subadmin->created_at }}</td>
-
+                                        <td>{{ $subadmin->user->name ?? 'Null' }}</td>
+                                        <td>{{ $subadmin->user->student_id ?? 'Null' }}</td>
+                                        <td>{{ $subadmin->user->number ?? 'Null' }}</td>
+                                        <td>{{ $subadmin->user->whats_app ?? 'Null' }}</td>
+                                        <td>{{ $subadmin->user->country ?? 'Null' }}</td>
+                                        <td>{{ $subadmin->user->role_as ?? 'Null' }}</td>
+                                        <td>{{ $subadmin->user->gender ?? 'Null' }}</td>
+                                        <td>{{ $subadmin->withdrawal_amount ?? 'Nll' }}</td>
+                                        <td>100.00</td>
+                                        <td>{{ $subadmin->payment_method ?? 'Null' }}</td>
+                                        <td>{{ $subadmin->payment_number ?? 'Null' }}</td>
+                                        <td>{{ $subadmin->created_at ?? 'Null'}}</td>
+                                        <td><button type="button" class="btn btn-warning btn-sm">Unpaid</button></td>
                                         <td>
                                             @if ($subadmin->status =='unpaid')
-                                            <a href="{{route('admin.withdwal.status.paid', ['wId' => $subadmin->id, 'id'=>$subadmin->user->id])}}" class="btn-sm btn-secondary" onclick="return confirm('আপনি কি এখন এই ইউজার এর পেমেন্ট স্ট্যাটাস পেইড করে দিতে চাচ্ছেন ??')">Pay-Now</a>
+                                            <a href="{{route('admin.withdwal.status.paidtoMember', ['wId' => $subadmin->id, 'id'=>$subadmin->user->id])}}" class="btn-sm btn-secondary" onclick="return confirm('আপনি কি এখন এই ইউজার এর পেমেন্ট স্ট্যাটাস পেইড করে দিতে চাচ্ছেন ??')">Pay Now</a>
                                             @else
                                                 <button type="button" class="btn btn-success btn-sm">Paid</button>
                                             @endif
                                         </td>
-
                                     </tr>
                                 @endforeach
                             </tbody>

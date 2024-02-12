@@ -19,7 +19,7 @@ class ManageMemberByController extends Controller
 
         // return $counselors;
 
-        $users = User::where('status', 'deactivate')->Where('role_as', 'member')->Where('management_type', 'controller')->get();
+        $users = User::where('status', 'deactivate')->Where('role_as', 'member')->Where('management_type', 'controller')->latest()->get();
 
 
         return view('backend.controller.inactive-members', compact(['users', 'counselors']));
@@ -44,17 +44,6 @@ class ManageMemberByController extends Controller
             ]);
 
             if ($result) {
-
-                // Earning::create([
-                //     'user_id' => auth()->user()->id,
-                //     'amount' => 20,
-                // ]);
-
-                // Earning::create([
-                //     'user_id' => $request->counselor_id,
-                //     'amount' => 15,
-                // ]);
-
                 $affectedRows++;
             } else {
                 return redirect()->back()->with('error', 'Only One Members Transferred Successfully');
@@ -70,7 +59,19 @@ class ManageMemberByController extends Controller
     }
 
 
-    
+    public function AllInactiveLeads()
+    {
+        $counselors = Counselor::with('user')->get();
+
+
+        // $users = User::with(['counselor', 'teamleader'])->where('status', 'deactivate')->Where('role_as', 'member')->get();
+        $users = User::with(['counselor', 'teamleader'])->where('status', 'deactivate')->where('role_as', 'member')->get();        // return $users;
+
+        return view('backend.controller.all-inactive-members', compact(['users', 'counselors']));
+    }
+
+
+
 
 
 }

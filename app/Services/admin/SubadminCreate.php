@@ -33,6 +33,18 @@ class SubadminCreate
         }elseif (request()->input('subadmintype_id') == 2){ //2== team leader
             $user->role_as = 'teamleader';
             $user->subadmintype_id = 'teamleader';
+        }elseif (request()->input('subadmintype_id') == 3){ //2== photo editor teacher
+            $user->role_as = 'photo_editing';
+            $user->subadmintype_id = 'photo_editing';
+        }elseif (request()->input('subadmintype_id') == 4){ //2== video editor teacher
+            $user->role_as = 'video_editing';
+            $user->subadmintype_id = 'video_editing';
+        }elseif (request()->input('subadmintype_id') == 5){ //2== lead_gen teacher
+            $user->role_as = 'lead_gen';
+            $user->subadmintype_id = 'lead_gen';
+        }elseif (request()->input('subadmintype_id') == 6){ //2== digital_marketing teacher
+            $user->role_as = 'digital_marketing';
+            $user->subadmintype_id = 'digital_marketing';
         }
         $user->password = Hash::make($data['password']);
         $user->status = 'active';
@@ -45,7 +57,7 @@ class SubadminCreate
         $user->language = $data['language'];
 
         if(request()->hasFile('image')){
-            $image = upload_image(request('image'), 'uploads/sub-admin/', 400, 400);
+            $image = Upload(request('image'), 'uploads/sub-admin/', 400, 400);
             $user->image = $image;
         }
         $user->save();
@@ -68,11 +80,10 @@ class SubadminCreate
         $userdata['email'] = $data['email'];
         $userdata['password'] = $data['password'];
 
-        Mail::send('backend.admin.emails.welcome', $userdata, function($message) use ($data){
+        Mail::send('backend.admin.emails.welcome', ['user' => $userdata], function($message) use ($data){
             $message->to($data['email']);
             $message->subject('Welcome Mail from Touch and Earn');
         });
-
         return true;
 
     }

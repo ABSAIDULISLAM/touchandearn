@@ -8,17 +8,10 @@
 @endsection
 
 @section('toproute')
-    <div class="row mb-2" style="box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; padding: 8px; background-color:#fff">
-        <div class="col-sm-6">
-            <h4 class="m-0">Sponsor list</h4>
-        </div>
-        <div class="col-sm-6">
-
-            <ol class="breadcrumb float-sm-right">
-                {{-- <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
-                <li class="breadcrumb-item"><a href="#">Station</a></li> --}}
-                <a href="" class="btn btn-outline-primary">Create</a>
-            </ol>
+    <div class="row mb-4" style="box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; padding: 8px; background-color:#fff">
+        <div class="col-md-12 d-flex justify-content-between">
+            <h4 class="m-0">Sponsor List</h4>
+            {{-- <a class="btn btn-primary"> Create</a> --}}
         </div>
     </div>
 @endsection
@@ -43,21 +36,28 @@
                             <thead>
                                 <th scope="col" class="col-md-1">#</th>
                                 <th scope="col" class="col-md-2">Name</th>
-                                <th scope="col" class="col-md-2">Status</th>
+                                <th scope="col" class="col-md-2">whats app</th>
+                                <th scope="col" class="col-md-1">Status</th>
                                 <th scope="col" class="col-md-2">Joing date</th>
                                 <th scope="col" class="col-md-1">Last seen</th>
+                                <th scope="col" class="col-md-1"></th>
                             </thead>
                             <tbody>
                                 @foreach ($networkDatas as $user)
+                                    @if ($user->usertwo)
                                     <tr>
                                         <td>{{ $loop->index + 1 }}</td>
-                                        <td>{{ $user->usertwo->name }}</td>
-                                        <td>{{ $user->usertwo->status }}</td>
-                                        <td>{{ $user->usertwo->created_at }}</td>
-                                        <td>{{ $user->usertwo->last_seen }}</td>
-
-
+                                        <td>{{ $user->usertwo->name ?? 'Null' }}</td>
+                                        <td>{{ $user->usertwo->whats_app ?? 'Null' }}</td>
+                                        <td>{{ $user->usertwo->status ?? 'Null' }}</td>
+                                        <td>{{ $user->usertwo->created_at ?? 'Null' }}</td>
+                                        <td>{{ $user->usertwo->last_seen ?? 'Null' }}</td>
+                                        <td>
+                                            <a href="{{route('sponsor.edit', ['stid'=>$user->usertwo->id, 'name' =>$user->usertwo->name])}}" class="btn-sm btn-success">Edit</a>
+                                        </td>
                                     </tr>
+                                    @endif
+                                    
                                 @endforeach
                             </tbody>
                         </table>

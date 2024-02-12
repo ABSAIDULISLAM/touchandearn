@@ -21,6 +21,9 @@ return new class extends Migration
             $table->string('role_as')->nullable();
             $table->string('status')->nullable()->default(Status::Unpaid->value);
             $table->timestamps();
+            
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+
         });
     }
 

@@ -35,7 +35,7 @@ class WelcomeMail extends Mailable
         $userData['email'] = $this->email;
         $userData['password'] = $this->password;
 
-        return view('backend.admin.emails.welcome')->with('userData', $userData); // Create a Blade view for your email
+        return view('backend.admin.emails.welcome')->with('user', $userData); // Create a Blade view for your email
     }
 
     /**

@@ -1,67 +1,131 @@
 @extends('frontend.layouts.master')
 
 @section('body')
+    <!-- ======= Hero Section ======= -->
+    <section id="hero" class="d-flex align-items-center">
 
-
-<!-- ======= Hero Section ======= -->
-<section id="hero" class="d-flex align-items-center">
-
-    <div class="container">
-        <div class="row gy-4">
-            <div class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center">
-                <h1>Touch And Earn Digital Platform</h1>
-                <h2>It’s a learning and earning prosses by using your valuable free time at home thought your
-                    smartphone only. It’s a very eassy prosses and you can learn this prosses on your mother tounge
-                    and you can earn form our comunity with selling some courses services or photo and video editing
-                    and watching video.</h2>
-                <div>
-                    <a href="login_form.php" class="btn-get-started scrollto">Log In</a>
-                    <a href="{{route('register')}}" class="btn-get-started scrollto">Regiester</a>
+        <div class="container">
+            <div class="row gy-4">
+                <div class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center">
+                    <h1>Touch And Earn Digital Platform</h1>
+                    <h2>It’s a learning and earning prosses by using your valuable free time at home thought your
+                        smartphone only. It’s a very eassy prosses and you can learn this prosses on your mother tounge
+                        and you can earn form our comunity with selling some courses services or photo and video editing
+                        and watching video.</h2>
+                    <div>
+                        <a href="{{ route('login') }}" class="btn-get-started scrollto">Log In</a>
+                        <a href="{{ route('register') }}" class="btn-get-started scrollto">Regiester</a>
+                    </div>
+                </div>
+                <div class="col-lg-6 order-1 order-lg-2 hero-img">
+                    <img src="{{ asset('frontend/assets/img/world.webp') }}" class="img-fluid animated" alt="">
                 </div>
             </div>
-            <div class="col-lg-6 order-1 order-lg-2 hero-img">
-                <img src="{{asset('frontend/assets/img/world.webp')}}" class="img-fluid animated" alt="">
-            </div>
         </div>
-    </div>
 
-</section><!-- End Hero -->
+    </section><!-- End Hero -->
 
-{{-- <main id="main"> --}}
-
-    <!-- ======= About Section ======= -->
     <section id="about" class="about">
         <div class="container">
 
             <div class="row justify-content-between">
                 <div class="col-lg-5 d-flex align-items-center justify-content-center about-img">
-                    <img src="{{asset('frontend/assets/img/about-img.png')}}" class="img-fluid" alt="" data-aos="zoom-in">
+                    <img src="{{ asset('frontend/assets/img/about-img.png') }}" class="img-fluid" alt=""
+                        data-aos="zoom-in">
                 </div>
-                <div class="col-lg-6 pt-5 pt-lg-0">
-                    <h3 data-aos="fade-up">About Us</h3>
+                <div class="col-lg-6 pt-2 pt-lg-0">
+                    <h4 data-aos="fade-up">Touch And Earn Digital: Empowering Digital Income and Skill Development</h4>
                     <p data-aos="fade-up" data-aos-delay="100">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                        labore et dolore magna aliqua. Duis aute irure dolor in reprehenderit
+                        Touch And Earn Digital isn't just a company; it's a platform revolutionizing how individuals engage
+                        with the digital world. Our members can earn rewards seamlessly by performing various tasks through
+                        their online presence.
                     </p>
                     <div class="row">
                         <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
                             <i class="bx bx-receipt"></i>
-                            <h4>Corporis voluptates sit</h4>
-                            <p>Consequuntur sunt aut quasi enim aliquam quae harum pariatur laboris nisi ut aliquip
+                            <h4>*Upload, Like, and Share Images:*</h4>
+                            <p>Members can earn points by creating a vibrant community, sharing photos, and staying engaged.
                             </p>
                         </div>
                         <div class="col-md-6" data-aos="fade-up" data-aos-delay="200">
                             <i class="bx bx-cube-alt"></i>
-                            <h4>Ullamco laboris nisi</h4>
-                            <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+                            <h4>*Video Editing and Submission:* </h4>
+                            <p> Showcase your creativity! Edit videos and earn points by submitting them on the platform.
                             </p>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
+                            <i class="bx bx-receipt"></i>
+                            <h4>*Task Completion:*</h4>
+                            <p>Earn rewards for completing tasks available on your member ID.</p>
+                        </div>
+                        <div class="col-md-6" data-aos="fade-up" data-aos-delay="200">
+                            <i class="bx bx-cube-alt"></i>
+                            <h4>*Data Entry:*</h4>
+                            <p>  Data entry involves typing information or text, a real source of income for many individuals working remotely from home over the internet.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div data-bs-toggle="collapse" class="collapsed question" href="#faq12"><button href="" class="btn btn-warning px-4 mt-4">learn more</button>
+                        <div id="faq12" class="collapse" data-bs-parent=".faq-list">
+                            <div class="row">
+                                <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
+                                    <i class="bx bx-receipt"></i>
+                                    <h4>*Courses and Products:*</h4>
+                                    <p> Learn and thrive! We offer courses in photo editing, video editing, and digital marketing. Additionally, members can sell courses and products on our platform.</p>
+                                </div>
+                                <div class="col-md-6" data-aos="fade-up" data-aos-delay="200">
+                                    <i class="bx bx-cube-alt"></i>
+                                    <h4>*Advertisement Campaigns:*</h4>
+                                    <p> Increase your income by advertising and reaching a wider audience.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
+                                    <i class="bx bx-receipt"></i>
+                                    <h4>*Sponsorships:*</h4>
+                                    <p> Increase income by sponsoring companies for promotion.</p>
+                                </div>
+                                <div class="col-md-6" data-aos="fade-up" data-aos-delay="200">
+                                    <i class="bx bx-cube-alt"></i>
+                                    <h4>*Photo and Video Editing:*</h4>
+                                    <p> Unlock your artistic potential through our courses on photo and video editing.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
+                                    <i class="bx bx-receipt"></i>
+                                    <h4>*Digital Marketing Mastery:*</h4>
+                                    <p>Dive into the world of digital marketing with our comprehensive courses.</p>
+                                </div>
+                                <div class="col-md-6" data-aos="fade-up" data-aos-delay="200">
+                                    <i class="bx bx-cube-alt"></i>
+                                    <p>### Vision and Mission: </p>
+
+                                    <p> At Touch And Earn Digital, our vision is to empower individuals for the full potential of the digital landscape. We believe in providing various earning opportunities alongside skill development and fostering a creative community.</p>
+
+                                       <p> ### Join Us on the Digital Journey:</p>
+
+                                        <p>Become a member of Touch And Earn Digital and embark on a journey where learning to earn is the path to shaping your career. Enhance your digital expertise and contribute to the growth of a dynamic online community. 🤟🤟🤟🤟🤟🤟</p>
+
+                                        <p>Touch And Earn Digital: Where your digital presence transforms into income and expertise.</p>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
+
             </div>
 
         </div>
     </section><!-- End About Section -->
+
 
     <!-- ======= Services Section ======= -->
     <section id="services" class="services section-bg">
@@ -75,43 +139,88 @@
             <div class="row">
                 <div class="col-md-6 col-lg-3 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
                     <div class="icon-box">
-                        <div class="icon"><i class="bx bxl-dribbble"></i></div>
-                        <h4 class="title"><a href="">Photo Editing Through Mobail Apps</a></h4>
-                        <p class="description">Voluptatum deleniti atque corrupti quos dolores et quas molestias
-                            excepturi sint occaecati cupiditate</p>
+                        <div class="icon mb-2"><img src="{{ asset('frontend/photo-editing.jpg') }}" class="w-100" alt="">
+                        </div>
+                        <h4 class="title"><a href="">Photo Editing Through Mobile Apps</a></h4>
+                        <p class="description">We will teach our Photo editing course, throuch a company prescribed,
+                            flexible and user compitable mobile application through our multiple online class and trainer
+                            guidence</p>
+
+                            <div data-bs-toggle="collapse" class="collapsed question" href="#faq11"><button href="" class="btn btn-warning px-4 mt-4">learn more</button>
+                                <div id="faq11" class="collapse" data-bs-parent=".faq-list">
+                                        <p class="mt-2">1.Advertisement Making</p>
+                                        <p>2.YouTube Thumbnail</p>
+                                        <p>3.Poster Making</p>
+                                        <p>4.Poster designing</p>
+                                        <p>5.3D picture Making</p>
+                                        <p>6.Photo designing</p>
+                                </div>
+                            </div>
                     </div>
                 </div>
 
-                <div class="col-md-6 col-lg-3 d-flex align-items-stretch" data-aos="zoom-in"
-                    data-aos-delay="200">
+                <div class="col-md-6 col-lg-3 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="200">
                     <div class="icon-box">
-                        <div class="icon"><i class="bx bx-file"></i></div>
-                        <h4 class="title"><a href="">Photo Editing Through Mobail Apps</a></h4>
-                        <p class="description">Duis aute irure dolor in reprehenderit in voluptate velit esse
-                            cillum dolore eu fugiat nulla</p>
+                        <div class="icon mb-2"><img src="{{ asset('frontend/video-editing .jpg') }}" class="w-100" alt="">
+                        </div>
+                        <h4 class="title"><a href="">Video Editing Through Mobile Apps</a></h4>
+                        <p class="description">We will teach our Video editing course, throuch a company prescribed,
+                            flexible and user compitable mobile application through our multiple online class and trainer
+                            guidence</p>
+
+                            <div data-bs-toggle="collapse" class="collapsed question" href="#faq15"><button href="" class="btn btn-warning px-4 mt-4">learn more</button>
+                                <div id="faq15" class="collapse" data-bs-parent=".faq-list">
+                                        <p class="mt-2">1.Making Videos across picture</p>
+                                        <p>2.Sound and effects in the video</p>
+                                        <p>3.Speaking in front of the camara</p>
+                                        <p>4.Screen recorder video Making</p>
+                                        <p>5.Advertisement video Making</p>
+                                </div>
+                            </div>
                     </div>
                 </div>
 
-                <div class="col-md-6 col-lg-3 d-flex align-items-stretch" data-aos="zoom-in"
-                    data-aos-delay="300">
+                <div class="col-md-6 col-lg-3 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="300">
                     <div class="icon-box">
-                        <div class="icon"><i class="bx bx-tachometer"></i></div>
-                        <h4 class="title"><a href="">Photo Editing Through Mobail Apps</a></h4>
-                        <p class="description">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
-                            officia deserunt mollit anim</p>
+                        <div class="icon mb-2"><img src="{{ asset('frontend/digital-marketing.jpg') }}" class="w-100" alt="">
+                        </div>
+                        <h4 class="title"><a href="">Digital Editing Through Mobile Apps</a></h4>
+                        <p class="description">We will teach our Digital editing course, throuch a company prescribed,
+                            flexible and user compitable mobile application through our multiple online class and trainer
+                            guidence</p>
+
+                            <div data-bs-toggle="collapse" class="collapsed question" href="#faq13"><button href="" class="btn btn-warning px-4 mt-4">learn more</button>
+                                <div id="faq13" class="collapse" data-bs-parent=".faq-list">
+                                        <p class="mt-2">1.Lead generation</p>
+                                        <p>2.Sales processes</p>
+                                        <p>3.Google adsense</p>
+                                        <p>4.Manager Accounts Management</p>
+                                        <p>5.Sales Management</p>
+                                </div>
+                            </div>
+
                     </div>
                 </div>
 
-                <div class="col-md-6 col-lg-3 d-flex align-items-stretch" data-aos="zoom-in"
-                    data-aos-delay="400">
+                <div class="col-md-6 col-lg-3 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="400">
                     <div class="icon-box">
-                        <div class="icon"><i class="bx bx-world"></i></div>
-                        <h4 class="title"><a href="">Photo Editing Through Mobail Apps</a></h4>
-                        <p class="description">At vero eos et accusamus et iusto odio dignissimos ducimus qui
-                            blanditiis praesentium voluptatum</p>
+                        <div class="icon mb-2"><img src="{{ asset('frontend/SEO-editing .jpg') }}" class="w-100" alt="">
+                        </div>
+                        <h4 class="title"><a href="">SEO Editing Through Mobile Apps</a></h4>
+                        <p class="description">We will teach our SEO editing course, throuch a company prescribed, flexible
+                            and user compitable mobile application through our multiple online class and trainer guidence
+                        </p>
+
+                        <div data-bs-toggle="collapse" class="collapsed question" href="#faq10"><button href="" class="btn btn-warning px-4 mt-4">learn more</button>
+                        <div id="faq10" class="collapse" data-bs-parent=".faq-list">
+                                <p class="mt-2">1.Website SEO</p>
+                                <p>2.Facebook SEO</p>
+                                <p>3.Fast Page Ranking</p>
+                                <p>4.Youtube SEO</p>
+                                <p>5.Instagram SEO</p>
+                        </div>
                     </div>
                 </div>
-
             </div>
 
         </div>
@@ -210,7 +319,7 @@
 
                 <div class="col-xl-3 col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="100">
                     <div class="member">
-                        <img src="{{asset('frontend/assets/img/team/team-1.jpg')}}" class="img-fluid" alt="">
+                        <img src="{{ asset('frontend/assets/img/team/team-1.jpg') }}" class="img-fluid" alt="">
                         <div class="member-info">
                             <div class="member-info-content">
                                 <h4>Walter White</h4>
@@ -228,7 +337,7 @@
 
                 <div class="col-xl-3 col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="200">
                     <div class="member">
-                        <img src="{{asset('frontend/assets/img/team/team-2.jpg')}}" class="img-fluid" alt="">
+                        <img src="{{ asset('frontend/assets/img/team/team-2.jpg') }}" class="img-fluid" alt="">
                         <div class="member-info">
                             <div class="member-info-content">
                                 <h4>Sarah Jhonson</h4>
@@ -246,7 +355,7 @@
 
                 <div class="col-xl-3 col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="300">
                     <div class="member">
-                        <img src="{{asset('frontend/assets/img/team/team-3.jpg')}}" class="img-fluid" alt="">
+                        <img src="{{ asset('frontend/assets/img/team/team-3.jpg') }}" class="img-fluid" alt="">
                         <div class="member-info">
                             <div class="member-info-content">
                                 <h4>William Anderson</h4>
@@ -264,7 +373,7 @@
 
                 <div class="col-xl-3 col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="400">
                     <div class="member">
-                        <img src="{{asset('frontend/assets/img/team/team-4.jpg')}}" class="img-fluid" alt="">
+                        <img src="{{ asset('frontend/assets/img/team/team-4.jpg') }}" class="img-fluid" alt="">
                         <div class="member-info">
                             <div class="member-info-content">
                                 <h4>Amanda Jepson</h4>
@@ -296,22 +405,22 @@
 
             <div class="clients-slider swiper" data-aos="fade-up" data-aos-delay="100">
                 <div class="swiper-wrapper align-items-center">
-                    <div class="swiper-slide"><img src="{{asset('frontend/assets/img/clients/client-1.png')}}" class="img-fluid"
-                            alt=""></div>
-                    <div class="swiper-slide"><img src="{{asset('frontend/assets/img/clients/client-2.png')}}" class="img-fluid"
-                            alt=""></div>
-                    <div class="swiper-slide"><img src="{{asset('frontend/assets/img/clients/client-3.png')}}" class="img-fluid"
-                            alt=""></div>
-                    <div class="swiper-slide"><img src="{{asset('frontend/assets/img/clients/client-4.png')}}" class="img-fluid"
-                            alt=""></div>
-                    <div class="swiper-slide"><img src="{{asset('frontend/assets/img/clients/client-5.png')}}" class="img-fluid"
-                            alt=""></div>
-                    <div class="swiper-slide"><img src="{{asset('frontend/assets/img/clients/client-6.png')}}" class="img-fluid"
-                            alt=""></div>
-                    <div class="swiper-slide"><img src="{{asset('frontend/assets/img/clients/client-7.png')}}" class="img-fluid"
-                            alt=""></div>
-                    <div class="swiper-slide"><img src="{{asset('frontend/assets/img/clients/client-8.png')}}" class="img-fluid"
-                            alt=""></div>
+                    <div class="swiper-slide"><img src="{{ asset('frontend/assets/img/clients/client-1.png') }}"
+                            class="img-fluid" alt=""></div>
+                    <div class="swiper-slide"><img src="{{ asset('frontend/assets/img/clients/client-2.png') }}"
+                            class="img-fluid" alt=""></div>
+                    <div class="swiper-slide"><img src="{{ asset('frontend/assets/img/clients/client-3.png') }}"
+                            class="img-fluid" alt=""></div>
+                    <div class="swiper-slide"><img src="{{ asset('frontend/assets/img/clients/client-4.png') }}"
+                            class="img-fluid" alt=""></div>
+                    <div class="swiper-slide"><img src="{{ asset('frontend/assets/img/clients/client-5.png') }}"
+                            class="img-fluid" alt=""></div>
+                    <div class="swiper-slide"><img src="{{ asset('frontend/assets/img/clients/client-6.png') }}"
+                            class="img-fluid" alt=""></div>
+                    <div class="swiper-slide"><img src="{{ asset('frontend/assets/img/clients/client-7.png') }}"
+                            class="img-fluid" alt=""></div>
+                    <div class="swiper-slide"><img src="{{ asset('frontend/assets/img/clients/client-8.png') }}"
+                            class="img-fluid" alt=""></div>
                 </div>
                 <div class="swiper-pagination"></div>
             </div>
@@ -320,7 +429,7 @@
     </section><!-- End Clients Section -->
 
     <!-- ======= Contact Us Section ======= -->
-    <section id="contact" class="contact">
+   {{-- <section id="contact" class="contact">
         <div class="container" data-aos="fade-up">
 
             <div class="section-title">
@@ -350,13 +459,12 @@
                             <p>+1 5589 55488 55s</p>
                         </div>
 
-                        {{-- <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12097.433213460943!2d-74.0062269!3d40.7101282!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xb89d1fe6bc499443!2sDowntown+Conference+Center!5e0!3m2!1smk!2sbg!4v1539943755621" frameborder="0" style="border:0; width: 100%; height: 290px;" allowfullscreen></iframe> --}}
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12097.433213460943!2d-74.0062269!3d40.7101282!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xb89d1fe6bc499443!2sDowntown+Conference+Center!5e0!3m2!1smk!2sbg!4v1539943755621" frameborder="0" style="border:0; width: 100%; height: 290px;" allowfullscreen></iframe>
                     </div>
 
                 </div>
 
-                <div class="col-lg-7 mt-5 mt-lg-0 d-flex align-items-stretch" data-aos="fade-up"
-                    data-aos-delay="200">
+                <div class="col-lg-7 mt-5 mt-lg-0 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
                     <form action="forms/contact.php" method="post" role="form" class="php-email-form">
                         <div class="row">
                             <div class="form-group col-md-6">
@@ -391,24 +499,23 @@
             </div>
 
         </div>
-    </section><!-- End Contact Us Section -->
+    </section> --}}
+    <!-- End Contact Us Section -->
 
-{{-- </main><!-- End #main --> --}}
+    </main><!-- End #main -->
 
 @section('newslater')
-<div class="footer-newsletter">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-6">
-                <h4>Join Our Newsletter</h4>
-                <form action="" method="post">
-                    <input type="email" name="email"><input type="submit" value="Subscribe">
-                </form>
+    <div class="footer-newsletter">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-6">
+                    <h4>Join Our Newsletter</h4>
+                    <form action="" method="post">
+                        <input type="email" name="email"><input type="submit" value="Subscribe">
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-</div>
 @endsection
-
-
 @endsection

@@ -14,7 +14,7 @@
     <link href="{{asset('frontend/assets/img/logo.png')}}" rel="apple-touch-icon">
 
     <!-- Google Fonts -->
-    {{-- <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,600,600i,700,700i" rel="stylesheet"> --}}
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,600,600i,700,700i" rel="stylesheet">
 
     <!-- Vendor CSS Files -->
     <link href="{{asset('frontend/assets/vendor/aos/aos.css')}}" rel="stylesheet">
@@ -30,6 +30,27 @@
 </head>
 
 <body>
+
+    {{-- @if(config('app.env') !== 'production')
+        {!! Debugbar::render() !!}
+    @endif
+
+    <style>
+        /* Debugbar button hide */
+        #debugbar-container {
+            display: none !important;
+        }
+    </style> --}}
+
+    {{-- <script>
+        // Debugbar button hide
+        document.addEventListener('DOMContentLoaded', function() {
+            var debugbarContainer = document.getElementById('debugbar-container');
+            if (debugbarContainer) {
+                debugbarContainer.style.display = 'none';
+            }
+        });
+    </script> --}}
 
     <!-- ======= Header ======= -->
     <header id="header" class="fixed-top d-flex align-items-center">
@@ -49,7 +70,7 @@
                     <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
                     <li><a class="nav-link scrollto" href="#about">About Us</a></li>
 
-                    <li><a class="getstarted scrollto" href="{{route('login')}}">Admin Login</a></li>
+                    <li><a class="getstarted scrollto" href="{{route('login')}}">Sub-admin Login</a></li>
                     <li><a class="getstarted scrollto" href="{{route('register')}}">Sign Up</a></li>
                 </ul>
                 <i class="bi bi-list mobile-nav-toggle"></i>
@@ -75,10 +96,10 @@
                     <div class="col-lg-3 col-md-6 footer-contact">
                         <h3>Touch And Earn</h3>
                         <p>
-                            A108 Adam Street <br>
+                            {{-- A108 Adam Street <br>
                             New York, NY 535022<br>
                             United States <br><br>
-                            <strong>Phone:</strong> +1 5589 55488 55<br>
+                            <strong>Phone:</strong> +1 5589 55488 55<br> --}}
                             <strong>Email:</strong> info@example.com<br>
                         </p>
                     </div>

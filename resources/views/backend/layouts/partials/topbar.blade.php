@@ -33,12 +33,12 @@
             </a>
             <div class="dropdown-menu dropdown-menu-center">
                 <a href="{{route('profile')}}" class="dropdown-item">
-                    <i class="far fa-circle mr-2" style="color: #b8bfcc;"></i> Profile
+                    <i class="fas fa-user-circle mr-2" style="color: #b8bfcc;"></i> Profile
                 </a>
                 <a class="dropdown-item" href="{{ route('logout') }}"
                     onclick="event.preventDefault();
                     document.getElementById('logout-form').submit();">
-                    <i class="far fa-circle mr-2" style="color: #b8bfcc;"></i> Log out
+                    <i class="fas fa-sign-out-alt mr-2" style="color: #b8bfcc;"></i> Log out
                     <span class="float-right text-muted text-sm"></span>
                 </a>
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">

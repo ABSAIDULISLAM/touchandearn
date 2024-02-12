@@ -33,8 +33,8 @@ class WithdrawController extends Controller
     public function withdrawRequestSend(Request $request)
     {
         $request->validate([
-            'withdrawal_amount' => ['required', 'numeric'],
-            'payment_number' => ['required', 'max:13', 'min:11'],
+            'withdrawal_amount' => ['required', 'numeric', 'min:1000'],
+            'payment_number' => ['required'],
             'payment_method' => ['required'],
         ]);
 
@@ -65,6 +65,7 @@ class WithdrawController extends Controller
 
         return redirect()->route('dashboard')->with('success', 'Your withdrawal request sent successfully!');
     }
+
 
 
 
@@ -110,5 +111,5 @@ class WithdrawController extends Controller
     // }
 
 
-    
+
 }

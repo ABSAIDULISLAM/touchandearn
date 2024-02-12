@@ -6,36 +6,33 @@ use App\Http\Controllers\Controller;
 use App\Models\Earning;
 use App\Models\Network;
 use App\Models\User;
+use App\Models\Withdraw;
 use Illuminate\Support\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
 
 class AdminDashController extends Controller
 {
     public function dashboard()
     {
-        $user = auth()->user(); // Assuming the user is logged in
-        // $user =  User::where('id', auth()->user()->id)->first();
+        $user = auth()->user();
+        $totalEarnings = $user->earnings()->where('processed', false)->sum('amount');
+
+        $earnings = $user->earnings()->where('processed', false)->get();
+
+        foreach ($earnings as $earning) {
+            $user->ballance += $earning->amount;
+            $user->save();
+            $earning->processed = true;
+            $earning->save();
+        }
 
         // Today's earnings
-        $todayEarnings = $user->earnings()
-            ->where('user_id', auth()->user()->id)
-            ->whereDate('created_at', Carbon::today())
-            ->sum('amount');
-
-        // Total earnings
-        $totalEarnings = $user->earnings()->where('user_id', auth()->user()->id)->sum('amount');
-
-        User::where('id', auth()->user()->id)->update([
-            'ballance' => DB::raw('ballance + ' . $totalEarnings),
-        ]);
+        $todayEarnings = $user->earnings()->where('user_id', auth()->user()->id)->whereDate('created_at', Carbon::today())->sum('amount');
 
         // for update user status when ballance >= 5000
-        User::where('role_as', 'member')
-            ->where('activation_points', '>=', 5000)->update([
-                'status' => 'active',
-            ]);
-
+        User::where('role_as', 'member')->where('activation_points', '>=', 5000)->update(['status' => 'active',]);
 
         // for user info
         $user =  User::where('id', auth()->user()->id)->first();
@@ -66,6 +63,10 @@ class AdminDashController extends Controller
             ->get();
 
         foreach ($activeUsers as $user) {
+            Earning::create([
+                'user_id' => $user->counselor_id,
+                'amount' => 500, // Referrer gets 500 points
+            ]);
             $user->distributePoints();
         }
     }
@@ -77,7 +78,6 @@ class AdminDashController extends Controller
     public function AdminWithdrawalIncome()
     {
         $earnings  =Earning::with('user')->where('user_id', auth()->user()->id)->get();
-        // $earnings = $user->earnings()->where('user_id', auth()->user()->id)->sum('amount');
 
         return view('backend.admin.income.withdrawal-income', compact('earnings'));
 
@@ -121,26 +121,63 @@ class AdminDashController extends Controller
 
 
 
+    // public function showStatistics()
+    // {
+    //     $totalVisitors = Visitor::count();
+    //     $todayVisitors = Visitor::whereDate('visited_at', today())->count();
+    //     $currentMonthVisitors = Visitor::whereMonth('visited_at', today())->count();
+    //     $lastMonthVisitors = Visitor::whereMonth('visited_at', today()->subMonth())->count();
+
+    //     return view('statistics', compact('totalVisitors', 'todayVisitors', 'currentMonthVisitors', 'lastMonthVisitors'));
+    // }
 
 
 
 
-
-
-
-
-    public function dashboardTest(){
-        // return User::with('referrer')->get();
-
-        // $email = 'absaidul2@gmail.com';
-        // $name = 'Saidul';
-
-        return 'ok';
-
-
+    public function Reference()
+    {
+        return view('backend.admin.reference.reference');
     }
 
 
+    public function ReferencecheckBYDate(Request $request)
+    {
+        $fromDate = $request->input('from_date');
+        $toDate = $request->input('to_date');
+
+        $query = User::where('role_as', 'member');
+
+        if ($fromDate) {
+            $query->whereYear('created_at', '=', Carbon::parse($fromDate)->year)
+                ->whereMonth('created_at', '=', Carbon::parse($fromDate)->month);
+
+        }elseif($toDate) {
+            $query->whereDate('created_at', '=', $toDate);
+
+        }else{
+
+        }
+
+        $user = $query
+            ->selectRaw('status, COUNT(*) as count')
+            ->groupBy('status')
+            ->pluck('count', 'status');
+
+        return response()->json([
+            'active' => $user['active'] ?? 0,
+            'deactive' => $user['deactivate'] ?? 0,
+            'total' => ($user['deactivate'] ?? 0) + ($user['active'] ?? 0),
+        ]);
+    }
+
+
+
+
+
+    public function dashboardTest() {
+        $password = decrypt('plain-text-password');
+        return $password;
+    }
 
 
 }

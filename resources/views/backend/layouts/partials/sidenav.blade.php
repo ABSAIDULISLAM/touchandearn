@@ -25,7 +25,7 @@
                 </li>
                 <li class="nav-item">
                     <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-id-card"></i>
+                        <i class="nav-icon fas fa-user-cog"></i>
                         <p>
                             Sub-admin Manage
                             <i class="right fas fa-angle-left"></i>
@@ -34,40 +34,46 @@
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
                             <a href="{{ route('controller-seniorAccountant') }}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
+                                <i style="font-size:12px;" class="far fa-circle nav-icon"></i>
                                 <p style="font-size: 13px">Controller/Accountant/Support</p>
                             </a>
                         </li>
 
                         <li class="nav-item">
                             <a href="{{ route('team-leader') }}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
+                                <i style="font-size:12px;" class="far fa-circle nav-icon"></i>
                                 <p >Team Leaders</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('counselor') }}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
+                                <i style="font-size:12px;" class="far fa-circle nav-icon"></i>
                                 <p >Counselor</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="{{route('subadmin.create')}}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
+                                <i style="font-size:12px;" class="far fa-circle nav-icon"></i>
                                 <p>Create Sub-admin</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="{{route('subadmin.send-activation-points')}}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
+                                <i style="font-size:12px;" class="far fa-circle nav-icon"></i>
                                 <p>Send Activation Points</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{route('subadmin.manage')}}" class="nav-link">
+                                <i style="font-size:12px;" class="far fa-circle nav-icon"></i>
+                                <p>Sub-admin Edit</p>
                             </a>
                         </li>
                     </ul>
                 </li>
                 <li class="nav-item">
                     <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-id-card"></i>
+                        <i class="nav-icon fas fa-user-plus"></i>
                         <p>
                             Member Manage
                             <i class="right fas fa-angle-left"></i>
@@ -76,14 +82,26 @@
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
                             <a href="{{ route('activemember.admin') }}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
+                                <i style="font-size:12px;" class="far fa-circle nav-icon"></i>
                                 <p>Active Member</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('inactivemember.admin') }}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
+                                <i style="font-size:12px;" class="far fa-circle nav-icon"></i>
                                 <p>Inactive Member</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('member.manage') }}" class="nav-link">
+                                <i style="font-size:12px;" class="far fa-circle nav-icon"></i>
+                                <p>Manage Member</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('member.trashed') }}" class="nav-link">
+                                <i style="font-size:12px;" class="far fa-circle nav-icon"></i>
+                                <p>Trashed Member</p>
                             </a>
                         </li>
 
@@ -91,7 +109,7 @@
                 </li>
                 <li class="nav-item">
                     <a href="#" class="nav-link">
-                        <i class="nav-icon far fa-plus-square"></i>
+                        <i class="nav-icon fas fa-cash-register"></i>
                         <p>
                             Withdraw Manage
                             <i class="fas fa-angle-left right"></i>
@@ -100,14 +118,20 @@
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
                             <a href="{{route('admin.withraw-request-member')}}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
+                                <i style="font-size:12px;" class="far fa-circle nav-icon"></i>
                                 <p>Member</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="{{route('admin.subadmin.withraw-request')}}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
+                                <i style="font-size:12px;" class="far fa-circle nav-icon"></i>
                                 <p>Sub admin</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{route('admin.withraw.paid-list')}}" class="nav-link">
+                                <i style="font-size:12px;" class="far fa-circle nav-icon"></i>
+                                <p>Paid List</p>
                             </a>
                         </li>
                     </ul>
@@ -115,7 +139,7 @@
 
                 <li class="nav-item">
                     <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-id-card"></i>
+                        <i class="nav-icon far fa-file-powerpoint"></i>
                         <p>
                             Activation Point
                             <i class="right fas fa-angle-left"></i>
@@ -124,15 +148,15 @@
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
                             <a href="{{route('admin.manage-activation-points-to-subadmin')}}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p style="font-size: 15px">Manage Activation Points</p>
+                                <i style="font-size:12px;" class="far fa-circle nav-icon"></i>
+                                <p style="font-size: 14px">Manage Activation Points</p>
                             </a>
                         </li>
                     </ul>
                 </li>
                 <li class="nav-item">
                     <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-id-card"></i>
+                        <i class="nav-icon fas fa-money-bill"></i>
                         <p>
                             Admin Income
                             <i class="right fas fa-angle-left"></i>
@@ -141,13 +165,13 @@
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
                             <a href="{{route('admin.withwal.income')}}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
+                                <i style="font-size:12px;" class="far fa-circle nav-icon"></i>
                                 <p style="font-size: 15px">Income From Withdawal</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="{{route('admin.all.accounts')}}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
+                                <i style="font-size:12px;" class="far fa-circle nav-icon"></i>
                                 <p style="font-size: 15px">All Accounts</p>
                             </a>
                         </li>
@@ -155,40 +179,20 @@
                 </li>
 
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon far fa-plus-square"></i>
+                    <a href="{{route('admin.reference')}}" class="nav-link">
+                        <i   class="fa fa-globe nav-icon"></i>
+                        <p style="font-size: 15px">All Accounts</p>
+                    </a>
+                </li>
+                <li class="nav-item ">
+                    <a href="{{route('admin.reference')}}" class="nav-link ">
+                        <i class="nav-icon fas fa-users"></i>
                         <p>
-                            Settings
-                            <i class="fas fa-angle-left right"></i>
+                            Reference
                         </p>
                     </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="{{route('dashboard')}}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Dashboard</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>
-                                    check
-                                    <i class="fas fa-angle-left right"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="pages/examples/login.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>check </p>
-                                    </a>
-                                </li>
-
-                            </ul>
-                        </li>
-                    </ul>
                 </li>
+
 
                 <!-- sSenior Accountant area  -->
                 @elseif(auth()->user()->role_as == 'senior_accountant')
@@ -201,26 +205,17 @@
                         </p>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-id-card"></i>
+                <li class="nav-item ">
+                    <a href="{{route('subadmin.manage-activation-points')}}" class="nav-link ">
+                        <i class="nav-icon fas fa-share-square"></i>
                         <p>
-                            Activation Point send
-                            <i class="right fas fa-angle-left"></i>
+                            Send Activation Point
                         </p>
                     </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="{{route('subadmin.manage-activation-points')}}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Send Activation Points</p>
-                            </a>
-                        </li>
-                    </ul>
                 </li>
                 <li class="nav-item ">
                     <a href="{{route('sa.tl-maping')}}" class="nav-link ">
-                        <i class="nav-icon fas fa-globe"></i>
+                        <i class="nav-icon fas fa-map-signs"></i>
                         <p>
                             TL Maping
                         </p>
@@ -228,13 +223,36 @@
                 </li>
                 <li class="nav-item ">
                     <a href="{{route('withdraw.history')}}" class="nav-link ">
-                        <i class="nav-icon fas fa-globe"></i>
+                        <i class="nav-icon far fa-paper-plane"></i>
                         <p>
                             Withdraw
                         </p>
                     </a>
                 </li>
-
+                <li class="nav-item ">
+                    <a href="{{route('sa.all-active-student')}}" class="nav-link ">
+                        <i class="nav-icon fas fa-user-graduate"></i>
+                        <p>
+                            All Active Students
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item ">
+                    <a href="{{route('sa.all-deactive-student')}}" class="nav-link ">
+                        <i class="nav-icon fas fa-user-times"></i>
+                        <p>
+                            All Deactive Students
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item ">
+                    <a href="{{route('sa.reference')}}" class="nav-link">
+                        <i class="nav-icon fas fa-users"></i>
+                        <p>
+                            Reference
+                        </p>
+                    </a>
+                </li>
 
 
 
@@ -274,7 +292,7 @@
                 </li>
                 <li class="nav-item ">
                     <a href="{{route('withdraw.history')}}" class="nav-link ">
-                        <i class="nav-icon fas fa-globe"></i>
+                        <i class="nav-icon far fa-paper-plane"></i>
                         <p>
                             Withdraw
                         </p>
@@ -313,36 +331,36 @@
 
                 <li class="nav-item ">
                     <a href="{{route('controller.members')}}" class="nav-link ">
-                        <i class="nav-icon fas fa-home"></i>
+                        <i class="nav-icon fas fa-users-slash"></i>
                         <p>
-                            Inactive Members
+                            Deactive Leads
                         </p>
                     </a>
                 </li>
                 <li class="nav-item ">
                     <a href="{{route('withdraw.history')}}" class="nav-link ">
-                        <i class="nav-icon fas fa-globe"></i>
+                        <i class="nav-icon far fa-paper-plane"></i>
                         <p>
                             Withdraw
                         </p>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-id-card"></i>
+
+                <li class="nav-item ">
+                    <a href="{{route('subadmin.manage-activation-points')}}" class="nav-link ">
+                        <i class="nav-icon fas fa-share-square"></i>
                         <p>
-                            Activation Point send
-                            <i class="right fas fa-angle-left"></i>
+                            Send Activation Point
                         </p>
                     </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="{{route('subadmin.manage-activation-points')}}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Send Activation Points</p>
-                            </a>
-                        </li>
-                    </ul>
+                </li>
+                <li class="nav-item ">
+                    <a href="{{route('controller.all.students')}}" class="nav-link ">
+                        <i class="nav-icon fas fa-user-times"></i>
+                        <p>
+                            All Deactive Leads
+                        </p>
+                    </a>
                 </li>
 
                 <!-- sub teamleader area  -->
@@ -356,39 +374,46 @@
                         </p>
                     </a>
                 </li>
-
                 <li class="nav-item ">
-                    <a href="{{route('teamleader.members')}}" class="nav-link">
-                        <i class="nav-icon fas fa-home"></i>
+                    <a href="{{route('teamleader.tl-wp-undone')}}" class="nav-link">
+                        <i class="nav-icon fas fa-users"></i>
                         <p>
-                            Members
+                            TL-WP-Un-Done
                         </p>
                     </a>
                 </li>
                 <li class="nav-item ">
+                    <a href="{{route('teamleader.members')}}" class="nav-link">
+                        <i class="nav-icon fas fa-users"></i>
+                        <p>
+                            TL-WP-DONE
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item ">
+                    <a href="{{route('teamleader.reference')}}" class="nav-link">
+                        <i class="nav-icon fas fa-users"></i>
+                        <p>
+                            Reference
+                        </p>
+                    </a>
+                </li>
+
+                <li class="nav-item ">
                     <a href="{{route('withdraw.history')}}" class="nav-link ">
-                        <i class="nav-icon fas fa-globe"></i>
+                        <i class="nav-icon far fa-paper-plane"></i>
                         <p>
                             Withdraw
                         </p>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-id-card"></i>
+                <li class="nav-item ">
+                    <a href="{{route('subadmin.manage-activation-points')}}" class="nav-link ">
+                        <i class="nav-icon fas fa-share-square"></i>
                         <p>
-                            Activation Point send
-                            <i class="right fas fa-angle-left"></i>
+                            Send Activation Point
                         </p>
                     </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="{{route('subadmin.manage-activation-points')}}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Send Activation Points</p>
-                            </a>
-                        </li>
-                    </ul>
                 </li>
 
                 <!--  Counselor area  -->
@@ -404,7 +429,7 @@
                 </li>
                 <li class="nav-item ">
                     <a href="{{route('profile')}}" class="nav-link @yield('')">
-                        <i class="nav-icon fas fa-user"></i>
+                        <i class="nav-icon fas fa-user-circle"></i>
                         <p>
                             Profile
                         </p>
@@ -412,7 +437,7 @@
                 </li>
                 <li class="nav-item ">
                     <a href="{{route('counselor.leads')}}" class="nav-link ">
-                        <i class="nav-icon fas fa-id-card"></i>
+                        <i class="nav-icon fas fa-users-cog"></i>
                         <p>
                             My Leads
                         </p>
@@ -420,7 +445,7 @@
                 </li>
                 <li class="nav-item ">
                     <a href="{{route('counselor.message-done')}}" class="nav-link ">
-                        <i class="nav-icon fas fa-globe"></i>
+                        <i class="nav-icon fas fa-clipboard-check"></i>
                         <p>
                             Message Done
                         </p>
@@ -428,7 +453,7 @@
                 </li>
                 <li class="nav-item ">
                     <a href="{{route('counselor.working-zone')}}" class="nav-link ">
-                        <i class="nav-icon fas fa-id-card"></i>
+                        <i class="nav-icon far fa-file-word"></i>
                         <p>
                             Working zone
                         </p>
@@ -436,7 +461,7 @@
                 </li>
                 <li class="nav-item ">
                     <a href="{{route('counselor.wrong_wp_list')}}" class="nav-link ">
-                        <i class="nav-icon fas fa-globe"></i>
+                        <i class="nav-icon fas fa-times-circle"></i>
                         <p>
                             Wrong WP
                         </p>
@@ -444,7 +469,7 @@
                 </li>
                 <li class="nav-item ">
                     <a href="" class="nav-link ">
-                        <i class="nav-icon fas fa-id-card"></i>
+                        <i class="nav-icon fas fa-clock"></i>
                         <p>
                             Time Zone
                         </p>
@@ -452,7 +477,7 @@
                 </li>
                 <li class="nav-item ">
                     <a href="{{route('withdraw.history')}}" class="nav-link ">
-                        <i class="nav-icon fas fa-globe"></i>
+                        <i class="nav-icon far fa-paper-plane"></i>
                         <p>
                             Withdraw
                         </p>
@@ -460,28 +485,27 @@
                 </li>
                 <li class="nav-item ">
                     <a href="{{route('counselor.all-student.search')}}" class="nav-link ">
-                        <i class="nav-icon fas fa-globe"></i>
+                        <i class="nav-icon fas fa-user-graduate"></i>
                         <p>
                             All Student
                         </p>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-id-card"></i>
+                <li class="nav-item ">
+                    <a href="{{route('subadmin.manage-activation-points')}}" class="nav-link ">
+                        <i class="nav-icon fas fa-share-square"></i>
                         <p>
-                            Activation Point send
-                            <i class="right fas fa-angle-left"></i>
+                            Send Activation Point
                         </p>
                     </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="{{route('subadmin.manage-activation-points')}}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Send Activation Points</p>
-                            </a>
-                        </li>
-                    </ul>
+                </li>
+                <li class="nav-item ">
+                    <a href="{{route('counselor.reference')}}" class="nav-link ">
+                        <i class="nav-icon fas fa-share-square"></i>
+                        <p>
+                            Reference
+                        </p>
+                    </a>
                 </li>
 
 
@@ -499,7 +523,7 @@
                     </a>
                     <li class="nav-item ">
                         <a href="{{route('profile')}}" class="nav-link ">
-                            <i class="nav-icon fas fa-user"></i>
+                            <i class="nav-icon fas fa-user-circle"></i>
                             <p>
                                 Profile
                             </p>
@@ -507,7 +531,7 @@
                     </li>
                     <li class="nav-item ">
                         <a href="{{route('withdraw.history')}}" class="nav-link ">
-                            <i class="nav-icon fas fa-globe"></i>
+                            <i class="nav-icon far fa-paper-plane"></i>
                             <p>
                                 Withdraw
                             </p>
@@ -515,9 +539,17 @@
                     </li>
                     <li class="nav-item ">
                         <a href="{{route('student.sponsor-list')}}" class="nav-link ">
-                            <i class="nav-icon fas fa-id-card"></i>
+                            <i class="nav-icon fas fa-snowflake"></i>
                             <p>
                                 Sponsor List
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item ">
+                        <a href="{{route('student.income.history')}}" class="nav-link ">
+                            <i class="nav-icon fas fa-file-invoice-dollar"></i>
+                            <p>
+                                Income History
                             </p>
                         </a>
                     </li>

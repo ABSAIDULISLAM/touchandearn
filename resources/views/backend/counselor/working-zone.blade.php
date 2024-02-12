@@ -12,14 +12,7 @@
         <div class="col-sm-6">
             <h4 class="m-0">Working Zone</h4>
         </div>
-        <div class="col-sm-6">
 
-            <ol class="breadcrumb float-sm-right">
-                {{-- <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
-                <li class="breadcrumb-item"><a href="#">Station</a></li> --}}
-                <a href="" class="btn btn-outline-primary">Create</a>
-            </ol>
-        </div>
     </div>
 @endsection
 
@@ -38,21 +31,21 @@
             <div class="card card-outline card-primary">
                 <div class="card-body">
 
-                    <div class="card">
+                    {{-- <div class="card">
                         <div class="col-md-8 m-auto">
                             <form action="" method="post">
                                 <div class="form-group row">
-                                    <div class="col-md-9">
+                                    <div class="col-md-9 col-9">
                                         <input type="text" class="form-control" name="search" placeholder="Search here by Student ID or NAME">
                                     </div>
 
-                                    <div class="col-md-2 mt-1">
+                                    <div class="col-md-3 col-3 mt-1">
                                         <button type="submit" class="btn btn-primary">Search</button>
                                     </div>
                                 </div>
                             </form>
                         </div>
-                    </div>
+                    </div> --}}
 
 
                     <div class="table-responsive">
@@ -79,9 +72,16 @@
                                         <td>{{ $user->student_id }}</td>
                                         <td>{{ date('d M Y H:i', strtotime($user->created_at)) }}</td>
                                         <td>{{ $user->name }}</td>
+                                        @if ($user->whats_app)
                                         <td><a target="blank" href="{{ route('send-whatsapp', ['number' => $user->whats_app, 'applicant_id' => $user->student_id]) }}" class="btn btn-primary btn-sm">
                                             WhatsApp
-                                        </a></td>
+                                        </a>
+                                        @else
+                                        <td>
+                                            WhatsApp
+                                        @endif
+
+                                        </td>
                                         <td>{{ $user->gender }}</td>
                                         <td>{{ $user->country }}</td>
                                         <td><a target="blank" href="" class="btn btn-success btn-sm">

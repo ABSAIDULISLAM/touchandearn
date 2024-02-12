@@ -67,6 +67,19 @@ function upload_image($filename, $path, $width = 400, $height = 400)
     return $image_upload;
 }
 
+function Upload($file, $path, $width = 400, $height = 400)
+{
+    $image_name = uniqid() . '-' . time() . '.' . $file->getClientOriginalExtension();
+    $new_webp = pathinfo($image_name, PATHINFO_FILENAME) . '.webp';
+    $imagePath = $path . '/' . $new_webp;
+
+    Image::make($file)->resize($width, $height, function ($constraint) {
+        $constraint->aspectRatio();
+    })->save(public_path($imagePath));
+
+    return $imagePath;
+}
+
 
 function handleUpdatedUploadedImage($file, $path, $data, $delete_path, $field)
 {

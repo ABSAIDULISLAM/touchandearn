@@ -8,13 +8,10 @@
 @endsection
 
 @section('toproute')
-    <div class="row mb-2" style="box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; padding: 8px; background-color:#fff">
-        <div class="col-sm-6">
+    <div class="row mb-4" style="box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; padding: 8px; background-color:#fff">
+        <div class="col-md-12 d-flex justify-content-between">
             <h4 class="m-0">Sub admin Create</h4>
-        </div>
-        <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-            </ol>
+            <a class="btn btn-primary"> Create</a>
         </div>
     </div>
 @endsection
@@ -63,16 +60,16 @@
                                 <label for="freeze_points">Freeze Points</label>
                                 <input type="number" id="freeze_points"
                                     class="form-control @error('freeze_points') is-invalid @enderror" name="freeze_points"
-                                    value="{{ $user->activation_points }}" placeholder="Enter activation_points">
+                                    value="{{ $user->freeze_points }}" placeholder="Enter activation_points">
                                     @if ($errors->has('freeze_points'))
                                         <span class="error text-danger ms-5">{{ $errors->first('freeze_points') }}</span>
                                     @endif
                             </div>
                             <div class="col-md-6 my-2">
-                                <label for="activation_points">Withdraw</label>
+                                <label for="withdraw">Withdraw</label>
                                 <input type="number" id="withdraw"
                                     class="form-control @error('withdraw') is-invalid @enderror" name="withdraw"
-                                    value="{{ $user->activation_points }}" placeholder="Enter withdraw">
+                                    value="{{ $user->withdraw }}" placeholder="Enter withdraw">
                                     @if ($errors->has('withdraw'))
                                         <span class="error text-danger ms-5">{{ $errors->first('withdraw') }}</span>
                                     @endif

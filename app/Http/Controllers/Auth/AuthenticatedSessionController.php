@@ -35,9 +35,7 @@ class AuthenticatedSessionController extends Controller
         if (!$user || !Hash::check($request->password, $user->password)) {
             return redirect()->back()->with('error', 'Opps !!. Invalid Credentials');
         }
-        // if ($user->status !== 'active') {
-        //     return redirect()->back()->with('error', 'Opps !!. Account is inactive please Conatct Admin Panel');
-        // }
+
         $request->authenticate();
         $request->session()->regenerate();
         return redirect()->intended(RouteServiceProvider::HOME)->with('success', 'Welcome'.' '. $user->name .' '. 'in Touch and Earn Empire');

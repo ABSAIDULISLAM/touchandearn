@@ -9,14 +9,9 @@ subadmin
 
 @section('toproute')
     <div class="row mb-2" style="box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; padding: 8px; background-color:#fff">
-        <div class="col-sm-6">
+        <div class="col-md-12 d-flex justify-content-between">
             <h4 class="m-0">Controller & Senior Accountant</h4>
-        </div>
-        <div class="col-sm-6">
-
-            <ol class="breadcrumb float-sm-right">
-                <a href="{{route('subadmin.create')}}" class="btn btn-outline-primary">Create Sub admin</a>
-            </ol>
+            <a href="{{route('subadmin.create')}}" class="btn btn-outline-primary">Create Sub admin</a>
         </div>
     </div>
 @endsection

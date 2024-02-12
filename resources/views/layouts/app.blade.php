@@ -15,6 +15,29 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="font-sans antialiased">
+
+        @if(config('app.env') !== 'production')
+        {!! Debugbar::render() !!}
+    @endif
+
+    <style>
+        /* Debugbar button hide */
+        #debugbar-container {
+            display: none !important;
+        }
+    </style>
+
+    <script>
+        // Debugbar button hide
+        document.addEventListener('DOMContentLoaded', function() {
+            var debugbarContainer = document.getElementById('debugbar-container');
+            if (debugbarContainer) {
+                debugbarContainer.style.display = 'none';
+            }
+        });
+    </script>
+
+
         <div class="min-h-screen bg-gray-100">
             @include('layouts.navigation')
 

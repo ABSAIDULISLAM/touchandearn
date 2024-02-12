@@ -86,7 +86,7 @@ h6,
   line-height: 1;
   font-weight: 700;
   letter-spacing: 2px;
-  
+
 }
 
 }
@@ -94,7 +94,7 @@ h6,
 #header .logo h1 a,
 #header .logo h1 a:hover {
   color: #f75600;
-  
+
 }
 
 #header .logo img {
@@ -111,7 +111,7 @@ h6,
 # Navigation Menu
 --------------------------------------------------------------*/
 /**
-* Desktop Navigation 
+* Desktop Navigation
 */
 .navbar {
   padding: 0;
@@ -184,7 +184,7 @@ h6,
 }
 
 /**
-* Mobile Navigation 
+* Mobile Navigation
 */
 .mobile-nav-toggle {
   color: #7a6960;
@@ -500,7 +500,7 @@ section {
 # Services
 --------------------------------------------------------------*/
 .services .icon-box {
-  padding: 30px;
+  padding: 10px;
   position: relative;
   overflow: hidden;
   margin: 0 0 40px 0;

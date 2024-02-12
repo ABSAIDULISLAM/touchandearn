@@ -16,9 +16,19 @@ class CounselorController extends Controller
 
     public function myleads()
     {
-        $users = User::where('status', 'deactivate')->Where('role_as', 'member')->Where('management_type', 'counselor')->where('myleads_response', null)->where('wp_message', null)->where('counselor_id', auth()->user()->id)->get();
+        $this->middleware('auth'); // Add this line to ensure authentication
 
-        return view('backend.counselor.inactive-members', compact('users'));
+        $users = User::where('status', 'deactivate')
+            ->where('role_as', 'member')
+            ->where('management_type', 'counselor')
+            ->where('myleads_response', null)
+            ->where('wp_message', null)
+            ->where('counselor_id', auth()->user()->id)
+            ->get();
+
+        return view('backend.counselor.inactive-members', compact([
+            'users',
+        ]));
     }
 
 
@@ -41,6 +51,7 @@ class CounselorController extends Controller
         }
     }
 
+
     public function wpmessageDone($id)
     {
         $update = User::where('student_id', $id)->update(['wp_message' => 'done']);
@@ -54,7 +65,19 @@ class CounselorController extends Controller
 
     public function messageDone()
     {
-        $users = User::where('status', 'deactivate')->Where('role_as', 'member')->Where('management_type', 'counselor')->where('wp_message', 'done')->where('msd_response', NULL)->Orwhere('myleads_response', 'right_wp')->where('counselor_id', auth()->user()->id)->get();
+        $this->middleware('auth'); // Add this line to ensure authentication
+
+        $users = User::where('status', 'deactivate')
+            ->where('counselor_id', auth()->user()->id)
+            ->where('role_as', 'member')
+            ->where('management_type', 'counselor')
+            ->where(function ($query) {
+                $query->where('wp_message', 'done')
+                    ->where('msd_response', NULL);
+            })
+            ->orWhere('myleads_response', 'right_wp')
+            ->get();
+
 
         return view('backend.counselor.message-done', compact('users'));
     }
@@ -65,10 +88,10 @@ class CounselorController extends Controller
         $searchQuery = $request->input('search');
 
         $searchResult = User::where('role_as', 'member')
-                                ->where('student_id', $searchQuery)
-                                ->orWhere('whats_app', $searchQuery)
-                                ->first();
-        if(!$searchResult){
+            ->where('student_id', $searchQuery)
+            ->orWhere('whats_app', $searchQuery)
+            ->first();
+        if (!$searchResult) {
             return redirect()->back()->with('error', 'Your Student ID or WhatsApp Not Match With Existing Record');
         }
 
@@ -110,10 +133,10 @@ class CounselorController extends Controller
     {
 
         $update = User::where('student_id', $request->student_id)->update(['msd_response' => $request->msd_response]);
-        if($update){
-             return redirect()->back()->with('success', 'Response saved Successfully');
-        }else{
-             return redirect()->back()->with('error', 'Something Wrong');
+        if ($update) {
+            return redirect()->back()->with('success', 'Response saved Successfully');
+        } else {
+            return redirect()->back()->with('error', 'Something Wrong');
         }
     }
 
@@ -152,7 +175,17 @@ class CounselorController extends Controller
 
     public function workingZone()
     {
-        $users = User::where('status', 'deactivate')->Where('role_as', 'member')->Where('management_type', 'counselor')->where('wp_message', 'done')->Orwhere('myleads_response', 'right_wp')->where('counselor_id', auth()->user()->id)->get();
+        $this->middleware('auth'); // Add this line to ensure authentication
+
+        $users = User::where('status', 'deactivate')
+            ->where('role_as', 'member')
+            ->where('management_type', 'counselor')
+            ->where(function ($query) {
+                $query->where('wp_message', 'done')
+                    ->orWhere('myleads_response', 'right_wp');
+            })
+            ->where('counselor_id', auth()->user()->id)
+            ->get();
 
         return view('backend.counselor.working-zone', compact('users'));
     }
@@ -162,21 +195,28 @@ class CounselorController extends Controller
     {
         $update = User::where('student_id', $stid)->update(['myleads_response' => 'wrong_wp']);
 
-       if($update){
+        if ($update) {
             return redirect()->back()->with('success', 'Lead listed in Wrong WhatsApp list');
-       }else{
+        } else {
             return redirect()->back()->with('error', 'Something Wrong');
-       }
+        }
     }
 
 
 
     public function wrongWhatsappList()
     {
-        $users = User::where('status', 'deactivate')->Where('role_as', 'member')->Where('management_type', 'counselor')->where('message', 'done')->where('myleads_response', 'wrong_wp')->where('counselor_id', auth()->user()->id)->get();
+        $users = User::where('status', 'deactivate')
+            ->where('role_as', 'member')
+            ->where('management_type', 'counselor')
+            ->where('wp_message', 'done')
+            ->where('myleads_response', 'wrong_wp')
+            ->where('counselor_id', auth()->user()->id)
+            ->get();
 
         return view('backend.counselor.wrong-whats-app', compact('users'));
     }
+
 
     public function RightWPUpdate($id)
     {
@@ -189,29 +229,57 @@ class CounselorController extends Controller
     }
 
 
-
-
     public function CounselorStudentSearch()
     {
         return view('backend.controller.search-member');
     }
 
+
     public function studentSearch(Request $request)
     {
         $searchQuery = $request->input('id_or_wp');
+        // $user = User::where('student_id', $searchQuery)->first();
 
-        $searchResult = User::where('role_as', 'member')
-                                ->where('student_id', $searchQuery)
-                                ->orWhere('whats_app', $searchQuery)
-                                ->first();
-        if(!$searchResult){
-            return redirect()->back()->with('error', 'Your Student ID or WhatsApp Not Match With Existing Record');
+        $student = User::where(function ($query) use ($searchQuery) {
+            $query->where('status', 'deactivate')
+                ->where(function ($query) use ($searchQuery) {
+                    $query->where('student_id', $searchQuery)
+                        ->orWhere('whats_app', $searchQuery);
+                });
+        })->with(['teamleader', 'counselor'])->first();
+
+        if (!$student) {
+            return redirect()->back()->with('error', 'Your Student ID or WhatsApp Does Not Match With Existing Record');
         }
 
-
-        return view('backend.controller.search-member', compact('searchResult'));
+        return view('backend.controller.search-member', compact('student'));
     }
 
+
+
+    public function Reference()
+    {
+        return view('backend.counselor.reference');
+    }
+
+
+    public function ReferencecheckBYDate(Request $request)
+    {
+        $fromDate = $request->input('from_date');
+        $toDate = $request->input('to_date');
+
+        $user = User::where('counselor_id', auth()->user()->id)
+            ->where('role_as', 'member')
+            ->whereBetween('created_at', [$fromDate, $toDate])
+            ->selectRaw('status, COUNT(*) as count')
+            ->groupBy('status')
+            ->pluck('count', 'status');
+
+        return response()->json([
+            'active' => $user['active'] ?? 0,
+            'deactive' => $user['deactivate'] ?? 0,
+        ]);
+    }
 
 
 

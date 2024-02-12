@@ -8,15 +8,10 @@
 @endsection
 
 @section('toproute')
-    <div class="row mb-2" style="box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; padding: 8px; background-color:#fff">
-        <div class="col-sm-6">
+    <div class="row mb-4" style="box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; padding: 8px; background-color:#fff">
+        <div class="col-md-12 d-flex justify-content-between">
             <h4 class="m-0">Searched Student</h4>
-        </div>
-        <div class="col-sm-6">
-
-            <ol class="breadcrumb float-sm-right">
-                <a href="{{route('counselor.message-done')}}" class="btn btn-outline-primary">Done Message</a>
-            </ol>
+            <a href="{{route('counselor.message-done')}}" class="btn btn-outline-primary">Done Message</a>
         </div>
     </div>
 @endsection
@@ -79,9 +74,6 @@
                 </div>
             </div>
         </div>
-
-
-
 
     </div>
     @push('js')

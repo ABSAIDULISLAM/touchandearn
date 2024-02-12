@@ -9,14 +9,9 @@
 
 @section('toproute')
     <div class="row mb-2" style="box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; padding: 8px; background-color:#fff">
-        <div class="col-sm-6">
-            <h4 class="m-0">Withdawal request list</h4>
-        </div>
-        <div class="col-sm-6">
-
-            <ol class="breadcrumb float-sm-right">
-                {{-- <a href="" class="btn btn-outline-primary">Create Teacher</a> --}}
-            </ol>
+        <div class="col-md-12 d-flex justify-content-between">
+            <h4 class="m-0">Withdraw Request List</h4>
+            <a class="btn btn-primary"> Create</a>
         </div>
     </div>
 @endsection
@@ -42,10 +37,17 @@
                                     <th scope="col" class="col-md-1">#</th>
                                     <th scope="col" class="col-md-2">Name</th>
                                     <th scope="col" class="col-md-2">std id</th>
-                                    <th scope="col" class="col-md-2">number</th>
+                                    <th scope="col" class="col-md-2">Phone</th>
+                                    <th scope="col" class="col-md-2">Whats app</th>
+                                    <th scope="col" class="col-md-2">Country</th>
+                                    <th scope="col" class="col-md-2">Role</th>
+                                    <th scope="col" class="col-md-2">Gender</th>
+                                    <th scope="col" class="col-md-2">Withdrawal Point</th>
+                                    <th scope="col" class="col-md-2">Withdrawal coast</th>
                                     <th scope="col" class="col-md-2">payment method</th>
-                                    <th scope="col" class="col-md-2">amount</th>
-                                    <th scope="col" class="col-md-1">created_at</th>
+                                    <th scope="col" class="col-md-2">payment number</th>
+                                    <th scope="col" class="col-md-1">Request date</th>
+                                    <th scope="col" class="col-md-1">status</th>
                                     <th scope="col" class="col-md-2">Action</th>
                                 </tr>
                             </thead>
@@ -53,15 +55,25 @@
                                 @foreach ($members as $member)
                                     <tr>
                                         <td>{{ $loop->index + 1 }}</td>
-                                        <td>{{ $user->name }}</td>
-                                        <td>{{ $user->student_id }}</td>
-                                        <td>{{ $user->email }}</td>
-                                        <td>{{ $user->country }}</td>
-                                        <td>{{ $user->gender }}</td>
-                                        <td>{{ $user->created_at }}</td>
+                                        <td>{{ $member->user->name ?? 'Null' }}</td>
+                                        <td>{{ $member->user->student_id ?? 'Null' }}</td>
+                                        <td>{{ $member->user->number ?? 'Null' }}</td>
+                                        <td>{{ $member->user->whats_app ?? 'Null' }}</td>
+                                        <td>{{ $member->user->country ?? 'Null' }}</td>
+                                        <td>{{ $member->user->role_as ?? 'Null' }}</td>
+                                        <td>{{ $member->user->gender ?? 'Null' }}</td>
+                                        <td>{{ $member->withdrawal_amount ?? 'Nll' }}</td>
+                                        <td>100.00</td>
+                                        <td>{{ $member->payment_method ?? 'Null' }}</td>
+                                        <td>{{ $member->payment_number ?? 'Null' }}</td>
+                                        <td>{{ $member->created_at ?? 'Null'}}</td>
+                                        <td><button type="button" class="btn btn-warning btn-sm">Unpaid</button></td>
                                         <td>
-                                            <a href="" class="btn-sm btn-success">Edit</a>
-                                            <a href="" class="btn-sm btn-primary">View</a>
+                                            @if ($member->status =='unpaid')
+                                            <a href="{{route('admin.withdwal.status.paidtoMember', ['wId' => $member->id, 'id'=>$member->user->id])}}" class="btn-sm btn-secondary" onclick="return confirm('আপনি কি এখন এই ইউজার এর পেমেন্ট স্ট্যাটাস পেইড করে দিতে চাচ্ছেন ??')">Pay Now</a>
+                                            @else
+                                                <button type="button" class="btn btn-success btn-sm">Paid</button>
+                                            @endif
                                         </td>
                                     </tr>
                                 @endforeach

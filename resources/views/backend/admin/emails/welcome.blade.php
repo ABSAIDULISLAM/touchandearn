@@ -17,19 +17,19 @@
 </head>
 
 <body class="hold-transition login-page">
+
     <div class="login-box">
 
         <div class="card card-outline card-primary">
-            <h2>Hi {{ $name }} ! Welcome to Tach and Earn Empire</h2>
-            <h3>Your Login Information bellow</h3>
-            <p>Email: <span class="badge badge-success">{{ $email }}</span></p>
-            <p>Password: <span class="badge badge-success">{{ $password }}</span></p>
+            <h2>Hi {{ $user['name'] }} ! Welcome to Tach and Earn Empire</h2>
+            <h3>Your Login Information below</h3>
+            <p>Email: <span class="badge badge-success">{{ $user['email'] }}</span></p>
+            <p>Password: <span class="badge badge-success">{{ $user['password'] }}</span></p>
         </div>
         <p>To login now <a href="http://127.0.0.1:8000/login">Click Here</a></p>
 
-        <h3>Thanks for Connet With us</h3>
+        <h3>Thanks for Connecting With us</h3>
     </div>
-
 
     <!-- jQuery -->
     <script src="{{ asset('backend/assets/plugins/jquery/jquery.min.js') }}"></script>

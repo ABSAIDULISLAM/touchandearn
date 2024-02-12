@@ -36,9 +36,9 @@ class EventServiceProvider extends ServiceProvider
         // UserRegistered::class => [
         //     AwardReferralPoints::class,
         // ],
-        ProjectLoaded::class => [
-            RunOptimizationTasks::class,
-        ],
+        // ProjectLoaded::class => [
+        //     RunOptimizationTasks::class,
+        // ],
     ];
 
     /**

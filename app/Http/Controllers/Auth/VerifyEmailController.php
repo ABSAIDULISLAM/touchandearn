@@ -23,14 +23,14 @@ class VerifyEmailController extends Controller
         }
 
         if ($request->user()->markEmailAsVerified()) {
+            if ($request->user()->email_verified_at && !$request->user()->gmail_verified_points_received) {
 
-            if (!$request->user()->gmail_verified_points_received) {
                 $request->user()->update(['gmail_verified_points_received' => true]);
 
                 // Award 100 points
                 $request->user()->earnings()->create([
                     'user_id' => $request->user()->id,
-                    'amount' => 100,
+                    'amount' => 50,
                 ]);
 
                 if ($request->user()->referrer_id) {
@@ -38,14 +38,12 @@ class VerifyEmailController extends Controller
                     if ($referrer) {
                         $referrer->earnings()->create([
                             'user_id' => $referrer->id,
-                            'amount' => 50,
+                            'amount' => 10,
                         ]);
                     }
                 }
             }
-
             event(new Verified($request->user()));
-
         }
 
         return redirect()->intended(RouteServiceProvider::HOME.'?verified=1');

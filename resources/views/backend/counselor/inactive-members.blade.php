@@ -8,17 +8,9 @@
 @endsection
 
 @section('toproute')
-    <div class="row mb-2" style="box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; padding: 8px; background-color:#fff">
-        <div class="col-sm-6">
+    <div class="row mb-4" style="box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; padding: 8px; background-color:#fff">
+        <div class="col-md-12 d-flex justify-content-between">
             <h4 class="m-0">My Leads</h4>
-        </div>
-        <div class="col-sm-6">
-
-            <ol class="breadcrumb float-sm-right">
-                {{-- <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
-                <li class="breadcrumb-item"><a href="#">Station</a></li> --}}
-                <a href="" class="btn btn-outline-primary">Create</a>
-            </ol>
         </div>
     </div>
 @endsection
@@ -32,30 +24,28 @@
 @endpush
 
 @section('homesection')
-    <div class="row">
 
+    <div class="row">
         <div class="col-md-12 order-2 order-md-1">
             <div class="card card-outline card-primary">
                 <div class="card-body">
-                    <div class="table-responsive">
 
+                    <div class="table-responsive">
                         <table id="example1" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
                                     <th scope="col" class="col-md-1">#</th>
                                     <th scope="col" class="col-md-2">STUDENT ID</th>
-                                    <th scope="col" class="col-md-2">JOINING DATE</th>
-                                    <th scope="col" class="col-md-2">VERIFICATION</th>
                                     <th scope="col" class="col-md-2">NAME</th>
                                     <th scope="col" class="col-md-1">WHATSAPP</th>
                                     <th scope="col" class="col-md-1">Call</th>
                                     <th scope="col" class="col-md-1">WP-Meaage</th>
                                     <th scope="col" class="col-md-2">RESPONSE</th>
                                     <th scope="col" class="col-md-1">LANGUAGE</th>
+                                    <th scope="col" class="col-md-2">JOINING DATE</th>
+                                    <th scope="col" class="col-md-2">VERIFICATION</th>
                                     <th scope="col" class="col-md-2">COUNTRY</th>
                                     <th scope="col" class="col-md-2">GENDER</th>
-                                    <th scope="col" class="col-md-2">MESSAGE</th>
-                                    <th scope="col" class="col-md-2">ACTION</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -63,12 +53,12 @@
                                     <tr>
                                         <td>{{ $loop->index + 1 }}</td>
                                         <td>{{ $user->student_id }}</td>
-                                        <td>{{ date('d M Y H:i', strtotime($user->created_at)) }}</td>
-                                        <td>{{ $user->email_verified_at == null ? 'Unverified' : 'verified' }}</td>
                                         <td>{{ $user->name }}</td>
+                                        @if ($user->name)
                                         <td>
                                             <a id="whatsappButton" href="{{ route('send-whatsapp', ['number' => $user->whats_app, 'applicant_id' => $user->student_id]) }}" class="btn btn-primary btn-sm">WhatsApp</a></td>
                                         <td>
+                                        @endif
                                             <a href="tel:{{$user->number}}" class="btn btn-secondary btn-sm px-3">Call</a>
                                         </td>
                                         <td>
@@ -86,14 +76,10 @@
                                             @endif
                                         </td>
                                         <td>{{ $user->language }}</td>
-
+                                        <td>{{ date('d M Y H:i', strtotime($user->created_at)) }}</td>
+                                        <td>{{ $user->email_verified_at == null ? 'Unverified' : 'verified' }}</td>
                                         <td>{{ $user->country }}</td>
                                         <td>{{ $user->gender }}</td>
-                                        <td>Noting</td>
-                                        <td>
-                                            <a href="" class="btn-sm btn-success">Edit</a>
-                                            <a href="" class="btn-sm btn-primary">view</a>
-                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -102,9 +88,9 @@
                 </div>
             </div>
         </div>
-
-
     </div>
+
+
     @push('js')
         <!-- DataTables  & Plugins -->
         <script src="{{ asset('backend/assets/plugins/datatables/jquery.dataTables.min.js') }}"></script>
@@ -141,5 +127,4 @@
             });
         </script>
     @endpush
-    {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script> --}}
 @endsection

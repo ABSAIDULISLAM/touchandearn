@@ -10,16 +10,9 @@
 
 @section('toproute')
     <div class="row mb-2" style="box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; padding: 8px; background-color:#fff">
-        <div class="col-sm-6">
-            <h4 class="m-0">Withdawal request list</h4>
-        </div>
-        <div class="col-sm-6">
-
-            <ol class="breadcrumb float-sm-right">
-                {{-- <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
-                <li class="breadcrumb-item"><a href="#">Station</a></li> --}}
-                <a href="" class="btn btn-outline-primary">Create Teacher</a>
-            </ol>
+        <div class="col-md-12 d-flex justify-content-between">
+            <h4 class="m-0">Deactive Student List</h4>
+            {{-- <a class="btn btn-primary"> Create</a> --}}
         </div>
     </div>
 @endsection
@@ -49,29 +42,25 @@
                                     <th>verification</th>
                                     <th>email</th>
                                     <th>phone</th>
-                                    <th>What' app</th>
-                                    <th>Gender</th>
-                                    <th>Language</th>
+                                    <th>Whats app</th>
+                                    <th>gender</th>
+                                    <th>Lenguage</th>
                                     <th>country</th>
                                     <th>Referral Code</th>
-                                    <th>RefferTL(Id)</th>
-                                    <th>Reffer TL(whatsapp)</th>
+                                    <th>Referrar Whats App</th>
+                                    <th>Referrar (rederrer Id)</th>
                                     <th>Counsellor (Id)</th>
-                                    <th>Counsellorwhatsapp</th>
-                                    <th>Message(Date/Time)</th>
-                                    <th>Message Response</th>
-                                    <th>Status</th>
-                                    <th>Active date/Time</th>e
-                                    <th>Team leader</th>
+                                    <th>Counsellor whatsapp</th>
+                                    <th>Team Leader (Id)</th>
                                     <th>Team Leader (whatsapp)</th>
-                                    <th>Action</th>
+                                    <th>Status</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($users as $user)
                                 <tr>
                                     <td>{{ $loop->index+1 }}</td>
-                                    <td>{{$user->id}}</td>
+                                    <td>{{$user->student_id}}</td>
                                     <td>{{$user->name}}</td>
                                     <td>{{$user->created_at}}</td>
                                     <td>{{$user->email_verified_at==null? 'Unverified':'Verified'}}</td>
@@ -82,21 +71,18 @@
                                     <td>{{$user->language}}</td>
                                     <td>{{$user->country}}</td>
                                     <td>{{$user->referral_code}}</td>
-                                    <td>Reffer(whatsapp)</td>
-                                    <td>RefferTL(Id)</td>
-                                    <td>Reffer TL(whatsapp)</td>
-                                    <td>Counsellor (Id)</td>
-                                    <td>Counsellorwhatsapp</td>
-                                    <td>Message(Date/Time)</td>
-                                    <td>Message Response</td>
-                                    <td>ab</td>
-                                    <td>an</td>
-                                    <td>{{$user->status=='active'?'Active':'Inactiv'}}</td>
-                                    <td>
+                                    <td>{{ $user->referrar ? $user->referrar->whats_app : 'Null' }}</td>
+                                    <td>{{ $user->referrar ? $user->referrar->student_id : 'Null' }}</td>
+                                    <td>{{$user->counselor ? $user->counselor->student_id : 'Null'}}</td>
+                                    <td>{{$user->counselor ? $user->counselor->whats_app : 'Null'}}</td>
+                                    <td>{{$user->teamleader ? $user->teamleader->student_id : 'Null'}}</td>
+                                    <td>{{$user->teamleader ? $user->teamleader->whats_app : 'Null'}}</td>
+                                    <td>{{$user->status=='active'?'Active':'Deactivate'}}</td>
+                                    {{-- <td>
                                         <a href="" class="btn-sm btn-primary">Edit</a>
                                         <a href="" onclick="confirm('are you sure to delete this item')"
                                             class="btn-sm btn-danger">Delete</a>
-                                    </td>
+                                    </td> --}}
                                 </tr>
                                 @endforeach
                             </tbody>

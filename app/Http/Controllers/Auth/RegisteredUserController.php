@@ -17,6 +17,13 @@ use App\Events\UserRegistered;
 use App\Models\Earning;
 use App\Models\Network;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Validation\Rules\Password;
+use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Validator;
+
+
+
 
 class RegisteredUserController extends Controller
 {
@@ -35,142 +42,114 @@ class RegisteredUserController extends Controller
      *
      * @throws \Illuminate\Validation\ValidationException
      */
+
     public function store(Request $request)
     {
+
         $request->validate([
-            'referral_code' => ['nullable'],//, 'unique:users,referral_code'
+            'referral_code' => ['nullable'],
             'name' => ['required', 'string', 'max:255'],
             'country' => ['required'],
             'language' => ['required'],
-            'number' => ['required','max:15', 'min:11', 'unique:'.User::class],
-            'whats_app' => ['required','max:15', 'min:11', 'unique:'.User::class],
             'gender' => ['required'],
-            'image'   => ['nullable'],//,'mimes:png,jpg,webp,jpeg'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class], // ,
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'image' => ['nullable', 'mimes:png,jpg,webp,jpeg'],
+            'email' => [ 'required', 'string', 'lowercase', 'email', 'max:255',
+                Rule::unique('users')->where(function ($query) {
+                    return $query->where('email', 'LIKE', '%@gmail.com');
+                }),
+                'ends_with:gmail.com',
+            ],
+            'password' => ['required', 'confirmed', Password::defaults()],
+
+            'countryCodeFormNumber' => ['required'],
+            'number' => [ 'required', 'max:15', 'min:5',
+                Rule::unique('users')->where(function ($query) use ($request) {
+                    return $query->where('number', $request->countryCodeFormNumber.$request->number);
+                }),
+            ],
+            'countryCodeFormWP' => ['required'],
+            'whats_app' => [ 'required', 'max:15', 'min:5',
+                Rule::unique('users')->where(function ($query) use ($request) {
+                    return $query->where('whats_app', $request->countryCodeFormWP.$request->whats_app);
+                }),
+            ],
+            'student_id' => ['unique:users,student_id'],
         ]);
 
-        $user = new User();
 
-        $referral_code = Rand(100000,10000000);
+        $number = $request->countryCodeFormNumber . $request->number;
+        $whatsApp = $request->countryCodeFormWP . $request->whats_app;
 
-        $userId = User::orderBy('id', 'desc')->first();
-        $studentId = 100001;
-
-        if ($userId) {
-            $studentId = $userId->student_id + 1;
-        }
-
-        if(isset($request->referral_code)){
-
-            $referrer = User::where('referral_code', $request->referral_code)->first();
-
-            if($referrer->count() > 0){
-
-                $user->name = $request->name;
-                $user->country = $request->country;
-                $user->language = $request->language;
-                $user->number = $request->number;
-                $user->whats_app = $request->whats_app;
-                $user->gender = $request->gender;
-                $user->email = $request->email;
-                $user->role_as = Status::Member->value;
-                $user->referral_code = $referral_code;
-                $user->referrer_id = $referrer->id;
-                $user->student_id = $studentId;
-                $user->management_type = 'controller';
-                $user->password = Hash::make($request->password);
-                if(request()->hasFile('image')){
-                    $image = upload_image(request('image'), 'uploads/members/', 400, 400);
-                    $user->image = $image;
+        $users =  User::all();
+        foreach($users as $user){
+                if($user->number == $number){
+                    return redirect()->back()->with('error', 'Number Already Exist');
                 }
-                $user->save();
 
-                $network = new Network();
-                $network->user_id = $user->id;
-                $network->referral_code = $request->referral_code;
-                $network->parent_id = $referrer->id;
-                $network->save();
-
-                event(new Registered($user));
-
-                Auth::login($user);
-
-                //
-
-                // $userdata = [];
-                // $userdata['name'] = $data['name'];
-                // $userdata['email'] = $data['email'];
-                // $userdata['password'] = $data['password'];
-
-                // Mail::send('backend.admin.emails.welcome', $userdata, function($message) use ($data){
-                //     $message->to($data['email']);
-                //     $message->subject('Welcome Mail from Touch and Earn');
-                // });
-
-                return redirect(RouteServiceProvider::HOME);
-
-            }else{
-                return redirect()->back()->with('error', 'Your Refer Code is Invalid !! Please Try Again with Valid refer Code');
-            }
-
-        }else{
-
-            $user->name = $request->name;
-            $user->country = $request->country;
-            $user->language = $request->language;
-            $user->number = $request->number;
-            $user->whats_app = $request->whats_app;
-            $user->gender = $request->gender;
-            $user->email = $request->email;
-            $user->role_as = Status::Member->value;
-            $user->referral_code = $referral_code;
-            $user->student_id = $studentId;
-            $user->management_type = 'controller';
-            $user->password = Hash::make($request->password);
-            if(request()->hasFile('image')){
-                $image = upload_image(request('image'), 'uploads/members/', 400, 400);
-                $user->image = $image;
-            }
-            $user->save();
-
-            event(new Registered($user));
-
-            Auth::login($user);
-
-            return redirect(RouteServiceProvider::HOME);
+                if($user->whats_app == $whatsApp){
+                    return redirect()->back()->with('error', 'Whats App Number Already Exist');
+                }
         }
 
+
+        $user = new User();
+        $referral_code = rand(100000, 10000000);
+        $userId = User::orderBy('id', 'desc')->value('student_id');
+        $studentId = $userId ? $userId + 1 : 100001;
+
+        $referrer = $request->has('referral_code') ? User::where('referral_code', $request->referral_code)->first() : null;
+
+        if ($request->has('referral_code') && !$referrer) {
+            return redirect()->back()->with('error', 'Your Refer Code is Invalid!! Please Try Again with a Valid refer Code');
+        }
+
+        $user->fill([
+            'name' => $request->name,
+            'country' => $request->country,
+            'language' => $request->language,
+            'number' => $number,
+            'whats_app' => $whatsApp,
+            'gender' => $request->gender,
+            'email' => $request->email,
+            'role_as' => Status::Member->value,
+            'referral_code' => $referral_code,
+            'referrer_id' => $referrer ? $referrer->id : 1,
+            'student_id' => $studentId,
+            'management_type' => 'controller',
+            'password' => Hash::make($request->password),
+        ]);
+
+        if ($request->hasFile('image')) {
+            $image = Upload($request->file('image'), 'uploads/members', 400, 400);
+            $user->image = $image;
+        }
+
+        $user->save();
+
+        $network = new Network();
+        $network->fill([
+            'user_id' => $user->id,
+            'referral_code' => $request->has('referral_code') ? $request->referral_code : 100,
+            'parent_id' => $referrer ? $referrer->id : null,
+        ]);
+        $network->save();
+
+        event(new Registered($user));
+
+        Auth::login($user);
+
+        $userdata = [
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => $request->password,
+        ];
+
+        Mail::send('backend.admin.emails.welcome', ['user' => $userdata], function ($message) use ($userdata) {
+            $message->to($userdata['email']);
+            $message->subject('Welcome Mail from Touch and Earn');
+        });
+
+        return redirect(RouteServiceProvider::HOME);
     }
-
-
-
-    // public function verifyGmail(Request $request)
-    // {
-
-    //     if (!$request->user()->gmail_verified_points_received) {
-    //         $request->user()->update(['gmail_verified_points_received' => true]);
-
-    //         // Award 100 points
-    //         $request->user()->earnings()->create([
-    //             'user_id' => $request->user()->id,
-    //             'amount' => 100,
-    //         ]);
-
-
-    //         if ($request->user()->referrer_id) {
-    //             // Award 50 points for being referred
-    //             $referrer = User::find($request->user()->referrer_id);
-    //             if ($referrer) {
-    //                 $referrer->earnings()->create([
-    //                     'user_id' => $referrer->id,
-    //                     'amount' => 50,
-    //                 ]);
-    //             }
-    //         }
-
-    //     }
-    // }
-
 
 }

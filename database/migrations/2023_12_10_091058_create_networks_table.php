@@ -17,6 +17,9 @@ return new class extends Migration
             $table->string('referral_code')->nullable();
             $table->integer('parent_id')->nullable();
             $table->timestamps();
+            
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+
         });
     }
 

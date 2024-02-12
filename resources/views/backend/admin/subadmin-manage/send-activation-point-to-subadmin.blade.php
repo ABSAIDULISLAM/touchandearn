@@ -9,16 +9,9 @@
 
 @section('toproute')
     <div class="row mb-2" style="box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; padding: 8px; background-color:#fff">
-        <div class="col-sm-6">
+        <div class="col-md-12 d-flex justify-content-between">
             <h4 class="m-0">Activation points send</h4>
-        </div>
-        <div class="col-sm-6">
-
-            <ol class="breadcrumb float-sm-right">
-                {{-- <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
-                <li class="breadcrumb-item"><a href="#">Station</a></li> --}}
-                <a href="" class="btn btn-outline-primary">Create Teacher</a>
-            </ol>
+            {{-- <a href="{{route('admin.send-activation-points-to-subadmin')}}" class="btn btn-primary">Send Activation Points</a> --}}
         </div>
     </div>
 @endsection

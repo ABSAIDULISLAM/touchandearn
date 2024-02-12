@@ -8,15 +8,10 @@
 @endsection
 
 @section('toproute')
-    <div class="row mb-2" style="box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; padding: 8px; background-color:#fff">
-        <div class="col-sm-6">
+    <div class="row mb-4" style="box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; padding: 8px; background-color:#fff">
+        <div class="col-md-12 d-flex justify-content-between">
             <h4 class="m-0">Withdraw history</h4>
-        </div>
-        <div class="col-sm-6">
-
-            <ol class="breadcrumb float-sm-right">
-                <a href="{{route('withdraw-request')}}" class="btn btn-primary">Send a Withdraw Request</a>
-            </ol>
+            <a href="{{route('withdraw-request')}}" class="btn btn-primary">Send a Withdraw Request</a>
         </div>
     </div>
 @endsection
@@ -48,6 +43,9 @@
                                 <th scope="col" class="col-md-1">active date</th>
                             </thead>
                             <tbody>
+                                @php
+                                    $total = 0;
+                                @endphp
                                 @foreach ($withdraws as $withdraw)
                                     <tr>
                                         <td>{{ $loop->index + 1 }}</td>
@@ -58,9 +56,16 @@
                                         <td>{{ $withdraw->created_at->isoFormat('Do MMM YYYY') }}</td>
                                         <td>{{ $withdraw->updated_at->isoFormat('Do MMM YYYY') }}</td>
                                     </tr>
+                                    @php
+                                    $total = $withdraw->withdrawal_amount+ $total;
+                                @endphp
                                 @endforeach
                             </tbody>
                         </table>
+                    </div>
+                    <hr>
+                    <div class="text-center">
+                        <h4>Your Total Withdraw:  <span class="text-success">{{$total}}</span> Points</h4>
                     </div>
                 </div>
             </div>

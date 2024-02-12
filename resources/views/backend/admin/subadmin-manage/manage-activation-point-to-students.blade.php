@@ -9,14 +9,9 @@
 
 @section('toproute')
     <div class="row mb-2" style="box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; padding: 8px; background-color:#fff">
-        <div class="col-sm-6">
+        <div class="col-md-12 d-flex justify-content-between">
             <h4 class="m-0">Sent Activation Points History</h4>
-        </div>
-        <div class="col-sm-6">
-
-            <ol class="breadcrumb float-sm-right">
-                <a href="{{route('subadmin.send-activation-points')}}" class="btn btn-primary">Send Activation Points</a>
-            </ol>
+            <a href="{{route('subadmin.send-activation-points')}}" class="btn btn-primary">Send Activation Points</a>
         </div>
     </div>
 @endsection
@@ -48,10 +43,11 @@
                             </thead>
                             <tbody>
                                 @foreach ($historys as $history)
+                                    @if ($history->user)
                                     <tr>
                                         <td>{{ $loop->index + 1 }}</td>
-                                        <td>{{ $history->user->name }}</td>
-                                        <td>{{ $history->user->student_id }}</td>
+                                        <td>{{ $history->user->name ?? 'null' }}</td>
+                                        <td>{{ $history->user->student_id ?? 'null' }}</td>
                                         <td>{{ $history->activation_points }}</td>
                                         @if ($history->description == null)
                                             <td>Null</td>
@@ -61,6 +57,8 @@
 
                                         <td>{{ $history->created_at->tz('Asia/Dhaka')->isoFormat('Do MMM YYYY h:mm:ss A') }}</td>
                                     </tr>
+                                    @endif
+                                    
                                 @endforeach
                             </tbody>
                         </table>

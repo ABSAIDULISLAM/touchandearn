@@ -8,19 +8,12 @@
 @endsection
 
 @section('toproute')
-    <div class="row mb-2" style="box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; padding: 8px; background-color:#fff">
-        <div class="col-sm-6">
-            <h4 class="m-0">Inactive members</h4>
-        </div>
-        <div class="col-sm-6">
-
-            <ol class="breadcrumb float-sm-right">
-                {{-- <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
-                <li class="breadcrumb-item"><a href="#">Station</a></li> --}}
-                <a href="" class="btn btn-outline-primary">Create Teacher</a>
-            </ol>
-        </div>
+<div class="row mb-2" style="box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; padding: 8px; background-color:#fff">
+    <div class="col-md-12 d-flex justify-content-between">
+        <h4 class="m-0">Inactive Members/Students</h4>
+        {{-- <a href="" class="btn btn-primary">Manage Student</a> --}}
     </div>
+</div>
 @endsection
 
 @push('css')
@@ -59,7 +52,9 @@
                                             <select name="counselor_id" id="" class="form-control" required>
                                                 <option disabled selected>Select Management Type</option>
                                                 @foreach ($counselors as $counselor)
+                                                @if ($counselor->user)
                                                 <option value="{{$counselor->user->id}}">{{$counselor->user->name}}</option>
+                                                @endif
                                                 @endforeach
                                             </select>
                                         </div>
@@ -89,7 +84,7 @@
                                         <th scope="col" class="col-md-1">Gender</th>
                                         <th scope="col" class="col-md-1">email_verified_at</th>
                                         <th scope="col" class="col-md-1">created_at</th>
-                                        <th scope="col" class="col-md-2">Action</th>
+                                        {{-- <th scope="col" class="col-md-2">Action</th> --}}
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -109,10 +104,10 @@
                                             <td>{{ $user->gender }}</td>
                                             <td>{{ $user->email_verified_at == null ? 'Unverified' : 'verified' }}</td>
                                             <td>{{ $user->created_at }}</td>
-                                            <td>
+                                            {{-- <td>
                                                 <a href="" class="btn-sm btn-success">Edit</a>
                                                 <a href="" class="btn-sm btn-primary">View</a>
-                                            </td>
+                                            </td> --}}
                                         </tr>
                                     @endforeach
                                 </tbody>

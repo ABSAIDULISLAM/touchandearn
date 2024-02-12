@@ -9,14 +9,9 @@
 
 @section('toproute')
     <div class="row mb-2" style="box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; padding: 8px; background-color:#fff">
-        <div class="col-sm-6">
+        <div class="col-md-12 d-flex justify-content-between">
             <h4 class="m-0">Sub admin Create</h4>
-        </div>
-        <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
-                <li class="breadcrumb-item"><a href="#">Station</a></li>
-            </ol>
+            <a href="{{route('subadmin.create')}}" class="btn btn-outline-primary">Create Sub admin</a>
         </div>
     </div>
 @endsection
@@ -200,12 +195,7 @@
                 });
             });
         </script>
-        {{-- <script>
-            $(document).ready(function(){
-               let name $('#name').val();
-               $('#member_id').val(name);
-            });
-        </script> --}}
+
     @endpush
     {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script> --}}
 

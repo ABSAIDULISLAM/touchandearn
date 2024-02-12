@@ -12,14 +12,6 @@
         <div class="col-sm-6">
             <h4 class="m-0">Wrong Whats app</h4>
         </div>
-        <div class="col-sm-6">
-
-            <ol class="breadcrumb float-sm-right">
-                {{-- <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
-                <li class="breadcrumb-item"><a href="#">Station</a></li> --}}
-                <a href="" class="btn btn-outline-primary">Create</a>
-            </ol>
-        </div>
     </div>
 @endsection
 
@@ -42,11 +34,11 @@
                         <div class="col-md-8 m-auto">
                             <form action="" method="post">
                                 <div class="form-group row">
-                                    <div class="col-md-9">
+                                    <div class="col-md-9 col-9">
                                         <input type="text" class="form-control" name="search" placeholder="Search here by Student ID or NAME">
                                     </div>
 
-                                    <div class="col-md-2 mt-1">
+                                    <div class="col-md-3 col-3 mt-1">
                                         <button type="submit" class="btn btn-primary">Transfer</button>
                                     </div>
                                 </div>

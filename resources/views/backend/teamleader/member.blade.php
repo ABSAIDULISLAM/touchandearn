@@ -8,17 +8,10 @@
 @endsection
 
 @section('toproute')
-    <div class="row mb-2" style="box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; padding: 8px; background-color:#fff">
-        <div class="col-sm-6">
+    <div class="row mb-4" style="box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; padding: 8px; background-color:#fff">
+        <div class="col-md-12 d-flex justify-content-between">
             <h4 class="m-0">Student List</h4>
-        </div>
-        <div class="col-sm-6">
-
-            <ol class="breadcrumb float-sm-right">
-                {{-- <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
-                <li class="breadcrumb-item"><a href="#">Station</a></li> --}}
-                <a href="" class="btn btn-outline-primary">Create</a>
-            </ol>
+            {{-- <a class="btn btn-primary"> Create</a> --}}
         </div>
     </div>
 @endsection
@@ -37,22 +30,6 @@
         <div class="col-md-12 order-2 order-md-1">
             <div class="card card-outline card-primary">
                 <div class="card-body">
-
-                    <div class="card">
-                        <div class="col-md-8 m-auto">
-                            <form action="" method="post">
-                                <div class="form-group row">
-                                    <div class="col-md-9">
-                                        <input type="text" class="form-control" name="search" placeholder="Search here by Student ID or NAME">
-                                    </div>
-
-                                    <div class="col-md-2 mt-1">
-                                        <button type="submit" class="btn btn-primary">Search</button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
 
 
                     <div class="table-responsive">
@@ -77,9 +54,15 @@
                                         <td>{{ $user->student_id }}</td>
                                         <td>{{ date('d M Y H:i', strtotime($user->created_at)) }}</td>
                                         <td>{{ $user->name }}</td>
-                                        <td><a target="blank" href="{{ route('send-whatsapp', ['number' => $user->whats_app, 'applicant_id' => $user->student_id]) }}" class="btn btn-primary btn-sm">
-                                            WhatsApp
-                                        </a></td>
+                                        @if ($user->whats_app)
+                                        <td>
+                                            <a target="blank" href="{{ route('tl-wp-done', ['number' => $user->whats_app, 'applicant_id' => $user->student_id, 'name'=>$user->name ]) }}" class="btn btn-primary btn-sm">
+                                                WhatsApp
+                                            </a>
+                                        </td>
+                                        @else
+                                            <td>Null</td>
+                                        @endif  
                                         <td>
                                             <a href="tel:{{$user->number}}" class="btn btn-secondary btn-sm px-3">Call</a>
                                         </td>
@@ -95,8 +78,9 @@
             </div>
         </div>
 
-
     </div>
+
+
     @push('js')
         <!-- DataTables  & Plugins -->
         <script src="{{ asset('backend/assets/plugins/datatables/jquery.dataTables.min.js') }}"></script>

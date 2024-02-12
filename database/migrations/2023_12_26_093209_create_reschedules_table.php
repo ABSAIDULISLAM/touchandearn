@@ -17,6 +17,7 @@ return new class extends Migration
             $table->date('schedule_date');
             $table->time('schedule_time');
             $table->timestamps();
+
         });
     }
 
